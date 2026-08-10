@@ -1,59 +1,69 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+>
 
   <title>Compress Image to Under 100KB Online | Image Size Fixer</title>
 
-  <meta
-    name="description"
-    content="Compress an image to a specific file size like 100KB directly in your browser. Free, fast and private. Supports JPG, PNG and WebP."
-  >
+<meta
+name="description"
+content="Compress an image to a specific file size like 100KB directly in your browser. Free, fast and private. Supports JPG, PNG and WebP."
+
+>
 
   <link
     rel="canonical"
     href="https://galsherm.github.io/image-size-fixer/"
   >
 
-  <meta
-    property="og:title"
-    content="Compress Image to Under 100KB Online"
-  >
+<meta
+property="og:title"
+content="Compress Image to Under 100KB Online"
 
-  <meta
-    property="og:description"
-    content="Need an image under 100KB? Compress JPG, PNG or WebP images to a target file size directly in your browser."
-  >
+>
 
-  <meta
-    property="og:type"
-    content="website"
-  >
+<meta
+property="og:description"
+content="Need an image under 100KB? Compress JPG, PNG or WebP images to a target file size directly in your browser."
 
-  <meta
-    property="og:url"
-    content="https://galsherm.github.io/image-size-fixer/"
-  >
+>
 
-  <meta
-    name="twitter:card"
-    content="summary"
-  >
+<meta
+property="og:type"
+content="website"
 
-  <meta
-    name="twitter:title"
-    content="Compress Image to Under 100KB Online"
-  >
+>
 
-  <meta
-    name="twitter:description"
-    content="Compress JPG, PNG or WebP images to a specific file size directly in your browser."
-  >
+<meta
+property="og:url"
+content="https://galsherm.github.io/image-size-fixer/"
+
+>
+
+<meta
+name="twitter:card"
+content="summary"
+
+>
+
+<meta
+name="twitter:title"
+content="Compress Image to Under 100KB Online"
+
+>
+
+<meta
+name="twitter:description"
+content="Compress JPG, PNG or WebP images to a specific file size directly in your browser."
+
+>
 
   <style>
     * {
@@ -208,6 +218,57 @@
       color: var(--muted);
       font-size: 0.85rem;
       white-space: nowrap;
+    }
+
+    .presets {
+      margin-top: 18px;
+    }
+
+    .presets-label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .preset-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .preset-btn {
+      min-height: 38px;
+      padding: 0 14px;
+
+      border: 1px solid var(--border);
+      border-radius: 8px;
+
+      background: white;
+      color: var(--text);
+
+      font: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+
+      cursor: pointer;
+
+      transition:
+        border-color 0.15s ease,
+        background 0.15s ease,
+        color 0.15s ease;
+    }
+
+    .preset-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .preset-btn.active {
+      border-color: var(--primary);
+      background: #eff6ff;
+      color: var(--primary);
     }
 
     .compress-btn {
@@ -389,194 +450,250 @@
       .image-box img {
         height: 220px;
       }
+
+      .preset-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .preset-btn {
+        width: 100%;
+      }
     }
   </style>
+
 </head>
 
 <body>
 
   <main class="container">
 
-    <header>
-      <h1>Compress Your Image to Under 100KB</h1>
+```
+<header>
+  <h1>Compress Your Image to Under 100KB</h1>
 
-      <p class="subtitle">
-        Quickly reduce JPG, PNG or WebP images to the exact file size you need.
-        Free, private and processed directly in your browser.
-      </p>
-    </header>
+  <p class="subtitle">
+    Quickly reduce JPG, PNG or WebP images to the exact file size you need.
+    Free, private and processed directly in your browser.
+  </p>
+</header>
 
-    <section class="card">
+<section class="card">
 
-      <label
-        class="drop-zone"
-        id="dropZone"
-        for="fileInput"
-      >
-        <input
-          type="file"
-          id="fileInput"
-          accept="image/jpeg,image/png,image/webp,image/gif"
-        >
+  <label
+    class="drop-zone"
+    id="dropZone"
+    for="fileInput"
+  >
+    <input
+      type="file"
+      id="fileInput"
+      accept="image/jpeg,image/png,image/webp,image/gif"
+    >
 
-        <div class="upload-icon">🖼️</div>
+    <div class="upload-icon">🖼️</div>
 
-        <div class="drop-title">
-          Drop your image here
-        </div>
+    <div class="drop-title">
+      Drop your image here
+    </div>
 
-        <div class="drop-description">
-          or click to choose an image
-        </div>
+    <div class="drop-description">
+      or click to choose an image
+    </div>
+  </label>
+
+  <div class="settings">
+
+    <div class="field">
+      <label for="maxSize">
+        Maximum file size
       </label>
 
-      <div class="settings">
+      <div class="input-row">
+        <input
+          type="number"
+          id="maxSize"
+          value="100"
+          min="1"
+          step="1"
+        >
 
-        <div class="field">
-          <label for="maxSize">
-            Maximum file size
-          </label>
-
-          <div class="input-row">
-            <input
-              type="number"
-              id="maxSize"
-              value="100"
-              min="1"
-              step="1"
-            >
-
-            <span class="unit">KB</span>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="maxWidth">
-            Maximum width
-          </label>
-
-          <div class="input-row">
-            <input
-              type="number"
-              id="maxWidth"
-              value="1200"
-              min="1"
-              step="1"
-            >
-
-            <span class="unit">px</span>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="format">
-            Format
-          </label>
-
-          <select id="format">
-            <option value="image/jpeg">JPG</option>
-            <option value="image/webp">WebP</option>
-            <option value="image/png">PNG</option>
-          </select>
-        </div>
-
+        <span class="unit">KB</span>
       </div>
+    </div>
+
+    <div class="field">
+      <label for="maxWidth">
+        Maximum width
+      </label>
+
+      <div class="input-row">
+        <input
+          type="number"
+          id="maxWidth"
+          value="1200"
+          min="1"
+          step="1"
+        >
+
+        <span class="unit">px</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="format">
+        Format
+      </label>
+
+      <select id="format">
+        <option value="image/jpeg">JPG</option>
+        <option value="image/webp">WebP</option>
+        <option value="image/png">PNG</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="presets">
+
+    <span class="presets-label">
+      Common file size limits
+    </span>
+
+    <div class="preset-buttons">
 
       <button
-        class="compress-btn"
-        id="compressBtn"
-        disabled
+        type="button"
+        class="preset-btn"
+        data-size="20"
       >
-        Compress Image
+        20KB
       </button>
 
-      <div
-        class="status"
-        id="status"
-        aria-live="polite"
-      ></div>
-
-      <div
-        class="error"
-        id="error"
-        role="alert"
-      ></div>
-
-      <div
-        class="preview"
-        id="preview"
+      <button
+        type="button"
+        class="preset-btn"
+        data-size="50"
       >
+        50KB
+      </button>
 
-        <div class="preview-grid">
+      <button
+        type="button"
+        class="preset-btn active"
+        data-size="100"
+      >
+        100KB
+      </button>
 
-          <div class="image-box">
-            <img
-              id="originalPreview"
-              alt="Original image preview"
-            >
+      <button
+        type="button"
+        class="preset-btn"
+        data-size="200"
+      >
+        200KB
+      </button>
 
-            <div class="image-title">
-              Original
-            </div>
+    </div>
 
-            <div
-              class="image-info"
-              id="originalInfo"
-            ></div>
-          </div>
+  </div>
 
-          <div class="image-box">
-            <img
-              id="resultPreview"
-              alt="Compressed image preview"
-            >
+  <button
+    class="compress-btn"
+    id="compressBtn"
+    disabled
+  >
+    Compress Image
+  </button>
 
-            <div class="image-title">
-              Compressed
-            </div>
+  <div
+    class="status"
+    id="status"
+    aria-live="polite"
+  ></div>
 
-            <div
-              class="image-info"
-              id="resultInfo"
-            ></div>
-          </div>
+  <div
+    class="error"
+    id="error"
+    role="alert"
+  ></div>
 
+  <div
+    class="preview"
+    id="preview"
+  >
+
+    <div class="preview-grid">
+
+      <div class="image-box">
+        <img
+          id="originalPreview"
+          alt="Original image preview"
+        >
+
+        <div class="image-title">
+          Original
         </div>
 
-        <div class="result">
+        <div
+          class="image-info"
+          id="originalInfo"
+        ></div>
+      </div>
 
-          <div
-            class="result-size"
-            id="resultSize"
-          ></div>
+      <div class="image-box">
+        <img
+          id="resultPreview"
+          alt="Compressed image preview"
+        >
 
-          <div
-            class="saving"
-            id="saving"
-          ></div>
-
-          <a
-            class="download-btn"
-            id="downloadBtn"
-            download="compressed-image"
-          >
-            Download image
-          </a>
-
+        <div class="image-title">
+          Compressed
         </div>
 
+        <div
+          class="image-info"
+          id="resultInfo"
+        ></div>
       </div>
 
-      <div class="privacy">
-        🔒 <strong>Your image stays on your device.</strong>
-        It is never uploaded to a server.
-      </div>
+    </div>
 
-    </section>
+    <div class="result">
 
-    <footer>
-      Image Size Fixer — Free to use
-    </footer>
+      <div
+        class="result-size"
+        id="resultSize"
+      ></div>
+
+      <div
+        class="saving"
+        id="saving"
+      ></div>
+
+      <a
+        class="download-btn"
+        id="downloadBtn"
+        download="compressed-image"
+      >
+        Download image
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="privacy">
+    🔒 <strong>Your image stays on your device.</strong>
+    It is never uploaded to a server.
+  </div>
+
+</section>
+
+<footer>
+  Image Size Fixer — Free to use
+</footer>
+```
 
   </main>
 
@@ -584,16 +701,29 @@
     const fileInput = document.getElementById("fileInput");
     const dropZone = document.getElementById("dropZone");
 
-    const maxSizeInput = document.getElementById("maxSize");
-    const maxWidthInput = document.getElementById("maxWidth");
-    const formatInput = document.getElementById("format");
+    const maxSizeInput =
+      document.getElementById("maxSize");
 
-    const compressBtn = document.getElementById("compressBtn");
+    const maxWidthInput =
+      document.getElementById("maxWidth");
 
-    const status = document.getElementById("status");
-    const errorBox = document.getElementById("error");
+    const formatInput =
+      document.getElementById("format");
 
-    const preview = document.getElementById("preview");
+    const presetButtons =
+      document.querySelectorAll(".preset-btn");
+
+    const compressBtn =
+      document.getElementById("compressBtn");
+
+    const status =
+      document.getElementById("status");
+
+    const errorBox =
+      document.getElementById("error");
+
+    const preview =
+      document.getElementById("preview");
 
     const originalPreview =
       document.getElementById("originalPreview");
@@ -668,12 +798,61 @@
     }
 
 
+    function updatePresetState(value) {
+      presetButtons.forEach(button => {
+        const buttonSize =
+          Number(button.dataset.size);
+
+        button.classList.toggle(
+          "active",
+          buttonSize === Number(value)
+        );
+      });
+    }
+
+
+    presetButtons.forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const size =
+            Number(button.dataset.size);
+
+          maxSizeInput.value = size;
+
+          updatePresetState(size);
+
+          clearError();
+
+          setStatus(
+            `Target size set to ${size}KB.`
+          );
+        }
+      );
+
+    });
+
+
+    maxSizeInput.addEventListener(
+      "input",
+      () => {
+        updatePresetState(
+          maxSizeInput.value
+        );
+      }
+    );
+
+
     function loadImage(file) {
       return new Promise((resolve, reject) => {
 
-        const url = URL.createObjectURL(file);
+        const url =
+          URL.createObjectURL(file);
 
-        const image = new Image();
+        const image =
+          new Image();
 
         image.onload = () => {
           URL.revokeObjectURL(url);
@@ -682,8 +861,11 @@
 
         image.onerror = () => {
           URL.revokeObjectURL(url);
+
           reject(
-            new Error("Could not read this image.")
+            new Error(
+              "Could not read this image."
+            )
           );
         };
 
@@ -692,16 +874,22 @@
     }
 
 
-    function createCanvas(image, width, height) {
+    function createCanvas(
+      image,
+      width,
+      height
+    ) {
 
-      const canvas = document.createElement("canvas");
+      const canvas =
+        document.createElement("canvas");
 
       canvas.width = width;
       canvas.height = height;
 
-      const context = canvas.getContext("2d", {
-        alpha: true
-      });
+      const context =
+        canvas.getContext("2d", {
+          alpha: true
+        });
 
       context.drawImage(
         image,
@@ -715,25 +903,36 @@
     }
 
 
-    function canvasToBlob(canvas, type, quality) {
-      return new Promise((resolve, reject) => {
+    function canvasToBlob(
+      canvas,
+      type,
+      quality
+    ) {
 
-        canvas.toBlob(
-          blob => {
-            if (!blob) {
-              reject(
-                new Error("Browser could not create the image.")
-              );
+      return new Promise(
+        (resolve, reject) => {
 
-              return;
-            }
+          canvas.toBlob(
+            blob => {
 
-            resolve(blob);
-          },
-          type,
-          quality
-        );
-      });
+              if (!blob) {
+
+                reject(
+                  new Error(
+                    "Browser could not create the image."
+                  )
+                );
+
+                return;
+              }
+
+              resolve(blob);
+            },
+            type,
+            quality
+          );
+        }
+      );
     }
 
 
@@ -744,6 +943,7 @@
     ) {
 
       if (originalWidth <= maxWidth) {
+
         return {
           width: originalWidth,
           height: originalHeight
@@ -756,12 +956,16 @@
       return {
         width: Math.max(
           1,
-          Math.round(originalWidth * ratio)
+          Math.round(
+            originalWidth * ratio
+          )
         ),
 
         height: Math.max(
           1,
-          Math.round(originalHeight * ratio)
+          Math.round(
+            originalHeight * ratio
+          )
         )
       };
     }
@@ -819,7 +1023,9 @@
           high
         );
 
-      if (highResult.blob.size <= targetBytes) {
+      if (
+        highResult.blob.size <= targetBytes
+      ) {
         return highResult;
       }
 
@@ -832,7 +1038,9 @@
           low
         );
 
-      if (lowResult.blob.size > targetBytes) {
+      if (
+        lowResult.blob.size > targetBytes
+      ) {
         return null;
       }
 
@@ -852,7 +1060,9 @@
             middle
           );
 
-        if (result.blob.size <= targetBytes) {
+        if (
+          result.blob.size <= targetBytes
+        ) {
 
           best = result;
           low = middle;
@@ -887,20 +1097,26 @@
             "image/png"
           );
 
-        if (result.blob.size <= targetBytes) {
+        if (
+          result.blob.size <= targetBytes
+        ) {
           return result;
         }
 
         currentWidth =
           Math.max(
             1,
-            Math.floor(currentWidth * 0.85)
+            Math.floor(
+              currentWidth * 0.85
+            )
           );
 
         currentHeight =
           Math.max(
             1,
-            Math.floor(currentHeight * 0.85)
+            Math.floor(
+              currentHeight * 0.85
+            )
           );
       }
 
@@ -962,7 +1178,10 @@
 
       for (let i = 0; i < 8; i++) {
 
-        if (width < 1 || height < 1) {
+        if (
+          width < 1 ||
+          height < 1
+        ) {
           break;
         }
 
@@ -1190,7 +1409,8 @@
 
           const duration =
             Math.round(
-              performance.now() - startTime
+              performance.now() -
+              startTime
             );
 
           if (!result) {
@@ -1238,7 +1458,8 @@
             );
 
           if (
-            result.blob.size < selectedFile.size
+            result.blob.size <
+            selectedFile.size
           ) {
 
             saving.textContent =
@@ -1253,11 +1474,15 @@
 
           let extension = "jpg";
 
-          if (format === "image/webp") {
+          if (
+            format === "image/webp"
+          ) {
             extension = "webp";
           }
 
-          if (format === "image/png") {
+          if (
+            format === "image/png"
+          ) {
             extension = "png";
           }
 
