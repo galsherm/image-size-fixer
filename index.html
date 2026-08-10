@@ -2,22 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <meta
     name="google-site-verification"
     content="1vsWdsiggv-ksgu6OfwL5HpR5pZamLemomVxFSLK5po"
   >
 
-  <title>Under100KB - Compress Images to Under 100KB Online</title>
+  <title>Under100KB - Compress Images Online</title>
 
   <meta
     name="description"
-    content="Compress JPG, PNG or WebP images to under 100KB or any file size you need. Free, fast and private. Your images stay on your device."
+    content="Compress JPG, PNG and WebP images to under 100KB or any file size you need. Free, fast and private. Your images stay on your device."
+  >
+
+  <meta
+    name="robots"
+    content="index, follow"
   >
 
   <link
@@ -27,12 +28,12 @@
 
   <meta
     property="og:title"
-    content="Under100KB - Compress Images to Under 100KB"
+    content="Under100KB - Compress Images Online"
   >
 
   <meta
     property="og:description"
-    content="Compress JPG, PNG or WebP images to a specific file size directly in your browser. Free, fast and private."
+    content="Compress images to a specific file size directly in your browser. Free, fast and private."
   >
 
   <meta
@@ -52,7 +53,7 @@
 
   <meta
     name="twitter:title"
-    content="Under100KB - Compress Images to Under 100KB"
+    content="Under100KB - Compress Images Online"
   >
 
   <meta
@@ -81,7 +82,6 @@
       margin: 0;
       min-height: 100vh;
       padding: 40px 16px;
-
       font-family:
         Inter,
         system-ui,
@@ -89,7 +89,6 @@
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
-
       background: var(--background);
       color: var(--text);
     }
@@ -123,8 +122,7 @@
       background: var(--card);
       border-radius: 18px;
       padding: 24px;
-      box-shadow:
-        0 10px 30px rgba(15, 23, 42, 0.07);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
     }
 
     .drop-zone {
@@ -194,10 +192,8 @@
       width: 100%;
       min-height: 44px;
       padding: 10px 12px;
-
       border: 1px solid var(--border);
       border-radius: 9px;
-
       background: white;
       color: var(--text);
       font: inherit;
@@ -236,19 +232,14 @@
     .preset-btn {
       min-height: 38px;
       padding: 0 14px;
-
       border: 1px solid var(--border);
       border-radius: 8px;
-
       background: white;
       color: var(--text);
-
       font: inherit;
       font-size: 0.88rem;
       font-weight: 600;
-
       cursor: pointer;
-
       transition:
         border-color 0.15s ease,
         background 0.15s ease,
@@ -270,17 +261,13 @@
       width: 100%;
       min-height: 50px;
       margin-top: 22px;
-
       border: 0;
       border-radius: 10px;
-
       background: var(--primary);
       color: white;
-
       font: inherit;
       font-weight: 700;
       font-size: 1rem;
-
       cursor: pointer;
       transition:
         background 0.15s ease,
@@ -392,16 +379,12 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-
       min-height: 44px;
       margin-top: 15px;
       padding: 0 20px;
-
       border-radius: 9px;
-
       background: var(--success);
       color: white;
-
       text-decoration: none;
       font-weight: 700;
     }
@@ -473,11 +456,8 @@
 
     <section class="card">
 
-      <label
-        class="drop-zone"
-        id="dropZone"
-        for="fileInput"
-      >
+      <label class="drop-zone" id="dropZone" for="fileInput">
+
         <input
           type="file"
           id="fileInput"
@@ -493,16 +473,19 @@
         <div class="drop-description">
           or click to choose an image
         </div>
+
       </label>
 
       <div class="settings">
 
         <div class="field">
+
           <label for="maxSize">
             Maximum file size
           </label>
 
           <div class="input-row">
+
             <input
               type="number"
               id="maxSize"
@@ -511,16 +494,22 @@
               step="1"
             >
 
-            <span class="unit">KB</span>
+            <span class="unit">
+              KB
+            </span>
+
           </div>
+
         </div>
 
         <div class="field">
+
           <label for="maxWidth">
             Maximum width
           </label>
 
           <div class="input-row">
+
             <input
               type="number"
               id="maxWidth"
@@ -529,20 +518,36 @@
               step="1"
             >
 
-            <span class="unit">px</span>
+            <span class="unit">
+              px
+            </span>
+
           </div>
+
         </div>
 
         <div class="field">
+
           <label for="format">
             Format
           </label>
 
           <select id="format">
-            <option value="image/jpeg">JPG</option>
-            <option value="image/webp">WebP</option>
-            <option value="image/png">PNG</option>
+
+            <option value="image/jpeg">
+              JPG
+            </option>
+
+            <option value="image/webp">
+              WebP
+            </option>
+
+            <option value="image/png">
+              PNG
+            </option>
+
           </select>
+
         </div>
 
       </div>
@@ -619,6 +624,7 @@
         <div class="preview-grid">
 
           <div class="image-box">
+
             <img
               id="originalPreview"
               alt="Original image preview"
@@ -632,9 +638,11 @@
               class="image-info"
               id="originalInfo"
             ></div>
+
           </div>
 
           <div class="image-box">
+
             <img
               id="resultPreview"
               alt="Compressed image preview"
@@ -648,6 +656,7 @@
               class="image-info"
               id="resultInfo"
             ></div>
+
           </div>
 
         </div>
@@ -692,51 +701,21 @@
   <script>
     const fileInput = document.getElementById("fileInput");
     const dropZone = document.getElementById("dropZone");
-
-    const maxSizeInput =
-      document.getElementById("maxSize");
-
-    const maxWidthInput =
-      document.getElementById("maxWidth");
-
-    const formatInput =
-      document.getElementById("format");
-
-    const presetButtons =
-      document.querySelectorAll(".preset-btn");
-
-    const compressBtn =
-      document.getElementById("compressBtn");
-
-    const status =
-      document.getElementById("status");
-
-    const errorBox =
-      document.getElementById("error");
-
-    const preview =
-      document.getElementById("preview");
-
-    const originalPreview =
-      document.getElementById("originalPreview");
-
-    const resultPreview =
-      document.getElementById("resultPreview");
-
-    const originalInfo =
-      document.getElementById("originalInfo");
-
-    const resultInfo =
-      document.getElementById("resultInfo");
-
-    const resultSize =
-      document.getElementById("resultSize");
-
-    const saving =
-      document.getElementById("saving");
-
-    const downloadBtn =
-      document.getElementById("downloadBtn");
+    const maxSizeInput = document.getElementById("maxSize");
+    const maxWidthInput = document.getElementById("maxWidth");
+    const formatInput = document.getElementById("format");
+    const presetButtons = document.querySelectorAll(".preset-btn");
+    const compressBtn = document.getElementById("compressBtn");
+    const status = document.getElementById("status");
+    const errorBox = document.getElementById("error");
+    const preview = document.getElementById("preview");
+    const originalPreview = document.getElementById("originalPreview");
+    const resultPreview = document.getElementById("resultPreview");
+    const originalInfo = document.getElementById("originalInfo");
+    const resultInfo = document.getElementById("resultInfo");
+    const resultSize = document.getElementById("resultSize");
+    const saving = document.getElementById("saving");
+    const downloadBtn = document.getElementById("downloadBtn");
 
     let selectedFile = null;
     let originalObjectUrl = null;
@@ -784,8 +763,7 @@
 
     function updatePresetState(value) {
       presetButtons.forEach(button => {
-        const buttonSize =
-          Number(button.dataset.size);
+        const buttonSize = Number(button.dataset.size);
 
         button.classList.toggle(
           "active",
@@ -796,8 +774,7 @@
 
     presetButtons.forEach(button => {
       button.addEventListener("click", () => {
-        const size =
-          Number(button.dataset.size);
+        const size = Number(button.dataset.size);
 
         maxSizeInput.value = size;
 
@@ -805,28 +782,18 @@
 
         clearError();
 
-        setStatus(
-          `Target size set to ${size}KB.`
-        );
+        setStatus(`Target size set to ${size}KB.`);
       });
     });
 
-    maxSizeInput.addEventListener(
-      "input",
-      () => {
-        updatePresetState(
-          maxSizeInput.value
-        );
-      }
-    );
+    maxSizeInput.addEventListener("input", () => {
+      updatePresetState(maxSizeInput.value);
+    });
 
     function loadImage(file) {
       return new Promise((resolve, reject) => {
-        const url =
-          URL.createObjectURL(file);
-
-        const image =
-          new Image();
+        const url = URL.createObjectURL(file);
+        const image = new Image();
 
         image.onload = () => {
           URL.revokeObjectURL(url);
@@ -837,9 +804,7 @@
           URL.revokeObjectURL(url);
 
           reject(
-            new Error(
-              "Could not read this image."
-            )
+            new Error("Could not read this image.")
           );
         };
 
@@ -847,21 +812,15 @@
       });
     }
 
-    function createCanvas(
-      image,
-      width,
-      height
-    ) {
-      const canvas =
-        document.createElement("canvas");
+    function createCanvas(image, width, height) {
+      const canvas = document.createElement("canvas");
 
       canvas.width = width;
       canvas.height = height;
 
-      const context =
-        canvas.getContext("2d", {
-          alpha: true
-        });
+      const context = canvas.getContext("2d", {
+        alpha: true
+      });
 
       context.drawImage(
         image,
@@ -874,32 +833,26 @@
       return canvas;
     }
 
-    function canvasToBlob(
-      canvas,
-      type,
-      quality
-    ) {
-      return new Promise(
-        (resolve, reject) => {
-          canvas.toBlob(
-            blob => {
-              if (!blob) {
-                reject(
-                  new Error(
-                    "Browser could not create the image."
-                  )
-                );
+    function canvasToBlob(canvas, type, quality) {
+      return new Promise((resolve, reject) => {
+        canvas.toBlob(
+          blob => {
+            if (!blob) {
+              reject(
+                new Error(
+                  "Browser could not create the image."
+                )
+              );
 
-                return;
-              }
+              return;
+            }
 
-              resolve(blob);
-            },
-            type,
-            quality
-          );
-        }
-      );
+            resolve(blob);
+          },
+          type,
+          quality
+        );
+      });
     }
 
     function calculateDimensions(
@@ -914,22 +867,17 @@
         };
       }
 
-      const ratio =
-        maxWidth / originalWidth;
+      const ratio = maxWidth / originalWidth;
 
       return {
         width: Math.max(
           1,
-          Math.round(
-            originalWidth * ratio
-          )
+          Math.round(originalWidth * ratio)
         ),
 
         height: Math.max(
           1,
-          Math.round(
-            originalHeight * ratio
-          )
+          Math.round(originalHeight * ratio)
         )
       };
     }
@@ -941,19 +889,17 @@
       format,
       quality
     ) {
-      const canvas =
-        createCanvas(
-          image,
-          width,
-          height
-        );
+      const canvas = createCanvas(
+        image,
+        width,
+        height
+      );
 
-      const blob =
-        await canvasToBlob(
-          canvas,
-          format,
-          quality
-        );
+      const blob = await canvasToBlob(
+        canvas,
+        format,
+        quality
+      );
 
       return {
         blob,
@@ -971,57 +917,46 @@
     ) {
       let low = 0.05;
       let high = 0.95;
-
       let best = null;
 
-      const highResult =
-        await encode(
-          image,
-          width,
-          height,
-          format,
-          high
-        );
+      const highResult = await encode(
+        image,
+        width,
+        height,
+        format,
+        high
+      );
 
-      if (
-        highResult.blob.size <= targetBytes
-      ) {
+      if (highResult.blob.size <= targetBytes) {
         return highResult;
       }
 
-      const lowResult =
-        await encode(
-          image,
-          width,
-          height,
-          format,
-          low
-        );
+      const lowResult = await encode(
+        image,
+        width,
+        height,
+        format,
+        low
+      );
 
-      if (
-        lowResult.blob.size > targetBytes
-      ) {
+      if (lowResult.blob.size > targetBytes) {
         return null;
       }
 
       best = lowResult;
 
       for (let i = 0; i < 9; i++) {
-        const middle =
-          (low + high) / 2;
+        const middle = (low + high) / 2;
 
-        const result =
-          await encode(
-            image,
-            width,
-            height,
-            format,
-            middle
-          );
+        const result = await encode(
+          image,
+          width,
+          height,
+          format,
+          middle
+        );
 
-        if (
-          result.blob.size <= targetBytes
-        ) {
+        if (result.blob.size <= targetBytes) {
           best = result;
           low = middle;
         } else {
@@ -1042,35 +977,26 @@
       let currentHeight = height;
 
       for (let i = 0; i < 10; i++) {
-        const result =
-          await encode(
-            image,
-            currentWidth,
-            currentHeight,
-            "image/png"
-          );
+        const result = await encode(
+          image,
+          currentWidth,
+          currentHeight,
+          "image/png"
+        );
 
-        if (
-          result.blob.size <= targetBytes
-        ) {
+        if (result.blob.size <= targetBytes) {
           return result;
         }
 
-        currentWidth =
-          Math.max(
-            1,
-            Math.floor(
-              currentWidth * 0.85
-            )
-          );
+        currentWidth = Math.max(
+          1,
+          Math.floor(currentWidth * 0.85)
+        );
 
-        currentHeight =
-          Math.max(
-            1,
-            Math.floor(
-              currentHeight * 0.85
-            )
-          );
+        currentHeight = Math.max(
+          1,
+          Math.floor(currentHeight * 0.85)
+        );
       }
 
       return null;
@@ -1082,84 +1008,71 @@
       maxWidth,
       format
     ) {
-      const dimensions =
-        calculateDimensions(
-          image.naturalWidth,
-          image.naturalHeight,
-          maxWidth
-        );
+      const dimensions = calculateDimensions(
+        image.naturalWidth,
+        image.naturalHeight,
+        maxWidth
+      );
 
       let result;
 
       if (format === "image/png") {
-        result =
-          await compressPng(
-            image,
-            dimensions.width,
-            dimensions.height,
-            targetBytes
-          );
+        result = await compressPng(
+          image,
+          dimensions.width,
+          dimensions.height,
+          targetBytes
+        );
       } else {
-        result =
-          await compressWithQuality(
-            image,
-            dimensions.width,
-            dimensions.height,
-            format,
-            targetBytes
-          );
+        result = await compressWithQuality(
+          image,
+          dimensions.width,
+          dimensions.height,
+          format,
+          targetBytes
+        );
       }
 
       if (result) {
         return result;
       }
 
-      let width =
-        Math.floor(
-          dimensions.width * 0.85
-        );
+      let width = Math.floor(
+        dimensions.width * 0.85
+      );
 
-      let height =
-        Math.floor(
-          dimensions.height * 0.85
-        );
+      let height = Math.floor(
+        dimensions.height * 0.85
+      );
 
       for (let i = 0; i < 8; i++) {
-        if (
-          width < 1 ||
-          height < 1
-        ) {
+        if (width < 1 || height < 1) {
           break;
         }
 
         if (format === "image/png") {
-          result =
-            await compressPng(
-              image,
-              width,
-              height,
-              targetBytes
-            );
+          result = await compressPng(
+            image,
+            width,
+            height,
+            targetBytes
+          );
         } else {
-          result =
-            await compressWithQuality(
-              image,
-              width,
-              height,
-              format,
-              targetBytes
-            );
+          result = await compressWithQuality(
+            image,
+            width,
+            height,
+            format,
+            targetBytes
+          );
         }
 
         if (result) {
           return result;
         }
 
-        width =
-          Math.floor(width * 0.85);
-
-        height =
-          Math.floor(height * 0.85);
+        width = Math.floor(width * 0.85);
+        height = Math.floor(height * 0.85);
       }
 
       return null;
@@ -1186,8 +1099,7 @@
       }
 
       try {
-        const image =
-          await loadImage(file);
+        const image = await loadImage(file);
 
         selectedFile = file;
 
@@ -1220,8 +1132,7 @@
     fileInput.addEventListener(
       "change",
       event => {
-        const file =
-          event.target.files[0];
+        const file = event.target.files[0];
 
         handleFile(file);
       }
@@ -1317,9 +1228,7 @@
 
         try {
           const image =
-            await loadImage(
-              selectedFile
-            );
+            await loadImage(selectedFile);
 
           const startTime =
             performance.now();
@@ -1334,8 +1243,7 @@
 
           const duration =
             Math.round(
-              performance.now() -
-              startTime
+              performance.now() - startTime
             );
 
           if (!result) {
@@ -1344,9 +1252,7 @@
             );
           }
 
-          if (
-            result.blob.size > targetBytes
-          ) {
+          if (result.blob.size > targetBytes) {
             throw new Error(
               "The image could not be compressed below the requested size."
             );
@@ -1394,15 +1300,11 @@
 
           let extension = "jpg";
 
-          if (
-            format === "image/webp"
-          ) {
+          if (format === "image/webp") {
             extension = "webp";
           }
 
-          if (
-            format === "image/png"
-          ) {
+          if (format === "image/png") {
             extension = "png";
           }
 
@@ -1412,8 +1314,7 @@
           downloadBtn.download =
             `compressed-image.${extension}`;
 
-          preview.style.display =
-            "block";
+          preview.style.display = "block";
 
           setStatus(
             "Compression complete."
