@@ -10,6 +10,12 @@ content="width=device-width, initial-scale=1.0"
 
 >
 
+<meta
+name="google-site-verification"
+content="1vsWdsiggv-ksgu6OfwL5HpR5pZamLemomVxFSLK5po"
+
+>
+
   <title>Compress Image to Under 100KB Online | Image Size Fixer</title>
 
 <meta
@@ -746,11 +752,9 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
     const downloadBtn =
       document.getElementById("downloadBtn");
 
-
     let selectedFile = null;
     let originalObjectUrl = null;
     let resultObjectUrl = null;
-
 
     function formatBytes(bytes) {
       if (bytes < 1024) {
@@ -764,23 +768,19 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
     }
 
-
     function showError(message) {
       errorBox.textContent = message;
       errorBox.style.display = "block";
     }
-
 
     function clearError() {
       errorBox.textContent = "";
       errorBox.style.display = "none";
     }
 
-
     function setStatus(message) {
       status.textContent = message;
     }
-
 
     function clearResultUrl() {
       if (resultObjectUrl) {
@@ -789,14 +789,12 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       }
     }
 
-
     function clearOriginalUrl() {
       if (originalObjectUrl) {
         URL.revokeObjectURL(originalObjectUrl);
         originalObjectUrl = null;
       }
     }
-
 
     function updatePresetState(value) {
       presetButtons.forEach(button => {
@@ -810,30 +808,22 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       });
     }
 
-
     presetButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const size =
+          Number(button.dataset.size);
 
-      button.addEventListener(
-        "click",
-        () => {
+        maxSizeInput.value = size;
 
-          const size =
-            Number(button.dataset.size);
+        updatePresetState(size);
 
-          maxSizeInput.value = size;
+        clearError();
 
-          updatePresetState(size);
-
-          clearError();
-
-          setStatus(
-            `Target size set to ${size}KB.`
-          );
-        }
-      );
-
+        setStatus(
+          `Target size set to ${size}KB.`
+        );
+      });
     });
-
 
     maxSizeInput.addEventListener(
       "input",
@@ -844,10 +834,8 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       }
     );
 
-
     function loadImage(file) {
       return new Promise((resolve, reject) => {
-
         const url =
           URL.createObjectURL(file);
 
@@ -873,13 +861,11 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       });
     }
 
-
     function createCanvas(
       image,
       width,
       height
     ) {
-
       const canvas =
         document.createElement("canvas");
 
@@ -902,21 +888,16 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       return canvas;
     }
 
-
     function canvasToBlob(
       canvas,
       type,
       quality
     ) {
-
       return new Promise(
         (resolve, reject) => {
-
           canvas.toBlob(
             blob => {
-
               if (!blob) {
-
                 reject(
                   new Error(
                     "Browser could not create the image."
@@ -935,15 +916,12 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       );
     }
 
-
     function calculateDimensions(
       originalWidth,
       originalHeight,
       maxWidth
     ) {
-
       if (originalWidth <= maxWidth) {
-
         return {
           width: originalWidth,
           height: originalHeight
@@ -970,7 +948,6 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       };
     }
 
-
     async function encode(
       image,
       width,
@@ -978,7 +955,6 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       format,
       quality
     ) {
-
       const canvas =
         createCanvas(
           image,
@@ -1000,7 +976,6 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       };
     }
 
-
     async function compressWithQuality(
       image,
       width,
@@ -1008,7 +983,6 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       format,
       targetBytes
     ) {
-
       let low = 0.05;
       let high = 0.95;
 
@@ -1047,7 +1021,6 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       best = lowResult;
 
       for (let i = 0; i < 9; i++) {
-
         const middle =
           (low + high) / 2;
 
@@ -1063,12 +1036,9 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
         if (
           result.blob.size <= targetBytes
         ) {
-
           best = result;
           low = middle;
-
         } else {
-
           high = middle;
         }
       }
@@ -1076,19 +1046,16 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       return best;
     }
 
-
     async function compressPng(
       image,
       width,
       height,
       targetBytes
     ) {
-
       let currentWidth = width;
       let currentHeight = height;
 
       for (let i = 0; i < 10; i++) {
-
         const result =
           await encode(
             image,
@@ -1123,14 +1090,12 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       return null;
     }
 
-
     async function compressImage(
       image,
       targetBytes,
       maxWidth,
       format
     ) {
-
       const dimensions =
         calculateDimensions(
           image.naturalWidth,
@@ -1141,7 +1106,6 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       let result;
 
       if (format === "image/png") {
-
         result =
           await compressPng(
             image,
@@ -1149,9 +1113,7 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
             dimensions.height,
             targetBytes
           );
-
       } else {
-
         result =
           await compressWithQuality(
             image,
@@ -1177,7 +1139,6 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
         );
 
       for (let i = 0; i < 8; i++) {
-
         if (
           width < 1 ||
           height < 1
@@ -1186,7 +1147,6 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
         }
 
         if (format === "image/png") {
-
           result =
             await compressPng(
               image,
@@ -1194,9 +1154,7 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
               height,
               targetBytes
             );
-
         } else {
-
           result =
             await compressWithQuality(
               image,
@@ -1221,9 +1179,7 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       return null;
     }
 
-
     async function handleFile(file) {
-
       clearError();
       clearResultUrl();
       clearOriginalUrl();
@@ -1236,7 +1192,6 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       }
 
       if (!file.type.startsWith("image/")) {
-
         showError(
           "Please choose a valid image file."
         );
@@ -1245,7 +1200,6 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       }
 
       try {
-
         const image =
           await loadImage(file);
 
@@ -1267,9 +1221,7 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
         setStatus(
           "Image ready to compress."
         );
-
       } catch (error) {
-
         selectedFile = null;
         compressBtn.disabled = true;
 
@@ -1279,11 +1231,9 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       }
     }
 
-
     fileInput.addEventListener(
       "change",
       event => {
-
         const file =
           event.target.files[0];
 
@@ -1291,11 +1241,9 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       }
     );
 
-
     dropZone.addEventListener(
       "dragover",
       event => {
-
         event.preventDefault();
 
         dropZone.classList.add(
@@ -1304,22 +1252,18 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       }
     );
 
-
     dropZone.addEventListener(
       "dragleave",
       () => {
-
         dropZone.classList.remove(
           "drag-over"
         );
       }
     );
 
-
     dropZone.addEventListener(
       "drop",
       event => {
-
         event.preventDefault();
 
         dropZone.classList.remove(
@@ -1333,11 +1277,9 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       }
     );
 
-
     compressBtn.addEventListener(
       "click",
       async () => {
-
         if (!selectedFile) {
           return;
         }
@@ -1358,7 +1300,6 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
           !Number.isFinite(maxSize) ||
           maxSize <= 0
         ) {
-
           showError(
             "Maximum file size must be greater than 0."
           );
@@ -1370,7 +1311,6 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
           !Number.isFinite(maxWidth) ||
           maxWidth <= 0
         ) {
-
           showError(
             "Maximum width must be greater than 0."
           );
@@ -1390,7 +1330,6 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
         );
 
         try {
-
           const image =
             await loadImage(
               selectedFile
@@ -1414,7 +1353,6 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
             );
 
           if (!result) {
-
             throw new Error(
               "Could not reduce this image to the requested size."
             );
@@ -1423,7 +1361,6 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
           if (
             result.blob.size > targetBytes
           ) {
-
             throw new Error(
               "The image could not be compressed below the requested size."
             );
@@ -1461,13 +1398,10 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
             result.blob.size <
             selectedFile.size
           ) {
-
             saving.textContent =
               `${percentage}% smaller · ` +
               `Processed in ${duration}ms`;
-
           } else {
-
             saving.textContent =
               `Processed in ${duration}ms`;
           }
@@ -1498,18 +1432,14 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
           setStatus(
             "Compression complete."
           );
-
         } catch (error) {
-
           showError(
             error.message ||
             "Something went wrong while compressing the image."
           );
 
           setStatus("");
-
         } finally {
-
           compressBtn.disabled = false;
         }
       }
