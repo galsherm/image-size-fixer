@@ -1,75 +1,64 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
->
+  <meta
+    name="google-site-verification"
+    content="1vsWdsiggv-ksgu6OfwL5HpR5pZamLemomVxFSLK5po"
+  >
 
-<meta
-name="google-site-verification"
-content="1vsWdsiggv-ksgu6OfwL5HpR5pZamLemomVxFSLK5po"
+  <title>Under100KB - Compress Images to Under 100KB Online</title>
 
->
-
-  <title>Compress Image to Under 100KB Online | Image Size Fixer</title>
-
-<meta
-name="description"
-content="Compress an image to a specific file size like 100KB directly in your browser. Free, fast and private. Supports JPG, PNG and WebP."
-
->
+  <meta
+    name="description"
+    content="Compress JPG, PNG or WebP images to under 100KB or any file size you need. Free, fast and private. Your images stay on your device."
+  >
 
   <link
     rel="canonical"
-    href="https://galsherm.github.io/image-size-fixer/"
+    href="https://galsherm.github.io/under100kb/"
   >
 
-<meta
-property="og:title"
-content="Compress Image to Under 100KB Online"
+  <meta
+    property="og:title"
+    content="Under100KB - Compress Images to Under 100KB"
+  >
 
->
+  <meta
+    property="og:description"
+    content="Compress JPG, PNG or WebP images to a specific file size directly in your browser. Free, fast and private."
+  >
 
-<meta
-property="og:description"
-content="Need an image under 100KB? Compress JPG, PNG or WebP images to a target file size directly in your browser."
+  <meta
+    property="og:type"
+    content="website"
+  >
 
->
+  <meta
+    property="og:url"
+    content="https://galsherm.github.io/under100kb/"
+  >
 
-<meta
-property="og:type"
-content="website"
+  <meta
+    name="twitter:card"
+    content="summary"
+  >
 
->
+  <meta
+    name="twitter:title"
+    content="Under100KB - Compress Images to Under 100KB"
+  >
 
-<meta
-property="og:url"
-content="https://galsherm.github.io/image-size-fixer/"
-
->
-
-<meta
-name="twitter:card"
-content="summary"
-
->
-
-<meta
-name="twitter:title"
-content="Compress Image to Under 100KB Online"
-
->
-
-<meta
-name="twitter:description"
-content="Compress JPG, PNG or WebP images to a specific file size directly in your browser."
-
->
+  <meta
+    name="twitter:description"
+    content="Compress images to a specific file size directly in your browser. Free, fast and private."
+  >
 
   <style>
     * {
@@ -467,239 +456,236 @@ content="Compress JPG, PNG or WebP images to a specific file size directly in yo
       }
     }
   </style>
-
 </head>
 
 <body>
 
   <main class="container">
 
-```
-<header>
-  <h1>Compress Your Image to Under 100KB</h1>
+    <header>
+      <h1>Under100KB</h1>
 
-  <p class="subtitle">
-    Quickly reduce JPG, PNG or WebP images to the exact file size you need.
-    Free, private and processed directly in your browser.
-  </p>
-</header>
+      <p class="subtitle">
+        Compress JPG, PNG or WebP images to under 100KB
+        or any file size you need. Free, fast and private.
+      </p>
+    </header>
 
-<section class="card">
+    <section class="card">
 
-  <label
-    class="drop-zone"
-    id="dropZone"
-    for="fileInput"
-  >
-    <input
-      type="file"
-      id="fileInput"
-      accept="image/jpeg,image/png,image/webp,image/gif"
-    >
-
-    <div class="upload-icon">🖼️</div>
-
-    <div class="drop-title">
-      Drop your image here
-    </div>
-
-    <div class="drop-description">
-      or click to choose an image
-    </div>
-  </label>
-
-  <div class="settings">
-
-    <div class="field">
-      <label for="maxSize">
-        Maximum file size
-      </label>
-
-      <div class="input-row">
+      <label
+        class="drop-zone"
+        id="dropZone"
+        for="fileInput"
+      >
         <input
-          type="number"
-          id="maxSize"
-          value="100"
-          min="1"
-          step="1"
+          type="file"
+          id="fileInput"
+          accept="image/jpeg,image/png,image/webp,image/gif"
         >
 
-        <span class="unit">KB</span>
-      </div>
-    </div>
+        <div class="upload-icon">🖼️</div>
 
-    <div class="field">
-      <label for="maxWidth">
-        Maximum width
-      </label>
-
-      <div class="input-row">
-        <input
-          type="number"
-          id="maxWidth"
-          value="1200"
-          min="1"
-          step="1"
-        >
-
-        <span class="unit">px</span>
-      </div>
-    </div>
-
-    <div class="field">
-      <label for="format">
-        Format
-      </label>
-
-      <select id="format">
-        <option value="image/jpeg">JPG</option>
-        <option value="image/webp">WebP</option>
-        <option value="image/png">PNG</option>
-      </select>
-    </div>
-
-  </div>
-
-  <div class="presets">
-
-    <span class="presets-label">
-      Common file size limits
-    </span>
-
-    <div class="preset-buttons">
-
-      <button
-        type="button"
-        class="preset-btn"
-        data-size="20"
-      >
-        20KB
-      </button>
-
-      <button
-        type="button"
-        class="preset-btn"
-        data-size="50"
-      >
-        50KB
-      </button>
-
-      <button
-        type="button"
-        class="preset-btn active"
-        data-size="100"
-      >
-        100KB
-      </button>
-
-      <button
-        type="button"
-        class="preset-btn"
-        data-size="200"
-      >
-        200KB
-      </button>
-
-    </div>
-
-  </div>
-
-  <button
-    class="compress-btn"
-    id="compressBtn"
-    disabled
-  >
-    Compress Image
-  </button>
-
-  <div
-    class="status"
-    id="status"
-    aria-live="polite"
-  ></div>
-
-  <div
-    class="error"
-    id="error"
-    role="alert"
-  ></div>
-
-  <div
-    class="preview"
-    id="preview"
-  >
-
-    <div class="preview-grid">
-
-      <div class="image-box">
-        <img
-          id="originalPreview"
-          alt="Original image preview"
-        >
-
-        <div class="image-title">
-          Original
+        <div class="drop-title">
+          Drop your image here
         </div>
 
-        <div
-          class="image-info"
-          id="originalInfo"
-        ></div>
-      </div>
+        <div class="drop-description">
+          or click to choose an image
+        </div>
+      </label>
 
-      <div class="image-box">
-        <img
-          id="resultPreview"
-          alt="Compressed image preview"
-        >
+      <div class="settings">
 
-        <div class="image-title">
-          Compressed
+        <div class="field">
+          <label for="maxSize">
+            Maximum file size
+          </label>
+
+          <div class="input-row">
+            <input
+              type="number"
+              id="maxSize"
+              value="100"
+              min="1"
+              step="1"
+            >
+
+            <span class="unit">KB</span>
+          </div>
         </div>
 
-        <div
-          class="image-info"
-          id="resultInfo"
-        ></div>
+        <div class="field">
+          <label for="maxWidth">
+            Maximum width
+          </label>
+
+          <div class="input-row">
+            <input
+              type="number"
+              id="maxWidth"
+              value="1200"
+              min="1"
+              step="1"
+            >
+
+            <span class="unit">px</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="format">
+            Format
+          </label>
+
+          <select id="format">
+            <option value="image/jpeg">JPG</option>
+            <option value="image/webp">WebP</option>
+            <option value="image/png">PNG</option>
+          </select>
+        </div>
+
       </div>
 
-    </div>
+      <div class="presets">
 
-    <div class="result">
+        <span class="presets-label">
+          Common file size limits
+        </span>
+
+        <div class="preset-buttons">
+
+          <button
+            type="button"
+            class="preset-btn"
+            data-size="20"
+          >
+            20KB
+          </button>
+
+          <button
+            type="button"
+            class="preset-btn"
+            data-size="50"
+          >
+            50KB
+          </button>
+
+          <button
+            type="button"
+            class="preset-btn active"
+            data-size="100"
+          >
+            100KB
+          </button>
+
+          <button
+            type="button"
+            class="preset-btn"
+            data-size="200"
+          >
+            200KB
+          </button>
+
+        </div>
+
+      </div>
+
+      <button
+        class="compress-btn"
+        id="compressBtn"
+        disabled
+      >
+        Compress Image
+      </button>
 
       <div
-        class="result-size"
-        id="resultSize"
+        class="status"
+        id="status"
+        aria-live="polite"
       ></div>
 
       <div
-        class="saving"
-        id="saving"
+        class="error"
+        id="error"
+        role="alert"
       ></div>
 
-      <a
-        class="download-btn"
-        id="downloadBtn"
-        download="compressed-image"
+      <div
+        class="preview"
+        id="preview"
       >
-        Download image
-      </a>
 
-    </div>
+        <div class="preview-grid">
 
-  </div>
+          <div class="image-box">
+            <img
+              id="originalPreview"
+              alt="Original image preview"
+            >
 
-  <div class="privacy">
-    🔒 <strong>Your image stays on your device.</strong>
-    It is never uploaded to a server.
-  </div>
+            <div class="image-title">
+              Original
+            </div>
 
-</section>
+            <div
+              class="image-info"
+              id="originalInfo"
+            ></div>
+          </div>
 
-<footer>
-  Image Size Fixer — Free to use
-</footer>
-```
+          <div class="image-box">
+            <img
+              id="resultPreview"
+              alt="Compressed image preview"
+            >
+
+            <div class="image-title">
+              Compressed
+            </div>
+
+            <div
+              class="image-info"
+              id="resultInfo"
+            ></div>
+          </div>
+
+        </div>
+
+        <div class="result">
+
+          <div
+            class="result-size"
+            id="resultSize"
+          ></div>
+
+          <div
+            class="saving"
+            id="saving"
+          ></div>
+
+          <a
+            class="download-btn"
+            id="downloadBtn"
+            download="compressed-image"
+          >
+            Download image
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="privacy">
+        🔒 <strong>Your image stays on your device.</strong>
+        It is never uploaded to a server.
+      </div>
+
+    </section>
+
+    <footer>
+      Under100KB — Free to use
+    </footer>
 
   </main>
 
