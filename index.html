@@ -1,19 +1,22 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+>
 
   <title>Image Size Fixer</title>
 
-  <meta
-    name="description"
-    content="Compress images to a specific file size directly in your browser."
-  >
+<meta
+name="description"
+content="Compress JPG, PNG or WebP images to a specific file size like 100KB directly in your browser."
+
+>
 
   <style>
     * {
@@ -347,197 +350,200 @@
       }
     }
   </style>
+
 </head>
 
 <body>
 
   <main class="container">
 
-    <header>
-      <h1>Image Size Fixer</h1>
+```
+<header>
+  <h1>Compress Image to a Specific File Size</h1>
 
-      <p class="subtitle">
-        Compress your image to fit the exact file size
-        and dimensions you need.
-      </p>
-    </header>
+  <p class="subtitle">
+    Reduce JPG, PNG or WebP images to a target size like
+    100KB — directly in your browser.
+  </p>
+</header>
 
-    <section class="card">
+<section class="card">
 
-      <!-- Upload -->
-      <label
-        class="drop-zone"
-        id="dropZone"
-        for="fileInput"
-      >
-        <input
-          type="file"
-          id="fileInput"
-          accept="image/jpeg,image/png,image/webp,image/gif"
-        >
+  <!-- Upload -->
+  <label
+    class="drop-zone"
+    id="dropZone"
+    for="fileInput"
+  >
+    <input
+      type="file"
+      id="fileInput"
+      accept="image/jpeg,image/png,image/webp,image/gif"
+    >
 
-        <div class="upload-icon">🖼️</div>
+    <div class="upload-icon">🖼️</div>
 
-        <div class="drop-title">
-          Drop your image here
-        </div>
+    <div class="drop-title">
+      Drop your image here
+    </div>
 
-        <div class="drop-description">
-          or click to choose an image
-        </div>
+    <div class="drop-description">
+      or click to choose an image
+    </div>
+  </label>
+
+  <!-- Settings -->
+  <div class="settings">
+
+    <div class="field">
+      <label for="maxSize">
+        Maximum file size
       </label>
 
-      <!-- Settings -->
-      <div class="settings">
+      <div class="input-row">
+        <input
+          type="number"
+          id="maxSize"
+          value="100"
+          min="1"
+          step="1"
+        >
 
-        <div class="field">
-          <label for="maxSize">
-            Maximum file size
-          </label>
+        <span class="unit">KB</span>
+      </div>
+    </div>
 
-          <div class="input-row">
-            <input
-              type="number"
-              id="maxSize"
-              value="100"
-              min="1"
-              step="1"
-            >
+    <div class="field">
+      <label for="maxWidth">
+        Maximum width
+      </label>
 
-            <span class="unit">KB</span>
-          </div>
+      <div class="input-row">
+        <input
+          type="number"
+          id="maxWidth"
+          value="1200"
+          min="1"
+          step="1"
+        >
+
+        <span class="unit">px</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="format">
+        Format
+      </label>
+
+      <select id="format">
+        <option value="image/jpeg">JPG</option>
+        <option value="image/webp">WebP</option>
+        <option value="image/png">PNG</option>
+      </select>
+    </div>
+
+  </div>
+
+  <!-- Compress -->
+  <button
+    class="compress-btn"
+    id="compressBtn"
+    disabled
+  >
+    Compress Image
+  </button>
+
+  <div
+    class="status"
+    id="status"
+    aria-live="polite"
+  ></div>
+
+  <div
+    class="error"
+    id="error"
+    role="alert"
+  ></div>
+
+  <!-- Preview -->
+  <div
+    class="preview"
+    id="preview"
+  >
+
+    <div class="preview-grid">
+
+      <div class="image-box">
+        <img
+          id="originalPreview"
+          alt="Original image preview"
+        >
+
+        <div class="image-title">
+          Original
         </div>
 
-        <div class="field">
-          <label for="maxWidth">
-            Maximum width
-          </label>
-
-          <div class="input-row">
-            <input
-              type="number"
-              id="maxWidth"
-              value="1200"
-              min="1"
-              step="1"
-            >
-
-            <span class="unit">px</span>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="format">
-            Format
-          </label>
-
-          <select id="format">
-            <option value="image/jpeg">JPG</option>
-            <option value="image/webp">WebP</option>
-            <option value="image/png">PNG</option>
-          </select>
-        </div>
-
+        <div
+          class="image-info"
+          id="originalInfo"
+        ></div>
       </div>
 
-      <!-- Compress -->
-      <button
-        class="compress-btn"
-        id="compressBtn"
-        disabled
-      >
-        Compress Image
-      </button>
+      <div class="image-box">
+        <img
+          id="resultPreview"
+          alt="Compressed image preview"
+        >
+
+        <div class="image-title">
+          Compressed
+        </div>
+
+        <div
+          class="image-info"
+          id="resultInfo"
+        ></div>
+      </div>
+
+    </div>
+
+    <div class="result">
 
       <div
-        class="status"
-        id="status"
-        aria-live="polite"
+        class="result-size"
+        id="resultSize"
       ></div>
 
       <div
-        class="error"
-        id="error"
-        role="alert"
+        class="saving"
+        id="saving"
       ></div>
 
-      <!-- Preview -->
-      <div
-        class="preview"
-        id="preview"
+      <a
+        class="download-btn"
+        id="downloadBtn"
+        download="compressed-image"
       >
+        Download image
+      </a>
 
-        <div class="preview-grid">
+    </div>
 
-          <div class="image-box">
-            <img
-              id="originalPreview"
-              alt="Original image preview"
-            >
+  </div>
 
-            <div class="image-title">
-              Original
-            </div>
+  <div class="privacy">
+    🔒
+    <strong>Your image stays on your device.</strong>
+    It is never uploaded to a server.
+  </div>
 
-            <div
-              class="image-info"
-              id="originalInfo"
-            ></div>
-          </div>
+</section>
 
-          <div class="image-box">
-            <img
-              id="resultPreview"
-              alt="Compressed image preview"
-            >
-
-            <div class="image-title">
-              Compressed
-            </div>
-
-            <div
-              class="image-info"
-              id="resultInfo"
-            ></div>
-          </div>
-
-        </div>
-
-        <div class="result">
-
-          <div
-            class="result-size"
-            id="resultSize"
-          ></div>
-
-          <div
-            class="saving"
-            id="saving"
-          ></div>
-
-          <a
-            class="download-btn"
-            id="downloadBtn"
-            download="compressed-image"
-          >
-            Download image
-          </a>
-
-        </div>
-
-      </div>
-
-      <div class="privacy">
-        🔒
-        <strong>Your image stays on your device.</strong>
-        It is never uploaded to a server.
-      </div>
-
-    </section>
-
-    <footer>
-      Image Size Fixer — Free to use
-    </footer>
+<footer>
+  Image Size Fixer — Free to use
+</footer>
+```
 
   </main>
 
@@ -582,12 +588,6 @@
     let originalObjectUrl = null;
     let resultObjectUrl = null;
 
-
-    /*
-     * -------------------------
-     * Utility functions
-     * -------------------------
-     */
 
     function formatBytes(bytes) {
       if (bytes < 1024) {
@@ -635,12 +635,6 @@
     }
 
 
-    /*
-     * -------------------------
-     * Image loading
-     * -------------------------
-     */
-
     function loadImage(file) {
       return new Promise((resolve, reject) => {
 
@@ -665,12 +659,6 @@
     }
 
 
-    /*
-     * -------------------------
-     * Canvas creation
-     * -------------------------
-     */
-
     function createCanvas(image, width, height) {
 
       const canvas = document.createElement("canvas");
@@ -694,12 +682,6 @@
     }
 
 
-    /*
-     * -------------------------
-     * Canvas → Blob
-     * -------------------------
-     */
-
     function canvasToBlob(canvas, type, quality) {
       return new Promise((resolve, reject) => {
 
@@ -721,12 +703,6 @@
       });
     }
 
-
-    /*
-     * -------------------------
-     * Calculate dimensions
-     * -------------------------
-     */
 
     function calculateDimensions(
       originalWidth,
@@ -758,12 +734,6 @@
     }
 
 
-    /*
-     * -------------------------
-     * Encode at a quality
-     * -------------------------
-     */
-
     async function encode(
       image,
       width,
@@ -794,16 +764,6 @@
     }
 
 
-    /*
-     * -------------------------
-     * JPEG / WebP compression
-     *
-     * Binary search is used to
-     * find the highest quality
-     * that fits the target size.
-     * -------------------------
-     */
-
     async function compressWithQuality(
       image,
       width,
@@ -817,9 +777,6 @@
 
       let best = null;
 
-      /*
-       * Try maximum quality first.
-       */
       const highResult =
         await encode(
           image,
@@ -833,9 +790,6 @@
         return highResult;
       }
 
-      /*
-       * Try minimum quality.
-       */
       const lowResult =
         await encode(
           image,
@@ -851,13 +805,6 @@
 
       best = lowResult;
 
-      /*
-       * Binary search.
-       *
-       * Around 8-10 iterations are
-       * normally enough to find a
-       * very good quality.
-       */
       for (let i = 0; i < 9; i++) {
 
         const middle =
@@ -875,18 +822,10 @@
         if (result.blob.size <= targetBytes) {
 
           best = result;
-
-          /*
-           * It fits, so try higher
-           * quality.
-           */
           low = middle;
 
         } else {
 
-          /*
-           * Too large, reduce quality.
-           */
           high = middle;
         }
       }
@@ -894,20 +833,6 @@
       return best;
     }
 
-
-    /*
-     * -------------------------
-     * PNG compression
-     *
-     * PNG is lossless and the
-     * quality parameter does not
-     * work like JPEG/WebP.
-     *
-     * Therefore, if PNG is too
-     * large, we progressively
-     * reduce dimensions.
-     * -------------------------
-     */
 
     async function compressPng(
       image,
@@ -933,10 +858,6 @@
           return result;
         }
 
-        /*
-         * Reduce dimensions by
-         * approximately 15%.
-         */
         currentWidth =
           Math.max(
             1,
@@ -954,12 +875,6 @@
     }
 
 
-    /*
-     * -------------------------
-     * Main compression algorithm
-     * -------------------------
-     */
-
     async function compressImage(
       image,
       targetBytes,
@@ -974,10 +889,6 @@
           maxWidth
         );
 
-      /*
-       * First attempt using the
-       * requested maximum width.
-       */
       let result;
 
       if (format === "image/png") {
@@ -1006,14 +917,6 @@
         return result;
       }
 
-
-      /*
-       * If the target is still too
-       * difficult, progressively
-       * reduce dimensions.
-       *
-       * This is a fallback.
-       */
       let width =
         Math.floor(
           dimensions.width * 0.85
@@ -1023,7 +926,6 @@
         Math.floor(
           dimensions.height * 0.85
         );
-
 
       for (let i = 0; i < 8; i++) {
 
@@ -1068,12 +970,6 @@
     }
 
 
-    /*
-     * -------------------------
-     * File selection
-     * -------------------------
-     */
-
     async function handleFile(file) {
 
       clearError();
@@ -1098,10 +994,6 @@
 
       try {
 
-        /*
-         * Verify that the browser
-         * can actually decode it.
-         */
         const image =
           await loadImage(file);
 
@@ -1136,12 +1028,6 @@
     }
 
 
-    /*
-     * -------------------------
-     * File input
-     * -------------------------
-     */
-
     fileInput.addEventListener(
       "change",
       event => {
@@ -1153,12 +1039,6 @@
       }
     );
 
-
-    /*
-     * -------------------------
-     * Drag & Drop
-     * -------------------------
-     */
 
     dropZone.addEventListener(
       "dragover",
@@ -1202,12 +1082,6 @@
     );
 
 
-    /*
-     * -------------------------
-     * Compression button
-     * -------------------------
-     */
-
     compressBtn.addEventListener(
       "click",
       async () => {
@@ -1228,10 +1102,6 @@
         const format =
           formatInput.value;
 
-
-        /*
-         * Validate settings.
-         */
         if (
           !Number.isFinite(maxSize) ||
           maxSize <= 0
@@ -1243,7 +1113,6 @@
 
           return;
         }
-
 
         if (
           !Number.isFinite(maxWidth) ||
@@ -1257,10 +1126,8 @@
           return;
         }
 
-
         const targetBytes =
           maxSize * 1024;
-
 
         compressBtn.disabled = true;
 
@@ -1270,7 +1137,6 @@
           "Compressing image..."
         );
 
-
         try {
 
           const image =
@@ -1278,10 +1144,8 @@
               selectedFile
             );
 
-
           const startTime =
             performance.now();
-
 
           const result =
             await compressImage(
@@ -1291,12 +1155,10 @@
               format
             );
 
-
           const duration =
             Math.round(
               performance.now() - startTime
             );
-
 
           if (!result) {
 
@@ -1305,14 +1167,6 @@
             );
           }
 
-
-          /*
-           * Final safety check.
-           *
-           * Never claim success if
-           * the output is actually
-           * above the requested limit.
-           */
           if (
             result.blob.size > targetBytes
           ) {
@@ -1322,7 +1176,6 @@
             );
           }
 
-
           resultObjectUrl =
             URL.createObjectURL(
               result.blob
@@ -1331,16 +1184,13 @@
           resultPreview.src =
             resultObjectUrl;
 
-
           resultInfo.textContent =
             `${formatBytes(result.blob.size)} · ` +
             `${result.width} × ` +
             `${result.height}px`;
 
-
           resultSize.textContent =
             `${formatBytes(result.blob.size)}`;
-
 
           const percentage =
             Math.max(
@@ -1353,7 +1203,6 @@
                 ) * 100
               )
             );
-
 
           if (
             result.blob.size < selectedFile.size
@@ -1369,11 +1218,6 @@
               `Processed in ${duration}ms`;
           }
 
-
-          /*
-           * Change extension according
-           * to selected output format.
-           */
           let extension = "jpg";
 
           if (format === "image/webp") {
@@ -1384,17 +1228,14 @@
             extension = "png";
           }
 
-
           downloadBtn.href =
             resultObjectUrl;
 
           downloadBtn.download =
             `compressed-image.${extension}`;
 
-
           preview.style.display =
             "block";
-
 
           setStatus(
             "Compression complete."
