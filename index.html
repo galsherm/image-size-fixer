@@ -1,29 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>Image Size Fixer</title>
+
+  <meta
+    name="description"
+    content="Compress images to a specific file size directly in your browser."
+  >
 
   <style>
     * {
       box-sizing: border-box;
     }
 
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --background: #f5f7fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #6b7280;
+      --border: #dfe3ea;
+      --success: #15803d;
+      --error: #dc2626;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: Inter, Arial, sans-serif;
-      background: #f6f7fb;
-      color: #17181c;
-      display: flex;
-      justify-content: center;
       padding: 40px 16px;
+
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      background: var(--background);
+      color: var(--text);
     }
 
     .container {
       width: 100%;
-      max-width: 720px;
+      max-width: 760px;
+      margin: 0 auto;
     }
 
     header {
@@ -33,248 +62,288 @@
 
     h1 {
       margin: 0 0 10px;
-      font-size: 38px;
-      letter-spacing: -1px;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.1;
     }
 
     .subtitle {
-      color: #666b76;
-      font-size: 16px;
-      margin: 0;
+      margin: 0 auto;
+      max-width: 600px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
     }
 
     .card {
-      background: white;
-      border-radius: 20px;
-      padding: 28px;
-      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.07);
+      background: var(--card);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.07);
     }
 
     .drop-zone {
-      border: 2px dashed #cfd3dc;
-      border-radius: 16px;
-      min-height: 190px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: block;
+      border: 2px dashed var(--border);
+      border-radius: 14px;
+      padding: 42px 20px;
       text-align: center;
       cursor: pointer;
-      transition: 0.2s;
-      background: #fafbfc;
+      transition:
+        border-color 0.15s ease,
+        background 0.15s ease;
     }
 
     .drop-zone:hover,
-    .drop-zone.dragging {
-      border-color: #5b5ff7;
-      background: #f4f4ff;
+    .drop-zone.drag-over {
+      border-color: var(--primary);
+      background: #eff6ff;
     }
 
-    .drop-content {
-      padding: 20px;
+    .drop-zone input {
+      display: none;
     }
 
     .upload-icon {
       font-size: 42px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .drop-title {
-      font-size: 18px;
+      font-size: 1.15rem;
       font-weight: 700;
     }
 
     .drop-description {
       margin-top: 6px;
-      color: #777d88;
-      font-size: 14px;
-    }
-
-    input[type="file"] {
-      display: none;
+      color: var(--muted);
+      font-size: 0.92rem;
     }
 
     .settings {
-      margin-top: 24px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 22px;
     }
 
     .field {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 7px;
     }
 
-    label {
-      font-size: 14px;
+    .field label {
+      font-size: 0.9rem;
       font-weight: 700;
     }
 
-    input,
-    select {
-      width: 100%;
-      padding: 13px 14px;
-      border: 1px solid #d8dbe2;
-      border-radius: 10px;
-      font-size: 15px;
-      background: white;
-      outline: none;
+    .input-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    input:focus,
+    input[type="number"],
+    select {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 12px;
+
+      border: 1px solid var(--border);
+      border-radius: 9px;
+
+      background: white;
+      color: var(--text);
+      font: inherit;
+    }
+
+    input[type="number"]:focus,
     select:focus {
-      border-color: #5b5ff7;
+      outline: 2px solid rgba(37, 99, 235, 0.2);
+      border-color: var(--primary);
+    }
+
+    .unit {
+      color: var(--muted);
+      font-size: 0.85rem;
+      white-space: nowrap;
     }
 
     .compress-btn {
       width: 100%;
+      min-height: 50px;
       margin-top: 22px;
+
       border: 0;
-      border-radius: 12px;
-      padding: 15px;
-      font-size: 16px;
-      font-weight: 800;
+      border-radius: 10px;
+
+      background: var(--primary);
       color: white;
-      background: #5b5ff7;
+
+      font: inherit;
+      font-weight: 700;
+      font-size: 1rem;
+
       cursor: pointer;
-      transition: 0.2s;
+      transition:
+        background 0.15s ease,
+        transform 0.1s ease;
     }
 
-    .compress-btn:hover {
-      background: #4b4fe5;
-      transform: translateY(-1px);
+    .compress-btn:hover:not(:disabled) {
+      background: var(--primary-dark);
+    }
+
+    .compress-btn:active:not(:disabled) {
+      transform: translateY(1px);
     }
 
     .compress-btn:disabled {
-      background: #b9bcc7;
+      opacity: 0.5;
       cursor: not-allowed;
-      transform: none;
+    }
+
+    .status {
+      min-height: 24px;
+      margin-top: 14px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .error {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #fef2f2;
+      color: var(--error);
+      font-size: 0.9rem;
+      display: none;
     }
 
     .preview {
       display: none;
-      margin-top: 25px;
-      border-top: 1px solid #eceef2;
-      padding-top: 25px;
+      margin-top: 28px;
     }
 
     .preview-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
     }
 
     .image-box {
-      background: #f7f8fa;
+      min-width: 0;
+      border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 12px;
-      text-align: center;
+      overflow: hidden;
+      background: #fafafa;
     }
 
     .image-box img {
+      display: block;
       width: 100%;
-      height: 180px;
+      height: 260px;
       object-fit: contain;
-      border-radius: 8px;
       background:
-        linear-gradient(45deg, #eee 25%, transparent 25%),
-        linear-gradient(-45deg, #eee 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, #eee 75%),
-        linear-gradient(-45deg, transparent 75%, #eee 75%);
+        linear-gradient(45deg, #f0f0f0 25%, transparent 25%),
+        linear-gradient(-45deg, #f0f0f0 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #f0f0f0 75%),
+        linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
       background-size: 20px 20px;
       background-position: 0 0, 0 10px, 10px -10px, -10px 0;
     }
 
     .image-title {
+      padding: 10px 12px 2px;
       font-weight: 700;
-      font-size: 14px;
-      margin: 8px 0 3px;
+      font-size: 0.9rem;
     }
 
     .image-info {
-      color: #747986;
-      font-size: 13px;
+      padding: 4px 12px 12px;
+      color: var(--muted);
+      font-size: 0.82rem;
     }
 
     .result {
-      display: none;
-      margin-top: 20px;
-      padding: 18px;
+      margin-top: 18px;
+      padding: 20px;
       border-radius: 12px;
-      background: #eefbf3;
-      border: 1px solid #bde8cb;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
       text-align: center;
     }
 
     .result-size {
-      font-size: 24px;
+      font-size: 1.35rem;
       font-weight: 800;
-      color: #168344;
+      color: var(--success);
     }
 
     .saving {
-      margin-top: 4px;
-      color: #23774a;
-      font-size: 14px;
+      margin-top: 5px;
+      color: #166534;
+      font-size: 0.9rem;
     }
 
     .download-btn {
-      display: inline-block;
-      margin-top: 14px;
-      padding: 12px 20px;
-      border-radius: 10px;
-      background: #168344;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      min-height: 44px;
+      margin-top: 15px;
+      padding: 0 20px;
+
+      border-radius: 9px;
+
+      background: var(--success);
       color: white;
+
       text-decoration: none;
       font-weight: 700;
     }
 
-    .error {
-      display: none;
-      margin-top: 18px;
-      padding: 14px;
-      border-radius: 10px;
-      background: #fff0f0;
-      color: #b42318;
-      border: 1px solid #f3c2c2;
-      font-size: 14px;
+    .download-btn:hover {
+      background: #166534;
     }
 
     .privacy {
+      margin-top: 20px;
       text-align: center;
-      margin-top: 18px;
-      color: #777d88;
-      font-size: 13px;
-    }
-
-    .privacy strong {
-      color: #555b66;
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.5;
     }
 
     footer {
+      margin-top: 24px;
       text-align: center;
-      margin-top: 20px;
-      color: #9a9eaa;
-      font-size: 12px;
+      color: var(--muted);
+      font-size: 0.82rem;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 650px) {
       body {
         padding: 24px 12px;
       }
 
-      h1 {
-        font-size: 30px;
-      }
-
       .card {
-        padding: 18px;
+        padding: 16px;
       }
 
-      .settings,
+      .settings {
+        grid-template-columns: 1fr;
+      }
+
       .preview-grid {
         grid-template-columns: 1fr;
+      }
+
+      .image-box img {
+        height: 220px;
       }
     }
   </style>
@@ -286,27 +355,35 @@
 
     <header>
       <h1>Image Size Fixer</h1>
+
       <p class="subtitle">
-        Compress your image to fit the exact requirements you need.
+        Compress your image to fit the exact file size
+        and dimensions you need.
       </p>
     </header>
 
     <section class="card">
 
       <!-- Upload -->
-      <label class="drop-zone" id="dropZone">
-        <input type="file" id="fileInput" accept="image/*" />
+      <label
+        class="drop-zone"
+        id="dropZone"
+        for="fileInput"
+      >
+        <input
+          type="file"
+          id="fileInput"
+          accept="image/jpeg,image/png,image/webp,image/gif"
+        >
 
-        <div class="drop-content">
-          <div class="upload-icon">🖼️</div>
+        <div class="upload-icon">🖼️</div>
 
-          <div class="drop-title">
-            Drop your image here
-          </div>
+        <div class="drop-title">
+          Drop your image here
+        </div>
 
-          <div class="drop-description">
-            or click to choose a JPG, PNG or WebP
-          </div>
+        <div class="drop-description">
+          or click to choose an image
         </div>
       </label>
 
@@ -318,16 +395,17 @@
             Maximum file size
           </label>
 
-          <input
-            type="number"
-            id="maxSize"
-            value="100"
-            min="1"
-          />
+          <div class="input-row">
+            <input
+              type="number"
+              id="maxSize"
+              value="100"
+              min="1"
+              step="1"
+            >
 
-          <small style="color:#777d88;">
-            KB
-          </small>
+            <span class="unit">KB</span>
+          </div>
         </div>
 
         <div class="field">
@@ -335,16 +413,17 @@
             Maximum width
           </label>
 
-          <input
-            type="number"
-            id="maxWidth"
-            value="1200"
-            min="1"
-          />
+          <div class="input-row">
+            <input
+              type="number"
+              id="maxWidth"
+              value="1200"
+              min="1"
+              step="1"
+            >
 
-          <small style="color:#777d88;">
-            pixels
-          </small>
+            <span class="unit">px</span>
+          </div>
         </div>
 
         <div class="field">
@@ -361,7 +440,7 @@
 
       </div>
 
-      <!-- Button -->
+      <!-- Compress -->
       <button
         class="compress-btn"
         id="compressBtn"
@@ -370,46 +449,76 @@
         Compress Image
       </button>
 
-      <!-- Error -->
-      <div class="error" id="error"></div>
+      <div
+        class="status"
+        id="status"
+        aria-live="polite"
+      ></div>
+
+      <div
+        class="error"
+        id="error"
+        role="alert"
+      ></div>
 
       <!-- Preview -->
-      <div class="preview" id="preview">
+      <div
+        class="preview"
+        id="preview"
+      >
 
         <div class="preview-grid">
 
           <div class="image-box">
-            <img id="originalPreview" alt="Original image" />
+            <img
+              id="originalPreview"
+              alt="Original image preview"
+            >
 
             <div class="image-title">
               Original
             </div>
 
-            <div class="image-info" id="originalInfo"></div>
+            <div
+              class="image-info"
+              id="originalInfo"
+            ></div>
           </div>
 
           <div class="image-box">
-            <img id="resultPreview" alt="Compressed image" />
+            <img
+              id="resultPreview"
+              alt="Compressed image preview"
+            >
 
             <div class="image-title">
               Compressed
             </div>
 
-            <div class="image-info" id="resultInfo"></div>
+            <div
+              class="image-info"
+              id="resultInfo"
+            ></div>
           </div>
 
         </div>
 
-        <div class="result" id="result">
+        <div class="result">
 
-          <div class="result-size" id="resultSize"></div>
+          <div
+            class="result-size"
+            id="resultSize"
+          ></div>
 
-          <div class="saving" id="saving"></div>
+          <div
+            class="saving"
+            id="saving"
+          ></div>
 
           <a
             class="download-btn"
             id="downloadBtn"
-            download="compressed-image.jpg"
+            download="compressed-image"
           >
             Download image
           </a>
@@ -419,7 +528,8 @@
       </div>
 
       <div class="privacy">
-        🔒 <strong>Your image stays on your device.</strong>
+        🔒
+        <strong>Your image stays on your device.</strong>
         It is never uploaded to a server.
       </div>
 
@@ -434,103 +544,683 @@
   <script>
     const fileInput = document.getElementById("fileInput");
     const dropZone = document.getElementById("dropZone");
-    const compressBtn = document.getElementById("compressBtn");
 
     const maxSizeInput = document.getElementById("maxSize");
     const maxWidthInput = document.getElementById("maxWidth");
     const formatInput = document.getElementById("format");
 
-    const preview = document.getElementById("preview");
-    const originalPreview = document.getElementById("originalPreview");
-    const resultPreview = document.getElementById("resultPreview");
+    const compressBtn = document.getElementById("compressBtn");
 
-    const originalInfo = document.getElementById("originalInfo");
-    const resultInfo = document.getElementById("resultInfo");
-
-    const result = document.getElementById("result");
-    const resultSize = document.getElementById("resultSize");
-    const saving = document.getElementById("saving");
-    const downloadBtn = document.getElementById("downloadBtn");
-
+    const status = document.getElementById("status");
     const errorBox = document.getElementById("error");
 
+    const preview = document.getElementById("preview");
+
+    const originalPreview =
+      document.getElementById("originalPreview");
+
+    const resultPreview =
+      document.getElementById("resultPreview");
+
+    const originalInfo =
+      document.getElementById("originalInfo");
+
+    const resultInfo =
+      document.getElementById("resultInfo");
+
+    const resultSize =
+      document.getElementById("resultSize");
+
+    const saving =
+      document.getElementById("saving");
+
+    const downloadBtn =
+      document.getElementById("downloadBtn");
+
+
     let selectedFile = null;
+    let originalObjectUrl = null;
+    let resultObjectUrl = null;
 
-    // ---------------------------
-    // File selection
-    // ---------------------------
 
-    fileInput.addEventListener("change", () => {
-      if (fileInput.files.length > 0) {
-        selectFile(fileInput.files[0]);
+    /*
+     * -------------------------
+     * Utility functions
+     * -------------------------
+     */
+
+    function formatBytes(bytes) {
+      if (bytes < 1024) {
+        return `${bytes} B`;
       }
-    });
 
-    dropZone.addEventListener("dragover", (event) => {
-      event.preventDefault();
-      dropZone.classList.add("dragging");
-    });
-
-    dropZone.addEventListener("dragleave", () => {
-      dropZone.classList.remove("dragging");
-    });
-
-    dropZone.addEventListener("drop", (event) => {
-      event.preventDefault();
-
-      dropZone.classList.remove("dragging");
-
-      const file = event.dataTransfer.files[0];
-
-      if (file) {
-        selectFile(file);
+      if (bytes < 1024 * 1024) {
+        return `${(bytes / 1024).toFixed(1)} KB`;
       }
-    });
 
-    function selectFile(file) {
+      return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+    }
+
+
+    function showError(message) {
+      errorBox.textContent = message;
+      errorBox.style.display = "block";
+    }
+
+
+    function clearError() {
+      errorBox.textContent = "";
+      errorBox.style.display = "none";
+    }
+
+
+    function setStatus(message) {
+      status.textContent = message;
+    }
+
+
+    function clearResultUrl() {
+      if (resultObjectUrl) {
+        URL.revokeObjectURL(resultObjectUrl);
+        resultObjectUrl = null;
+      }
+    }
+
+
+    function clearOriginalUrl() {
+      if (originalObjectUrl) {
+        URL.revokeObjectURL(originalObjectUrl);
+        originalObjectUrl = null;
+      }
+    }
+
+
+    /*
+     * -------------------------
+     * Image loading
+     * -------------------------
+     */
+
+    function loadImage(file) {
+      return new Promise((resolve, reject) => {
+
+        const url = URL.createObjectURL(file);
+
+        const image = new Image();
+
+        image.onload = () => {
+          URL.revokeObjectURL(url);
+          resolve(image);
+        };
+
+        image.onerror = () => {
+          URL.revokeObjectURL(url);
+          reject(
+            new Error("Could not read this image.")
+          );
+        };
+
+        image.src = url;
+      });
+    }
+
+
+    /*
+     * -------------------------
+     * Canvas creation
+     * -------------------------
+     */
+
+    function createCanvas(image, width, height) {
+
+      const canvas = document.createElement("canvas");
+
+      canvas.width = width;
+      canvas.height = height;
+
+      const context = canvas.getContext("2d", {
+        alpha: true
+      });
+
+      context.drawImage(
+        image,
+        0,
+        0,
+        width,
+        height
+      );
+
+      return canvas;
+    }
+
+
+    /*
+     * -------------------------
+     * Canvas → Blob
+     * -------------------------
+     */
+
+    function canvasToBlob(canvas, type, quality) {
+      return new Promise((resolve, reject) => {
+
+        canvas.toBlob(
+          blob => {
+            if (!blob) {
+              reject(
+                new Error("Browser could not create the image.")
+              );
+
+              return;
+            }
+
+            resolve(blob);
+          },
+          type,
+          quality
+        );
+      });
+    }
+
+
+    /*
+     * -------------------------
+     * Calculate dimensions
+     * -------------------------
+     */
+
+    function calculateDimensions(
+      originalWidth,
+      originalHeight,
+      maxWidth
+    ) {
+
+      if (originalWidth <= maxWidth) {
+        return {
+          width: originalWidth,
+          height: originalHeight
+        };
+      }
+
+      const ratio =
+        maxWidth / originalWidth;
+
+      return {
+        width: Math.max(
+          1,
+          Math.round(originalWidth * ratio)
+        ),
+
+        height: Math.max(
+          1,
+          Math.round(originalHeight * ratio)
+        )
+      };
+    }
+
+
+    /*
+     * -------------------------
+     * Encode at a quality
+     * -------------------------
+     */
+
+    async function encode(
+      image,
+      width,
+      height,
+      format,
+      quality
+    ) {
+
+      const canvas =
+        createCanvas(
+          image,
+          width,
+          height
+        );
+
+      const blob =
+        await canvasToBlob(
+          canvas,
+          format,
+          quality
+        );
+
+      return {
+        blob,
+        width,
+        height
+      };
+    }
+
+
+    /*
+     * -------------------------
+     * JPEG / WebP compression
+     *
+     * Binary search is used to
+     * find the highest quality
+     * that fits the target size.
+     * -------------------------
+     */
+
+    async function compressWithQuality(
+      image,
+      width,
+      height,
+      format,
+      targetBytes
+    ) {
+
+      let low = 0.05;
+      let high = 0.95;
+
+      let best = null;
+
+      /*
+       * Try maximum quality first.
+       */
+      const highResult =
+        await encode(
+          image,
+          width,
+          height,
+          format,
+          high
+        );
+
+      if (highResult.blob.size <= targetBytes) {
+        return highResult;
+      }
+
+      /*
+       * Try minimum quality.
+       */
+      const lowResult =
+        await encode(
+          image,
+          width,
+          height,
+          format,
+          low
+        );
+
+      if (lowResult.blob.size > targetBytes) {
+        return null;
+      }
+
+      best = lowResult;
+
+      /*
+       * Binary search.
+       *
+       * Around 8-10 iterations are
+       * normally enough to find a
+       * very good quality.
+       */
+      for (let i = 0; i < 9; i++) {
+
+        const middle =
+          (low + high) / 2;
+
+        const result =
+          await encode(
+            image,
+            width,
+            height,
+            format,
+            middle
+          );
+
+        if (result.blob.size <= targetBytes) {
+
+          best = result;
+
+          /*
+           * It fits, so try higher
+           * quality.
+           */
+          low = middle;
+
+        } else {
+
+          /*
+           * Too large, reduce quality.
+           */
+          high = middle;
+        }
+      }
+
+      return best;
+    }
+
+
+    /*
+     * -------------------------
+     * PNG compression
+     *
+     * PNG is lossless and the
+     * quality parameter does not
+     * work like JPEG/WebP.
+     *
+     * Therefore, if PNG is too
+     * large, we progressively
+     * reduce dimensions.
+     * -------------------------
+     */
+
+    async function compressPng(
+      image,
+      width,
+      height,
+      targetBytes
+    ) {
+
+      let currentWidth = width;
+      let currentHeight = height;
+
+      for (let i = 0; i < 10; i++) {
+
+        const result =
+          await encode(
+            image,
+            currentWidth,
+            currentHeight,
+            "image/png"
+          );
+
+        if (result.blob.size <= targetBytes) {
+          return result;
+        }
+
+        /*
+         * Reduce dimensions by
+         * approximately 15%.
+         */
+        currentWidth =
+          Math.max(
+            1,
+            Math.floor(currentWidth * 0.85)
+          );
+
+        currentHeight =
+          Math.max(
+            1,
+            Math.floor(currentHeight * 0.85)
+          );
+      }
+
+      return null;
+    }
+
+
+    /*
+     * -------------------------
+     * Main compression algorithm
+     * -------------------------
+     */
+
+    async function compressImage(
+      image,
+      targetBytes,
+      maxWidth,
+      format
+    ) {
+
+      let dimensions =
+        calculateDimensions(
+          image.naturalWidth,
+          image.naturalHeight,
+          maxWidth
+        );
+
+      /*
+       * First attempt using the
+       * requested maximum width.
+       */
+      let result;
+
+      if (format === "image/png") {
+
+        result =
+          await compressPng(
+            image,
+            dimensions.width,
+            dimensions.height,
+            targetBytes
+          );
+
+      } else {
+
+        result =
+          await compressWithQuality(
+            image,
+            dimensions.width,
+            dimensions.height,
+            format,
+            targetBytes
+          );
+      }
+
+      if (result) {
+        return result;
+      }
+
+
+      /*
+       * If the target is still too
+       * difficult, progressively
+       * reduce dimensions.
+       *
+       * This is a fallback.
+       */
+      let width =
+        Math.floor(
+          dimensions.width * 0.85
+        );
+
+      let height =
+        Math.floor(
+          dimensions.height * 0.85
+        );
+
+
+      for (let i = 0; i < 8; i++) {
+
+        if (width < 1 || height < 1) {
+          break;
+        }
+
+        if (format === "image/png") {
+
+          result =
+            await compressPng(
+              image,
+              width,
+              height,
+              targetBytes
+            );
+
+        } else {
+
+          result =
+            await compressWithQuality(
+              image,
+              width,
+              height,
+              format,
+              targetBytes
+            );
+        }
+
+        if (result) {
+          return result;
+        }
+
+        width =
+          Math.floor(width * 0.85);
+
+        height =
+          Math.floor(height * 0.85);
+      }
+
+      return null;
+    }
+
+
+    /*
+     * -------------------------
+     * File selection
+     * -------------------------
+     */
+
+    async function handleFile(file) {
 
       clearError();
+      clearResultUrl();
+      clearOriginalUrl();
 
-      if (!file.type.startsWith("image/")) {
-        showError("Please choose an image file.");
+      preview.style.display = "none";
+      setStatus("");
+
+      if (!file) {
         return;
       }
 
-      selectedFile = file;
+      if (!file.type.startsWith("image/")) {
 
-      const url = URL.createObjectURL(file);
+        showError(
+          "Please choose a valid image file."
+        );
 
-      originalPreview.src = url;
-
-      originalInfo.textContent =
-        `${formatBytes(file.size)} • ${file.type}`;
-
-      preview.style.display = "block";
-      result.style.display = "none";
-
-      compressBtn.disabled = false;
-    }
-
-    // ---------------------------
-    // Compression
-    // ---------------------------
-
-    compressBtn.addEventListener("click", async () => {
-
-      if (!selectedFile) return;
-
-      clearError();
-
-      compressBtn.disabled = true;
-      compressBtn.textContent = "Compressing...";
+        return;
+      }
 
       try {
 
-        const maxSizeKB =
-          Number(maxSizeInput.value);
+        /*
+         * Verify that the browser
+         * can actually decode it.
+         */
+        const image =
+          await loadImage(file);
 
-        const maxSizeBytes =
-          maxSizeKB * 1024;
+        selectedFile = file;
+
+        originalObjectUrl =
+          URL.createObjectURL(file);
+
+        originalPreview.src =
+          originalObjectUrl;
+
+        originalInfo.textContent =
+          `${formatBytes(file.size)} · ` +
+          `${image.naturalWidth} × ` +
+          `${image.naturalHeight}px`;
+
+        compressBtn.disabled = false;
+
+        setStatus(
+          "Image ready to compress."
+        );
+
+      } catch (error) {
+
+        selectedFile = null;
+        compressBtn.disabled = true;
+
+        showError(
+          "Could not read this image. Please try another file."
+        );
+      }
+    }
+
+
+    /*
+     * -------------------------
+     * File input
+     * -------------------------
+     */
+
+    fileInput.addEventListener(
+      "change",
+      event => {
+
+        const file =
+          event.target.files[0];
+
+        handleFile(file);
+      }
+    );
+
+
+    /*
+     * -------------------------
+     * Drag & Drop
+     * -------------------------
+     */
+
+    dropZone.addEventListener(
+      "dragover",
+      event => {
+
+        event.preventDefault();
+
+        dropZone.classList.add(
+          "drag-over"
+        );
+      }
+    );
+
+
+    dropZone.addEventListener(
+      "dragleave",
+      () => {
+
+        dropZone.classList.remove(
+          "drag-over"
+        );
+      }
+    );
+
+
+    dropZone.addEventListener(
+      "drop",
+      event => {
+
+        event.preventDefault();
+
+        dropZone.classList.remove(
+          "drag-over"
+        );
+
+        const file =
+          event.dataTransfer.files[0];
+
+        handleFile(file);
+      }
+    );
+
+
+    /*
+     * -------------------------
+     * Compression button
+     * -------------------------
+     */
+
+    compressBtn.addEventListener(
+      "click",
+      async () => {
+
+        if (!selectedFile) {
+          return;
+        }
+
+        clearError();
+        clearResultUrl();
+
+        const maxSize =
+          Number(maxSizeInput.value);
 
         const maxWidth =
           Number(maxWidthInput.value);
@@ -538,383 +1228,193 @@
         const format =
           formatInput.value;
 
+
+        /*
+         * Validate settings.
+         */
         if (
-          !maxSizeKB ||
-          maxSizeKB <= 0 ||
-          !maxWidth ||
+          !Number.isFinite(maxSize) ||
+          maxSize <= 0
+        ) {
+
+          showError(
+            "Maximum file size must be greater than 0."
+          );
+
+          return;
+        }
+
+
+        if (
+          !Number.isFinite(maxWidth) ||
           maxWidth <= 0
         ) {
-          throw new Error("Please enter valid limits.");
-        }
 
-        const image =
-          await loadImage(selectedFile);
-
-        const canvas =
-          document.createElement("canvas");
-
-        let width = image.width;
-        let height = image.height;
-
-        // Limit width
-        if (width > maxWidth) {
-          height =
-            Math.round(
-              height * (maxWidth / width)
-            );
-
-          width = maxWidth;
-        }
-
-        canvas.width = width;
-        canvas.height = height;
-
-        const ctx =
-          canvas.getContext("2d");
-
-        // White background is important
-        // when converting transparent PNG
-        // to JPG.
-        if (format === "image/jpeg") {
-          ctx.fillStyle = "#ffffff";
-          ctx.fillRect(
-            0,
-            0,
-            width,
-            height
+          showError(
+            "Maximum width must be greater than 0."
           );
+
+          return;
         }
 
-        ctx.drawImage(
-          image,
-          0,
-          0,
-          width,
-          height
+
+        const targetBytes =
+          maxSize * 1024;
+
+
+        compressBtn.disabled = true;
+
+        preview.style.display = "none";
+
+        setStatus(
+          "Compressing image..."
         );
 
-        let blob;
 
-        if (format === "image/png") {
+        try {
 
-          blob =
-            await canvasToBlob(
-              canvas,
-              "image/png"
+          const image =
+            await loadImage(
+              selectedFile
             );
 
-          // PNG compression doesn't offer
-          // a quality parameter.
-          // If it is still too large,
-          // reduce dimensions.
-          let attempts = 0;
 
-          while (
-            blob.size > maxSizeBytes &&
-            attempts < 10
+          const startTime =
+            performance.now();
+
+
+          const result =
+            await compressImage(
+              image,
+              targetBytes,
+              Math.floor(maxWidth),
+              format
+            );
+
+
+          const duration =
+            Math.round(
+              performance.now() - startTime
+            );
+
+
+          if (!result) {
+
+            throw new Error(
+              "Could not reduce this image to the requested size."
+            );
+          }
+
+
+          /*
+           * Final safety check.
+           *
+           * Never claim success if
+           * the output is actually
+           * above the requested limit.
+           */
+          if (
+            result.blob.size > targetBytes
           ) {
 
-            width =
-              Math.round(width * 0.85);
+            throw new Error(
+              "The image could not be compressed below the requested size."
+            );
+          }
 
-            height =
-              Math.round(height * 0.85);
 
-            canvas.width = width;
-            canvas.height = height;
-
-            ctx.drawImage(
-              image,
-              0,
-              0,
-              width,
-              height
+          resultObjectUrl =
+            URL.createObjectURL(
+              result.blob
             );
 
-            blob =
-              await canvasToBlob(
-                canvas,
-                "image/png"
-              );
+          resultPreview.src =
+            resultObjectUrl;
 
-            attempts++;
-          }
 
-        } else {
+          resultInfo.textContent =
+            `${formatBytes(result.blob.size)} · ` +
+            `${result.width} × ` +
+            `${result.height}px`;
 
-          // Binary search for the highest
-          // JPEG/WebP quality that fits.
-          let low = 0.05;
-          let high = 0.95;
 
-          let bestBlob = null;
+          resultSize.textContent =
+            `${formatBytes(result.blob.size)}`;
 
-          for (let i = 0; i < 12; i++) {
 
-            const quality =
-              (low + high) / 2;
-
-            const testBlob =
-              await canvasToBlob(
-                canvas,
-                format,
-                quality
-              );
-
-            if (
-              testBlob.size <= maxSizeBytes
-            ) {
-
-              bestBlob = testBlob;
-              low = quality;
-
-            } else {
-
-              high = quality;
-            }
-          }
-
-          blob = bestBlob;
-
-          // If even very low quality is
-          // too large, reduce dimensions.
-          if (!blob) {
-
-            let attempts = 0;
-
-            while (
-              attempts < 12
-            ) {
-
-              width =
-                Math.round(width * 0.85);
-
-              height =
-                Math.round(height * 0.85);
-
-              canvas.width = width;
-              canvas.height = height;
-
-              if (format === "image/jpeg") {
-                ctx.fillStyle = "#ffffff";
-                ctx.fillRect(
-                  0,
-                  0,
-                  width,
-                  height
-                );
-              }
-
-              ctx.drawImage(
-                image,
-                0,
-                0,
-                width,
-                height
-              );
-
-              const test =
-                await canvasToBlob(
-                  canvas,
-                  format,
-                  0.5
-                );
-
-              if (
-                test.size <= maxSizeBytes
-              ) {
-                blob = test;
-                break;
-              }
-
-              attempts++;
-            }
-          }
-        }
-
-        if (!blob) {
-          throw new Error(
-            "Could not compress the image to the requested size."
-          );
-        }
-
-        showResult(
-          blob,
-          selectedFile.size,
-          format
-        );
-
-      } catch (error) {
-
-        console.error(error);
-
-        showError(
-          error.message ||
-          "Something went wrong."
-        );
-
-      } finally {
-
-        compressBtn.disabled = false;
-        compressBtn.textContent =
-          "Compress Image";
-      }
-    });
-
-    // ---------------------------
-    // Canvas helpers
-    // ---------------------------
-
-    function loadImage(file) {
-
-      return new Promise(
-        (resolve, reject) => {
-
-          const img =
-            new Image();
-
-          const url =
-            URL.createObjectURL(file);
-
-          img.onload = () => {
-            URL.revokeObjectURL(url);
-            resolve(img);
-          };
-
-          img.onerror = () => {
-            URL.revokeObjectURL(url);
-            reject(
-              new Error(
-                "Could not read this image."
+          const percentage =
+            Math.max(
+              0,
+              Math.round(
+                (
+                  1 -
+                  result.blob.size /
+                  selectedFile.size
+                ) * 100
               )
             );
-          };
 
-          img.src = url;
-        }
-      );
-    }
 
-    function canvasToBlob(
-      canvas,
-      type,
-      quality
-    ) {
+          if (
+            result.blob.size < selectedFile.size
+          ) {
 
-      return new Promise(
-        (resolve, reject) => {
+            saving.textContent =
+              `${percentage}% smaller · ` +
+              `Processed in ${duration}ms`;
 
-          canvas.toBlob(
-            (blob) => {
+          } else {
 
-              if (blob) {
-                resolve(blob);
-              } else {
-                reject(
-                  new Error(
-                    "Browser could not create the image."
-                  )
-                );
-              }
+            saving.textContent =
+              `Processed in ${duration}ms`;
+          }
 
-            },
-            type,
-            quality
+
+          /*
+           * Change extension according
+           * to selected output format.
+           */
+          let extension = "jpg";
+
+          if (format === "image/webp") {
+            extension = "webp";
+          }
+
+          if (format === "image/png") {
+            extension = "png";
+          }
+
+
+          downloadBtn.href =
+            resultObjectUrl;
+
+          downloadBtn.download =
+            `compressed-image.${extension}`;
+
+
+          preview.style.display =
+            "block";
+
+
+          setStatus(
+            "Compression complete."
           );
 
+        } catch (error) {
+
+          showError(
+            error.message ||
+            "Something went wrong while compressing the image."
+          );
+
+          setStatus("");
+
+        } finally {
+
+          compressBtn.disabled = false;
         }
-      );
-    }
-
-    // ---------------------------
-    // Result
-    // ---------------------------
-
-    function showResult(
-      blob,
-      originalSize,
-      format
-    ) {
-
-      const url =
-        URL.createObjectURL(blob);
-
-      resultPreview.src = url;
-
-      resultInfo.textContent =
-        `${formatBytes(blob.size)} • ${format}`;
-
-      const percent =
-        Math.max(
-          0,
-          Math.round(
-            (1 - blob.size / originalSize) * 100
-          )
-        );
-
-      resultSize.textContent =
-        formatBytes(blob.size);
-
-      saving.textContent =
-        `${percent}% smaller`;
-
-      downloadBtn.href = url;
-
-      downloadBtn.download =
-        getFilename(format);
-
-      result.style.display = "block";
-      preview.style.display = "block";
-    }
-
-    function getFilename(format) {
-
-      if (format === "image/webp") {
-        return "compressed-image.webp";
       }
-
-      if (format === "image/png") {
-        return "compressed-image.png";
-      }
-
-      return "compressed-image.jpg";
-    }
-
-    // ---------------------------
-    // Utilities
-    // ---------------------------
-
-    function formatBytes(bytes) {
-
-      if (bytes < 1024) {
-        return bytes + " B";
-      }
-
-      if (bytes < 1024 * 1024) {
-        return (
-          (bytes / 1024).toFixed(1) +
-          " KB"
-        );
-      }
-
-      return (
-        (bytes / (1024 * 1024)).toFixed(2) +
-        " MB"
-      );
-    }
-
-    function showError(message) {
-
-      errorBox.textContent = message;
-      errorBox.style.display = "block";
-    }
-
-    function clearError() {
-
-      errorBox.textContent = "";
-      errorBox.style.display = "none";
-    }
-
+    );
   </script>
 
 </body>
