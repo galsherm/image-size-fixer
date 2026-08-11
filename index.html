@@ -19,21 +19,50 @@
   <meta name="robots" content="index, follow">
   <meta name="googlebot" content="index, follow">
 
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+      style-src 'self' 'unsafe-inline';
+      img-src 'self' blob: data:;
+      font-src 'self';
+      connect-src 'self';
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+      frame-ancestors 'none';
+    "
+  >
+
   <link
     rel="canonical"
     href="https://galsherm.github.io/under100kb/"
   >
 
   <meta property="og:title" content="Compress Image to 100KB Online — Under100KB">
+
   <meta
     property="og:description"
     content="Free online image compressor. Reduce JPG, PNG, WebP and TIFF images to your target file size directly in your browser."
   >
+
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://galsherm.github.io/under100kb/">
+
+  <meta
+    property="og:url"
+    content="https://galsherm.github.io/under100kb/"
+  >
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Compress Image to 100KB Online">
+
+  <meta
+    name="twitter:title"
+    content="Compress Image to 100KB Online"
+  >
+
   <meta
     name="twitter:description"
     content="Compress images to 100KB or any target size. Free, fast and private."
@@ -471,6 +500,75 @@
       color: var(--primary-dark);
     }
 
+    /* External security checks */
+    .external-trust {
+      margin-top: 10px;
+      padding: 14px;
+      border: 1px solid #e5e7eb;
+      border-radius: 11px;
+      background: #ffffff;
+      text-align: center;
+    }
+
+    .external-trust-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: #344054;
+      font-size: 0.77rem;
+      font-weight: 750;
+    }
+
+    .external-trust-subtitle {
+      max-width: 560px;
+      margin: 5px auto 0;
+      color: var(--muted);
+      font-size: 0.7rem;
+      line-height: 1.45;
+    }
+
+    .external-trust-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    .external-trust-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 0 10px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      background: #f8fafc;
+      color: #344054;
+      font-size: 0.69rem;
+      font-weight: 650;
+      text-decoration: none;
+      transition:
+        border-color 0.15s ease,
+        color 0.15s ease,
+        background 0.15s ease;
+    }
+
+    .external-trust-links a:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: #eff6ff;
+    }
+
+    .external-trust-note {
+      margin: 9px auto 0;
+      max-width: 560px;
+      color: #98a2b3;
+      font-size: 0.64rem;
+      line-height: 1.45;
+    }
+
     /* Privacy modal */
     .privacy-modal {
       position: fixed;
@@ -812,6 +910,15 @@
       .privacy-dialog {
         padding: 20px;
       }
+
+      .external-trust-links {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .external-trust-links a {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -1027,6 +1134,57 @@
           >
             How is my image processed?
           </button>
+        </div>
+
+      </div>
+
+      <!-- INDEPENDENT SECURITY CHECKS -->
+      <div
+        class="external-trust"
+        aria-label="Independent security checks"
+      >
+
+        <div class="external-trust-title">
+          🛡️ Independent security checks
+        </div>
+
+        <div class="external-trust-subtitle">
+          Want to verify the website yourself?
+          Check Under100KB using independent security services.
+        </div>
+
+        <div class="external-trust-links">
+
+          <a
+            href="https://transparencyreport.google.com/safe-browsing/search?url=https%3A%2F%2Fgalsherm.github.io%2Funder100kb%2F"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            🔎 Google Safe Browsing
+          </a>
+
+          <a
+            href="https://www.ssllabs.com/ssltest/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            🔐 Qualys SSL Labs
+          </a>
+
+          <a
+            href="https://developer.mozilla.org/en-US/observatory"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            🛡️ MDN HTTP Observatory
+          </a>
+
+        </div>
+
+        <div class="external-trust-note">
+          These checks are provided by independent third parties.
+          Under100KB does not claim certification, endorsement or a security rating
+          from these services. Results are generated by the services when you run a check.
         </div>
 
       </div>
