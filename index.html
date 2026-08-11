@@ -18,14 +18,23 @@
 
   <meta name="robots" content="index, follow">
   <meta name="googlebot" content="index, follow">
-
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
+  <!--
+    GitHub Pages does not allow arbitrary HTTP response headers.
+    This CSP is therefore delivered as a meta policy.
+
+    Important:
+    - No unsafe-inline in script-src.
+    - No data: in script-src.
+    - JavaScript is loaded from local files only.
+    - object-src is completely disabled.
+  -->
   <meta
     http-equiv="Content-Security-Policy"
     content="
       default-src 'self';
-      script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+      script-src 'self';
       style-src 'self' 'unsafe-inline';
       img-src 'self' blob: data:;
       font-src 'self';
@@ -34,8 +43,15 @@
       base-uri 'self';
       form-action 'self';
       frame-ancestors 'none';
+      frame-src 'none';
+      worker-src 'self';
+      manifest-src 'self';
+      media-src 'none';
+      upgrade-insecure-requests;
     "
   >
+
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()">
 
   <link
     rel="canonical"
@@ -43,107 +59,25 @@
   >
 
   <meta property="og:title" content="Compress Image to 100KB Online — Under100KB">
-
   <meta
     property="og:description"
     content="Free online image compressor. Reduce JPG, PNG, WebP and TIFF images to your target file size directly in your browser."
   >
-
   <meta property="og:type" content="website">
-
   <meta
     property="og:url"
     content="https://galsherm.github.io/under100kb/"
   >
 
   <meta name="twitter:card" content="summary">
-
   <meta
     name="twitter:title"
     content="Compress Image to 100KB Online"
   >
-
   <meta
     name="twitter:description"
     content="Compress images to 100KB or any target size. Free, fast and private."
   >
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Under100KB",
-    "url": "https://galsherm.github.io/under100kb/",
-    "description": "Free browser-based image compressor for reducing JPG, PNG, WebP and TIFF images to a target file size.",
-    "applicationCategory": "MultimediaApplication",
-    "operatingSystem": "Any",
-    "browserRequirements": "Requires a modern web browser",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "featureList": [
-      "Compress images to 20KB, 50KB, 100KB or 200KB",
-      "Custom target file size",
-      "JPG compression",
-      "PNG compression",
-      "WebP compression",
-      "TIFF compression",
-      "Local browser processing",
-      "No account required"
-    ]
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Can I compress an image to 100KB?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. Select your image, choose 100KB as the target size, and click Compress Image. The tool attempts to create an image at or below the selected target size."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is Under100KB free?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. Under100KB is free to use and does not require an account."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Are my images uploaded to a server?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. Image processing happens locally in your browser. Your image does not need to be uploaded to a server."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I compress a JPG to 100KB?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. Select a JPG image, choose 100KB as the target size, select JPG as the output format and start compression."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I compress a TIFF image?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. Under100KB supports TIFF input and TIFF output. TIFF images can also be converted to JPG or WebP when a smaller file is needed."
-        }
-      }
-    ]
-  }
-  </script>
 
   <style>
     * {
@@ -444,7 +378,6 @@
       display: none;
     }
 
-    /* Trust section */
     .trust-section {
       margin-top: 14px;
       padding: 13px 14px;
@@ -500,7 +433,6 @@
       color: var(--primary-dark);
     }
 
-    /* External security checks */
     .external-trust {
       margin-top: 10px;
       padding: 14px;
@@ -569,7 +501,6 @@
       line-height: 1.45;
     }
 
-    /* Privacy modal */
     .privacy-modal {
       position: fixed;
       inset: 0;
@@ -873,14 +804,8 @@
         padding: 15px;
       }
 
-      .settings-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .preview-grid {
-        grid-template-columns: 1fr;
-      }
-
+      .settings-grid,
+      .preview-grid,
       .value-grid {
         grid-template-columns: 1fr;
       }
@@ -945,11 +870,7 @@
 
     <section class="card" aria-label="Image compression tool">
 
-      <label
-        class="drop-zone"
-        id="dropZone"
-        for="fileInput"
-      >
+      <label class="drop-zone" id="dropZone" for="fileInput">
 
         <input
           type="file"
@@ -957,31 +878,20 @@
           accept=".jpg,.jpeg,.png,.webp,.tif,.tiff,image/jpeg,image/png,image/webp,image/tiff"
         >
 
-        <div
-          class="upload-icon"
-          id="uploadIcon"
-        >
-          🖼️
-        </div>
+        <div class="upload-icon" id="uploadIcon">🖼️</div>
 
-        <div
-          class="drop-title"
-          id="dropTitle"
-        >
+        <div class="drop-title" id="dropTitle">
           Drop your image here
         </div>
 
-        <div
-          class="drop-description"
-          id="dropDescription"
-        >
+        <div class="drop-description" id="dropDescription">
           JPG, JPEG, PNG, WebP or TIFF
         </div>
 
         <div
           class="selected-file"
           id="selectedFile"
-          style="display:none;"
+          hidden
         ></div>
 
       </label>
@@ -1003,7 +913,9 @@
                 id="maxSize"
                 value="100"
                 min="1"
+                max="10240"
                 step="1"
+                inputmode="numeric"
               >
 
               <span class="unit">KB</span>
@@ -1030,7 +942,9 @@
                 id="maxWidth"
                 value="1200"
                 min="1"
+                max="10000"
                 step="1"
+                inputmode="numeric"
               >
 
               <span class="unit">px</span>
@@ -1046,7 +960,9 @@
                 id="maxHeight"
                 value="1200"
                 min="1"
+                max="10000"
                 step="1"
+                inputmode="numeric"
               >
 
               <span class="unit">px</span>
@@ -1084,6 +1000,7 @@
       </div>
 
       <button
+        type="button"
         class="compress-btn"
         id="compressBtn"
         disabled
@@ -1103,8 +1020,10 @@
         role="alert"
       ></div>
 
-      <!-- TRUST BAR -->
-      <div class="trust-section" aria-label="Privacy and trust information">
+      <div
+        class="trust-section"
+        aria-label="Privacy and trust information"
+      >
 
         <div class="trust-grid">
 
@@ -1138,7 +1057,6 @@
 
       </div>
 
-      <!-- INDEPENDENT SECURITY CHECKS -->
       <div
         class="external-trust"
         aria-label="Independent security checks"
@@ -1189,10 +1107,7 @@
 
       </div>
 
-      <div
-        class="preview"
-        id="preview"
-      >
+      <div class="preview" id="preview">
 
         <div class="preview-grid">
 
@@ -1201,6 +1116,7 @@
             <img
               id="originalPreview"
               alt="Original image preview"
+              decoding="async"
             >
 
             <div class="image-title">
@@ -1219,6 +1135,7 @@
             <img
               id="resultPreview"
               alt="Compressed image preview"
+              decoding="async"
             >
 
             <div class="image-title">
@@ -1250,6 +1167,7 @@
             class="download-btn"
             id="downloadBtn"
             download="compressed-image"
+            rel="noopener"
           >
             Download image
           </a>
@@ -1379,13 +1297,13 @@
 
   </main>
 
-  <!-- PRIVACY EXPLANATION MODAL -->
   <div
     class="privacy-modal"
     id="privacyModal"
     role="dialog"
     aria-modal="true"
     aria-labelledby="privacyTitle"
+    hidden
   >
 
     <div class="privacy-dialog">
@@ -1428,974 +1346,8 @@
 
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/utif@3.1.0/UTIF.js"></script>
-
-  <script>
-    const fileInput = document.getElementById("fileInput");
-    const dropZone = document.getElementById("dropZone");
-    const uploadIcon = document.getElementById("uploadIcon");
-    const dropTitle = document.getElementById("dropTitle");
-    const dropDescription = document.getElementById("dropDescription");
-    const selectedFileElement = document.getElementById("selectedFile");
-
-    const maxSizeInput = document.getElementById("maxSize");
-    const maxWidthInput = document.getElementById("maxWidth");
-    const maxHeightInput = document.getElementById("maxHeight");
-    const formatInput = document.getElementById("format");
-
-    const presetButtons = document.querySelectorAll(".preset-btn");
-    const compressBtn = document.getElementById("compressBtn");
-
-    const status = document.getElementById("status");
-    const errorBox = document.getElementById("error");
-
-    const preview = document.getElementById("preview");
-    const originalPreview = document.getElementById("originalPreview");
-    const resultPreview = document.getElementById("resultPreview");
-
-    const originalInfo = document.getElementById("originalInfo");
-    const resultInfo = document.getElementById("resultInfo");
-
-    const resultSize = document.getElementById("resultSize");
-    const saving = document.getElementById("saving");
-    const downloadBtn = document.getElementById("downloadBtn");
-
-    const privacyButton = document.getElementById("privacyButton");
-    const privacyModal = document.getElementById("privacyModal");
-    const privacyClose = document.getElementById("privacyClose");
-
-    let selectedFile = null;
-    let originalObjectUrl = null;
-    let resultObjectUrl = null;
-    let selectedImageSource = null;
-
-    function formatBytes(bytes) {
-      if (bytes < 1024) {
-        return `${bytes} B`;
-      }
-
-      if (bytes < 1024 * 1024) {
-        return `${(bytes / 1024).toFixed(1)} KB`;
-      }
-
-      return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
-    }
-
-    function showError(message) {
-      errorBox.textContent = message;
-      errorBox.style.display = "block";
-    }
-
-    function clearError() {
-      errorBox.textContent = "";
-      errorBox.style.display = "none";
-    }
-
-    function setStatus(message) {
-      status.textContent = message;
-    }
-
-    function clearResultUrl() {
-      if (resultObjectUrl) {
-        URL.revokeObjectURL(resultObjectUrl);
-        resultObjectUrl = null;
-      }
-    }
-
-    function clearOriginalUrl() {
-      if (originalObjectUrl) {
-        URL.revokeObjectURL(originalObjectUrl);
-        originalObjectUrl = null;
-      }
-    }
-
-    function updateSelectedFileUI(file) {
-      dropZone.classList.add("selected");
-
-      uploadIcon.textContent = "✅";
-      dropTitle.textContent = "Image selected";
-
-      dropDescription.textContent =
-        "Click here to choose a different image";
-
-      selectedFileElement.textContent =
-        `${file.name} · ${formatBytes(file.size)}`;
-
-      selectedFileElement.style.display = "block";
-    }
-
-    function updatePresetState(value) {
-      presetButtons.forEach(button => {
-        const buttonSize = Number(button.dataset.size);
-
-        button.classList.toggle(
-          "active",
-          buttonSize === Number(value)
-        );
-      });
-    }
-
-    presetButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        const size = Number(button.dataset.size);
-
-        maxSizeInput.value = size;
-        updatePresetState(size);
-        clearError();
-
-        setStatus(`Target size set to ${size}KB.`);
-      });
-    });
-
-    maxSizeInput.addEventListener("input", () => {
-      updatePresetState(maxSizeInput.value);
-    });
-
-    function isTiff(file) {
-      const name = file.name.toLowerCase();
-
-      return (
-        file.type === "image/tiff" ||
-        name.endsWith(".tif") ||
-        name.endsWith(".tiff")
-      );
-    }
-
-    async function loadStandardImage(file) {
-      return new Promise((resolve, reject) => {
-        const url = URL.createObjectURL(file);
-        const image = new Image();
-
-        image.onload = () => {
-          URL.revokeObjectURL(url);
-          resolve(image);
-        };
-
-        image.onerror = () => {
-          URL.revokeObjectURL(url);
-
-          reject(
-            new Error("Could not read this image.")
-          );
-        };
-
-        image.src = url;
-      });
-    }
-
-    async function loadTiffImage(file) {
-      const buffer = await file.arrayBuffer();
-
-      const ifds = UTIF.decode(buffer);
-
-      if (!ifds || ifds.length === 0) {
-        throw new Error("Could not read this TIFF image.");
-      }
-
-      const ifd = ifds[0];
-
-      UTIF.decodeImage(buffer, ifd);
-
-      const width = ifd.width;
-      const height = ifd.height;
-
-      if (!width || !height) {
-        throw new Error(
-          "Could not determine the TIFF image dimensions."
-        );
-      }
-
-      const rgba = UTIF.toRGBA8(ifd);
-
-      const canvas = document.createElement("canvas");
-
-      canvas.width = width;
-      canvas.height = height;
-
-      const context = canvas.getContext("2d");
-
-      if (!context) {
-        throw new Error(
-          "Your browser could not create a canvas."
-        );
-      }
-
-      const imageData =
-        context.createImageData(width, height);
-
-      imageData.data.set(rgba);
-
-      context.putImageData(imageData, 0, 0);
-
-      return canvas;
-    }
-
-    async function loadImage(file) {
-      if (isTiff(file)) {
-        return loadTiffImage(file);
-      }
-
-      return loadStandardImage(file);
-    }
-
-    async function createPreviewUrlFromTiff(image) {
-      const blob = await new Promise((resolve, reject) => {
-        image.toBlob(
-          result => {
-            if (!result) {
-              reject(
-                new Error(
-                  "Could not create TIFF preview."
-                )
-              );
-
-              return;
-            }
-
-            resolve(result);
-          },
-          "image/png"
-        );
-      });
-
-      return URL.createObjectURL(blob);
-    }
-
-    function createCanvas(image, width, height) {
-      const canvas = document.createElement("canvas");
-
-      canvas.width = width;
-      canvas.height = height;
-
-      const context = canvas.getContext(
-        "2d",
-        { alpha: true }
-      );
-
-      context.drawImage(
-        image,
-        0,
-        0,
-        width,
-        height
-      );
-
-      return canvas;
-    }
-
-    function canvasToBlob(canvas, type, quality) {
-      return new Promise((resolve, reject) => {
-        canvas.toBlob(
-          blob => {
-            if (!blob) {
-              reject(
-                new Error(
-                  "Browser could not create the image."
-                )
-              );
-
-              return;
-            }
-
-            resolve(blob);
-          },
-          type,
-          quality
-        );
-      });
-    }
-
-    function canvasToTiff(canvas) {
-      const context = canvas.getContext("2d");
-
-      const imageData = context.getImageData(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      );
-
-      const tiffBuffer = UTIF.encodeImage(
-        imageData.data,
-        canvas.width,
-        canvas.height
-      );
-
-      return new Blob(
-        [tiffBuffer],
-        { type: "image/tiff" }
-      );
-    }
-
-    function calculateDimensions(
-      originalWidth,
-      originalHeight,
-      maxWidth,
-      maxHeight
-    ) {
-      const widthRatio =
-        maxWidth / originalWidth;
-
-      const heightRatio =
-        maxHeight / originalHeight;
-
-      const ratio = Math.min(
-        1,
-        widthRatio,
-        heightRatio
-      );
-
-      return {
-        width: Math.max(
-          1,
-          Math.round(originalWidth * ratio)
-        ),
-
-        height: Math.max(
-          1,
-          Math.round(originalHeight * ratio)
-        )
-      };
-    }
-
-    async function encode(
-      image,
-      width,
-      height,
-      format,
-      quality
-    ) {
-      const canvas = createCanvas(
-        image,
-        width,
-        height
-      );
-
-      if (format === "image/tiff") {
-        const blob = canvasToTiff(canvas);
-
-        return {
-          blob,
-          width,
-          height
-        };
-      }
-
-      const blob = await canvasToBlob(
-        canvas,
-        format,
-        quality
-      );
-
-      return {
-        blob,
-        width,
-        height
-      };
-    }
-
-    async function compressWithQuality(
-      image,
-      width,
-      height,
-      format,
-      targetBytes
-    ) {
-      let low = 0.05;
-      let high = 0.95;
-      let best = null;
-
-      const highResult = await encode(
-        image,
-        width,
-        height,
-        format,
-        high
-      );
-
-      if (highResult.blob.size <= targetBytes) {
-        return highResult;
-      }
-
-      const lowResult = await encode(
-        image,
-        width,
-        height,
-        format,
-        low
-      );
-
-      if (lowResult.blob.size > targetBytes) {
-        return null;
-      }
-
-      best = lowResult;
-
-      for (let i = 0; i < 9; i++) {
-        const middle = (low + high) / 2;
-
-        const result = await encode(
-          image,
-          width,
-          height,
-          format,
-          middle
-        );
-
-        if (result.blob.size <= targetBytes) {
-          best = result;
-          low = middle;
-        } else {
-          high = middle;
-        }
-      }
-
-      return best;
-    }
-
-    async function compressPng(
-      image,
-      width,
-      height,
-      targetBytes
-    ) {
-      let currentWidth = width;
-      let currentHeight = height;
-
-      for (let i = 0; i < 10; i++) {
-        const result = await encode(
-          image,
-          currentWidth,
-          currentHeight,
-          "image/png"
-        );
-
-        if (result.blob.size <= targetBytes) {
-          return result;
-        }
-
-        currentWidth = Math.max(
-          1,
-          Math.floor(currentWidth * 0.85)
-        );
-
-        currentHeight = Math.max(
-          1,
-          Math.floor(currentHeight * 0.85)
-        );
-      }
-
-      return null;
-    }
-
-    async function compressTiff(
-      image,
-      width,
-      height,
-      targetBytes
-    ) {
-      let currentWidth = width;
-      let currentHeight = height;
-
-      for (let i = 0; i < 20; i++) {
-        const result = await encode(
-          image,
-          currentWidth,
-          currentHeight,
-          "image/tiff"
-        );
-
-        if (result.blob.size <= targetBytes) {
-          return result;
-        }
-
-        currentWidth = Math.max(
-          1,
-          Math.floor(currentWidth * 0.85)
-        );
-
-        currentHeight = Math.max(
-          1,
-          Math.floor(currentHeight * 0.85)
-        );
-
-        if (
-          currentWidth <= 1 ||
-          currentHeight <= 1
-        ) {
-          break;
-        }
-      }
-
-      return null;
-    }
-
-    async function compressImage(
-      image,
-      targetBytes,
-      maxWidth,
-      maxHeight,
-      format
-    ) {
-      const dimensions = calculateDimensions(
-        image.naturalWidth || image.width,
-        image.naturalHeight || image.height,
-        maxWidth,
-        maxHeight
-      );
-
-      let result;
-
-      if (format === "image/png") {
-        result = await compressPng(
-          image,
-          dimensions.width,
-          dimensions.height,
-          targetBytes
-        );
-      } else if (format === "image/tiff") {
-        result = await compressTiff(
-          image,
-          dimensions.width,
-          dimensions.height,
-          targetBytes
-        );
-      } else {
-        result = await compressWithQuality(
-          image,
-          dimensions.width,
-          dimensions.height,
-          format,
-          targetBytes
-        );
-      }
-
-      if (result) {
-        return result;
-      }
-
-      let width =
-        Math.floor(dimensions.width * 0.85);
-
-      let height =
-        Math.floor(dimensions.height * 0.85);
-
-      for (let i = 0; i < 8; i++) {
-        if (width < 1 || height < 1) {
-          break;
-        }
-
-        if (format === "image/png") {
-          result = await compressPng(
-            image,
-            width,
-            height,
-            targetBytes
-          );
-        } else if (format === "image/tiff") {
-          result = await compressTiff(
-            image,
-            width,
-            height,
-            targetBytes
-          );
-        } else {
-          result = await compressWithQuality(
-            image,
-            width,
-            height,
-            format,
-            targetBytes
-          );
-        }
-
-        if (result) {
-          return result;
-        }
-
-        width = Math.floor(width * 0.85);
-        height = Math.floor(height * 0.85);
-      }
-
-      return null;
-    }
-
-    async function handleFile(file) {
-      clearError();
-
-      clearResultUrl();
-      clearOriginalUrl();
-
-      selectedImageSource = null;
-
-      preview.style.display = "none";
-
-      setStatus("");
-
-      if (!file) {
-        return;
-      }
-
-      const validImage =
-        file.type.startsWith("image/") ||
-        /\.(jpg|jpeg|png|webp|tif|tiff)$/i.test(
-          file.name
-        );
-
-      if (!validImage) {
-        showError(
-          "Please choose a JPG, JPEG, PNG, WebP or TIFF image."
-        );
-
-        return;
-      }
-
-      try {
-        setStatus(
-          isTiff(file)
-            ? "Reading TIFF image..."
-            : "Reading image..."
-        );
-
-        const image = await loadImage(file);
-
-        selectedFile = file;
-        selectedImageSource = image;
-
-        if (isTiff(file)) {
-          originalObjectUrl =
-            await createPreviewUrlFromTiff(image);
-        } else {
-          originalObjectUrl =
-            URL.createObjectURL(file);
-        }
-
-        originalPreview.src =
-          originalObjectUrl;
-
-        const imageWidth =
-          image.naturalWidth || image.width;
-
-        const imageHeight =
-          image.naturalHeight || image.height;
-
-        originalInfo.textContent =
-          `${formatBytes(file.size)} · ` +
-          `${imageWidth} × ${imageHeight}px`;
-
-        updateSelectedFileUI(file);
-
-        compressBtn.disabled = false;
-
-        setStatus(
-          "Image ready to compress."
-        );
-      } catch (error) {
-        selectedFile = null;
-        selectedImageSource = null;
-
-        compressBtn.disabled = true;
-
-        showError(
-          error.message ||
-          "Could not read this image. Please try another file."
-        );
-
-        setStatus("");
-      }
-    }
-
-    fileInput.addEventListener(
-      "change",
-      event => {
-        const file =
-          event.target.files[0];
-
-        handleFile(file);
-      }
-    );
-
-    dropZone.addEventListener(
-      "dragover",
-      event => {
-        event.preventDefault();
-
-        dropZone.classList.add(
-          "drag-over"
-        );
-      }
-    );
-
-    dropZone.addEventListener(
-      "dragleave",
-      () => {
-        dropZone.classList.remove(
-          "drag-over"
-        );
-      }
-    );
-
-    dropZone.addEventListener(
-      "drop",
-      event => {
-        event.preventDefault();
-
-        dropZone.classList.remove(
-          "drag-over"
-        );
-
-        const file =
-          event.dataTransfer.files[0];
-
-        handleFile(file);
-      }
-    );
-
-    compressBtn.addEventListener(
-      "click",
-      async () => {
-        if (
-          !selectedFile ||
-          !selectedImageSource
-        ) {
-          return;
-        }
-
-        clearError();
-        clearResultUrl();
-
-        const maxSize =
-          Number(maxSizeInput.value);
-
-        const maxWidth =
-          Number(maxWidthInput.value);
-
-        const maxHeight =
-          Number(maxHeightInput.value);
-
-        const format =
-          formatInput.value;
-
-        if (
-          !Number.isFinite(maxSize) ||
-          maxSize <= 0
-        ) {
-          showError(
-            "Target file size must be greater than 0."
-          );
-
-          return;
-        }
-
-        if (
-          !Number.isFinite(maxWidth) ||
-          maxWidth <= 0
-        ) {
-          showError(
-            "Maximum width must be greater than 0."
-          );
-
-          return;
-        }
-
-        if (
-          !Number.isFinite(maxHeight) ||
-          maxHeight <= 0
-        ) {
-          showError(
-            "Maximum height must be greater than 0."
-          );
-
-          return;
-        }
-
-        const targetBytes =
-          maxSize * 1024;
-
-        compressBtn.disabled = true;
-
-        preview.style.display = "none";
-
-        setStatus(
-          format === "image/tiff"
-            ? "Creating TIFF image..."
-            : "Compressing image..."
-        );
-
-        try {
-          const startTime =
-            performance.now();
-
-          const result =
-            await compressImage(
-              selectedImageSource,
-              targetBytes,
-              Math.floor(maxWidth),
-              Math.floor(maxHeight),
-              format
-            );
-
-          const duration =
-            Math.round(
-              performance.now() -
-              startTime
-            );
-
-          if (!result) {
-            throw new Error(
-              "Could not reduce this image to the requested size."
-            );
-          }
-
-          if (
-            result.blob.size >
-            targetBytes
-          ) {
-            throw new Error(
-              "The image could not be compressed below the requested size."
-            );
-          }
-
-          resultObjectUrl =
-            URL.createObjectURL(
-              result.blob
-            );
-
-          resultPreview.src =
-            resultObjectUrl;
-
-          resultInfo.textContent =
-            `${formatBytes(result.blob.size)} · ` +
-            `${result.width} × ${result.height}px`;
-
-          resultSize.textContent =
-            `${formatBytes(result.blob.size)} — Target ${maxSize} KB ✓`;
-
-          const percentage =
-            Math.max(
-              0,
-              Math.round(
-                (
-                  1 -
-                  result.blob.size /
-                  selectedFile.size
-                ) * 100
-              )
-            );
-
-          if (
-            result.blob.size <
-            selectedFile.size
-          ) {
-            saving.textContent =
-              `${percentage}% smaller · ` +
-              `Processed in ${duration}ms`;
-          } else {
-            saving.textContent =
-              `Processed in ${duration}ms`;
-          }
-
-          let extension = "jpg";
-
-          if (
-            format === "image/webp"
-          ) {
-            extension = "webp";
-          }
-
-          if (
-            format === "image/png"
-          ) {
-            extension = "png";
-          }
-
-          if (
-            format === "image/tiff"
-          ) {
-            extension = "tiff";
-          }
-
-          downloadBtn.href =
-            resultObjectUrl;
-
-          downloadBtn.download =
-            `compressed-image.${extension}`;
-
-          preview.style.display =
-            "block";
-
-          setStatus(
-            "Compression complete."
-          );
-
-          if (
-            window.innerWidth <= 600
-          ) {
-            preview.scrollIntoView({
-              behavior: "smooth",
-              block: "nearest"
-            });
-          }
-
-        } catch (error) {
-          showError(
-            error.message ||
-            "Something went wrong while compressing the image."
-          );
-
-          setStatus("");
-
-        } finally {
-          compressBtn.disabled = false;
-        }
-      }
-    );
-
-    /* Privacy explanation modal */
-
-    function openPrivacyModal() {
-      privacyModal.classList.add("open");
-      privacyClose.focus();
-      document.body.style.overflow = "hidden";
-    }
-
-    function closePrivacyModal() {
-      privacyModal.classList.remove("open");
-      document.body.style.overflow = "";
-      privacyButton.focus();
-    }
-
-    privacyButton.addEventListener(
-      "click",
-      openPrivacyModal
-    );
-
-    privacyClose.addEventListener(
-      "click",
-      closePrivacyModal
-    );
-
-    privacyModal.addEventListener(
-      "click",
-      event => {
-        if (event.target === privacyModal) {
-          closePrivacyModal();
-        }
-      }
-    );
-
-    document.addEventListener(
-      "keydown",
-      event => {
-        if (
-          event.key === "Escape" &&
-          privacyModal.classList.contains("open")
-        ) {
-          closePrivacyModal();
-        }
-      }
-    );
-  </script>
+  <script src="./UTIF.js"></script>
+  <script src="./app.js" defer></script>
 
 </body>
 </html>
