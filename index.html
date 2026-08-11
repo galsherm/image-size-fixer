@@ -8,12 +8,12 @@
 
   <meta
     name="description"
-    content="Compress JPG, PNG, WebP, GIF, BMP and TIFF images to 100KB, 50KB, 20KB or your own target size. Free, fast and private — your images never leave your device."
+    content="Compress JPG, PNG, WebP and TIFF images to 100KB, 50KB, 20KB or your own target size. Free, fast and private — your images never leave your device."
   >
 
   <meta
     name="keywords"
-    content="compress image to 100kb, image compressor, reduce image size, compress jpg to 100kb, compress png, compress webp, compress tiff, tiff compressor, image size reducer"
+    content="compress image to 100kb, image compressor, reduce image size, compress jpg to 100kb, compress png, compress tiff, tiff compressor, image size reducer, compress image online"
   >
 
   <meta name="robots" content="index, follow">
@@ -61,8 +61,6 @@
       "PNG compression",
       "WebP compression",
       "TIFF compression",
-      "GIF input",
-      "BMP input",
       "Local browser processing",
       "No account required"
     ]
@@ -132,7 +130,6 @@
       --muted: #667085;
       --border: #dfe3ea;
       --success: #15803d;
-      --success-dark: #166534;
       --success-bg: #f0fdf4;
       --error: #dc2626;
     }
@@ -152,12 +149,7 @@
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
-      background:
-        radial-gradient(
-          circle at top,
-          #eef4ff 0,
-          var(--background) 360px
-        );
+      background: var(--background);
       color: var(--text);
     }
 
@@ -169,7 +161,7 @@
 
     header {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .brand {
@@ -198,53 +190,48 @@
     }
 
     .privacy-banner {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
       gap: 7px;
-      margin-top: 16px;
-      padding: 9px 14px;
+      margin: 16px auto 0;
+      padding: 9px 13px;
+      max-width: 540px;
       border: 1px solid #bbf7d0;
-      border-radius: 999px;
-      background: rgba(240, 253, 244, 0.92);
+      border-radius: 10px;
+      background: var(--success-bg);
       color: #166534;
-      font-size: 0.82rem;
+      font-size: 0.83rem;
       line-height: 1.4;
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.98);
-      border: 1px solid rgba(223, 227, 234, 0.9);
-      border-radius: 20px;
+      background: var(--card);
+      border-radius: 18px;
       padding: 22px;
-      box-shadow:
-        0 18px 45px rgba(15, 23, 42, 0.08),
-        0 2px 8px rgba(15, 23, 42, 0.03);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
     }
 
     .drop-zone {
       display: block;
-      border: 2px dashed #cfd6e2;
-      border-radius: 15px;
-      padding: 34px 20px;
+      border: 2px dashed var(--border);
+      border-radius: 14px;
+      padding: 32px 20px;
       text-align: center;
       cursor: pointer;
-      background: #fbfcfe;
       transition:
-        border-color 0.18s ease,
-        background 0.18s ease,
-        transform 0.18s ease;
+        border-color 0.15s ease,
+        background 0.15s ease;
     }
 
     .drop-zone:hover,
     .drop-zone.drag-over {
       border-color: var(--primary);
       background: #eff6ff;
-      transform: translateY(-1px);
     }
 
     .drop-zone.selected {
-      border-color: #4ade80;
+      border-color: var(--success);
       background: var(--success-bg);
     }
 
@@ -253,19 +240,8 @@
     }
 
     .upload-icon {
-      width: 52px;
-      height: 52px;
-      display: grid;
-      place-items: center;
-      margin: 0 auto 10px;
-      border-radius: 14px;
-      background: #eef4ff;
-      color: var(--primary);
-      font-size: 27px;
-    }
-
-    .drop-zone.selected .upload-icon {
-      background: #dcfce7;
+      font-size: 36px;
+      margin-bottom: 7px;
     }
 
     .drop-title {
@@ -274,15 +250,9 @@
     }
 
     .drop-description {
-      margin-top: 6px;
+      margin-top: 5px;
       color: var(--muted);
-      font-size: 0.84rem;
-    }
-
-    .format-hint {
-      margin-top: 9px;
-      color: #8490a3;
-      font-size: 0.72rem;
+      font-size: 0.86rem;
     }
 
     .selected-file {
@@ -399,26 +369,23 @@
 
     .compress-btn {
       width: 100%;
-      min-height: 51px;
+      min-height: 49px;
       margin-top: 21px;
       border: 0;
-      border-radius: 11px;
+      border-radius: 10px;
       background: var(--primary);
       color: white;
       font: inherit;
       font-weight: 750;
       font-size: 1rem;
       cursor: pointer;
-      box-shadow: 0 5px 14px rgba(37, 99, 235, 0.18);
       transition:
         background 0.15s ease,
-        transform 0.1s ease,
-        box-shadow 0.15s ease;
+        transform 0.1s ease;
     }
 
     .compress-btn:hover:not(:disabled) {
       background: var(--primary-dark);
-      box-shadow: 0 7px 18px rgba(37, 99, 235, 0.24);
     }
 
     .compress-btn:active:not(:disabled) {
@@ -426,94 +393,16 @@
     }
 
     .compress-btn:disabled {
-      opacity: 0.55;
+      opacity: 0.5;
       cursor: not-allowed;
-      box-shadow: none;
-    }
-
-    .status-area {
-      margin-top: 15px;
-      display: none;
-    }
-
-    .status-area.visible {
-      display: block;
-    }
-
-    .progress-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 8px;
-      font-size: 0.8rem;
-    }
-
-    .progress-label {
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .progress-percent {
-      color: var(--muted);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .progress-track {
-      height: 7px;
-      overflow: hidden;
-      border-radius: 999px;
-      background: #e8edf4;
-    }
-
-    .progress-bar {
-      width: 0%;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(
-        90deg,
-        #2563eb,
-        #60a5fa
-      );
-      transition: width 0.25s ease;
-    }
-
-    .process-steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 7px;
-      margin-top: 11px;
-    }
-
-    .process-step {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      min-height: 29px;
-      border-radius: 7px;
-      background: #f6f8fb;
-      color: #98a2b3;
-      font-size: 0.7rem;
-      font-weight: 650;
-    }
-
-    .process-step.active {
-      background: #eff6ff;
-      color: var(--primary);
-    }
-
-    .process-step.done {
-      background: #f0fdf4;
-      color: var(--success);
     }
 
     .status {
-      min-height: 22px;
-      margin-top: 9px;
+      min-height: 23px;
+      margin-top: 11px;
       text-align: center;
       color: var(--muted);
-      font-size: 0.82rem;
+      font-size: 0.84rem;
     }
 
     .error {
@@ -524,6 +413,133 @@
       color: var(--error);
       font-size: 0.86rem;
       display: none;
+    }
+
+    /* Trust section */
+    .trust-section {
+      margin-top: 14px;
+      padding: 13px 14px;
+      border: 1px solid #e5e7eb;
+      border-radius: 11px;
+      background: #fafbfc;
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: #344054;
+      font-size: 0.75rem;
+      font-weight: 650;
+      text-align: center;
+    }
+
+    .trust-icon {
+      font-size: 0.9rem;
+    }
+
+    .trust-explainer {
+      margin: 10px auto 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.73rem;
+      line-height: 1.45;
+    }
+
+    .trust-button {
+      display: inline;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--primary);
+      font: inherit;
+      font-size: inherit;
+      font-weight: 650;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .trust-button:hover {
+      color: var(--primary-dark);
+    }
+
+    /* Privacy modal */
+    .privacy-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(15, 23, 42, 0.48);
+      backdrop-filter: blur(3px);
+    }
+
+    .privacy-modal.open {
+      display: flex;
+    }
+
+    .privacy-dialog {
+      width: 100%;
+      max-width: 470px;
+      padding: 24px;
+      border-radius: 16px;
+      background: white;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
+    }
+
+    .privacy-dialog-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .privacy-dialog h2 {
+      margin: 0;
+      font-size: 1.15rem;
+    }
+
+    .privacy-dialog p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.6;
+    }
+
+    .privacy-dialog ul {
+      margin: 14px 0 0;
+      padding-left: 20px;
+      color: #344054;
+      font-size: 0.84rem;
+      line-height: 1.7;
+    }
+
+    .privacy-close {
+      width: 32px;
+      height: 32px;
+      flex: 0 0 auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: white;
+      color: var(--muted);
+      font-size: 1.15rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .privacy-close:hover {
+      background: #f8fafc;
+      color: var(--text);
     }
 
     .preview {
@@ -577,71 +593,41 @@
 
     .result {
       margin-top: 14px;
-      padding: 18px;
-      border-radius: 12px;
+      padding: 16px;
+      border-radius: 11px;
       background: var(--success-bg);
       border: 1px solid #bbf7d0;
       text-align: center;
     }
 
-    .result-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 5px;
-      color: var(--success);
-      font-size: 0.78rem;
-      font-weight: 750;
-    }
-
     .result-size {
-      font-size: clamp(1.55rem, 5vw, 1.9rem);
-      font-weight: 850;
+      font-size: 1.25rem;
+      font-weight: 800;
       color: var(--success);
-      letter-spacing: -0.025em;
-    }
-
-    .target-result {
-      margin-top: 3px;
-      color: #166534;
-      font-size: 0.84rem;
-      font-weight: 650;
     }
 
     .saving {
-      margin-top: 7px;
+      margin-top: 4px;
       color: #166534;
-      font-size: 0.8rem;
+      font-size: 0.83rem;
     }
 
     .download-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 44px;
-      margin-top: 14px;
-      padding: 0 20px;
+      min-height: 43px;
+      margin-top: 13px;
+      padding: 0 19px;
       border-radius: 9px;
       background: var(--success);
       color: white;
       text-decoration: none;
       font-weight: 700;
-      box-shadow: 0 4px 12px rgba(21, 128, 61, 0.16);
     }
 
     .download-btn:hover {
-      background: var(--success-dark);
-    }
-
-    .privacy-footer {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 16px;
-      color: var(--muted);
-      font-size: 0.74rem;
-      text-align: center;
+      background: #166534;
     }
 
     .value-section {
@@ -655,7 +641,7 @@
     }
 
     .value-card {
-      padding: 13px 11px;
+      padding: 12px;
       border: 1px solid var(--border);
       border-radius: 11px;
       background: white;
@@ -663,7 +649,7 @@
     }
 
     .value-icon {
-      font-size: 19px;
+      font-size: 20px;
       margin-bottom: 4px;
     }
 
@@ -766,6 +752,13 @@
       line-height: 1.55;
     }
 
+    .privacy-footer {
+      margin-top: 16px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.74rem;
+    }
+
     footer {
       margin-top: 18px;
       text-align: center;
@@ -780,7 +773,6 @@
 
       .card {
         padding: 15px;
-        border-radius: 17px;
       }
 
       .settings-grid {
@@ -793,6 +785,11 @@
 
       .value-grid {
         grid-template-columns: 1fr;
+      }
+
+      .trust-grid {
+        grid-template-columns: 1fr;
+        gap: 7px;
       }
 
       .image-box img {
@@ -809,11 +806,11 @@
       }
 
       .privacy-banner {
-        font-size: 0.77rem;
+        font-size: 0.78rem;
       }
 
-      .process-step {
-        font-size: 0.66rem;
+      .privacy-dialog {
+        padding: 20px;
       }
     }
   </style>
@@ -839,7 +836,6 @@
       </div>
     </header>
 
-
     <section class="card" aria-label="Image compression tool">
 
       <label
@@ -851,7 +847,7 @@
         <input
           type="file"
           id="fileInput"
-          accept=".jpg,.jpeg,.png,.webp,.gif,.bmp,.tif,.tiff,image/jpeg,image/png,image/webp,image/gif,image/bmp,image/tiff"
+          accept=".jpg,.jpeg,.png,.webp,.tif,.tiff,image/jpeg,image/png,image/webp,image/tiff"
         >
 
         <div
@@ -872,11 +868,7 @@
           class="drop-description"
           id="dropDescription"
         >
-          Click to browse or drag & drop
-        </div>
-
-        <div class="format-hint">
-          JPG · PNG · WebP · GIF · BMP · TIFF
+          JPG, JPEG, PNG, WebP or TIFF
         </div>
 
         <div
@@ -887,7 +879,6 @@
 
       </label>
 
-
       <div class="settings">
 
         <div class="settings-title">
@@ -897,9 +888,7 @@
         <div class="settings-grid">
 
           <div class="field">
-            <label for="maxSize">
-              Target file size
-            </label>
+            <label for="maxSize">Target file size</label>
 
             <div class="input-row">
               <input
@@ -914,11 +903,8 @@
             </div>
           </div>
 
-
           <div class="field">
-            <label for="format">
-              Output format
-            </label>
+            <label for="format">Output format</label>
 
             <select id="format">
               <option value="image/jpeg">JPG</option>
@@ -928,11 +914,8 @@
             </select>
           </div>
 
-
           <div class="field">
-            <label for="maxWidth">
-              Maximum width
-            </label>
+            <label for="maxWidth">Maximum width</label>
 
             <div class="input-row">
               <input
@@ -947,11 +930,8 @@
             </div>
           </div>
 
-
           <div class="field">
-            <label for="maxHeight">
-              Maximum height
-            </label>
+            <label for="maxHeight">Maximum height</label>
 
             <div class="input-row">
               <input
@@ -968,7 +948,6 @@
 
         </div>
 
-
         <div class="presets">
 
           <span class="presets-label">
@@ -977,44 +956,25 @@
 
           <div class="preset-buttons">
 
-            <button
-              type="button"
-              class="preset-btn"
-              data-size="20"
-            >
+            <button type="button" class="preset-btn" data-size="20">
               20KB
             </button>
 
-            <button
-              type="button"
-              class="preset-btn"
-              data-size="50"
-            >
+            <button type="button" class="preset-btn" data-size="50">
               50KB
             </button>
 
-            <button
-              type="button"
-              class="preset-btn active"
-              data-size="100"
-            >
+            <button type="button" class="preset-btn active" data-size="100">
               100KB
             </button>
 
-            <button
-              type="button"
-              class="preset-btn"
-              data-size="200"
-            >
+            <button type="button" class="preset-btn" data-size="200">
               200KB
             </button>
 
           </div>
-
         </div>
-
       </div>
-
 
       <button
         class="compress-btn"
@@ -1024,72 +984,11 @@
         Compress Image
       </button>
 
-
-      <div
-        class="status-area"
-        id="statusArea"
-      >
-
-        <div class="progress-header">
-          <span
-            class="progress-label"
-            id="progressLabel"
-          >
-            Preparing...
-          </span>
-
-          <span
-            class="progress-percent"
-            id="progressPercent"
-          >
-            0%
-          </span>
-        </div>
-
-        <div class="progress-track">
-          <div
-            class="progress-bar"
-            id="progressBar"
-          ></div>
-        </div>
-
-        <div class="process-steps">
-
-          <div
-            class="process-step"
-            id="stepAnalyze"
-          >
-            <span>1</span>
-            Analyzing
-          </div>
-
-          <div
-            class="process-step"
-            id="stepCompress"
-          >
-            <span>2</span>
-            Compressing
-          </div>
-
-          <div
-            class="process-step"
-            id="stepDone"
-          >
-            <span>3</span>
-            Done
-          </div>
-
-        </div>
-
-      </div>
-
-
       <div
         class="status"
         id="status"
         aria-live="polite"
       ></div>
-
 
       <div
         class="error"
@@ -1097,6 +996,40 @@
         role="alert"
       ></div>
 
+      <!-- TRUST BAR -->
+      <div class="trust-section" aria-label="Privacy and trust information">
+
+        <div class="trust-grid">
+
+          <div class="trust-item">
+            <span class="trust-icon">🔒</span>
+            <span>Private by design</span>
+          </div>
+
+          <div class="trust-item">
+            <span class="trust-icon">⚡</span>
+            <span>Runs in your browser</span>
+          </div>
+
+          <div class="trust-item">
+            <span class="trust-icon">🆓</span>
+            <span>Free to use</span>
+          </div>
+
+        </div>
+
+        <div class="trust-explainer">
+          Your image is processed locally on your device and does not need to be uploaded.
+          <button
+            type="button"
+            class="trust-button"
+            id="privacyButton"
+          >
+            How is my image processed?
+          </button>
+        </div>
+
+      </div>
 
       <div
         class="preview"
@@ -1123,7 +1056,6 @@
 
           </div>
 
-
           <div class="image-box">
 
             <img
@@ -1144,21 +1076,11 @@
 
         </div>
 
-
         <div class="result">
-
-          <div class="result-status">
-            ✓ Compression complete
-          </div>
 
           <div
             class="result-size"
             id="resultSize"
-          ></div>
-
-          <div
-            class="target-result"
-            id="targetResult"
           ></div>
 
           <div
@@ -1178,16 +1100,11 @@
 
       </div>
 
-
       <div class="privacy-footer">
-        🔒
-        <span>
-          Processed locally in your browser — no upload required.
-        </span>
+        🔒 Processed locally in your browser — no upload required.
       </div>
 
     </section>
-
 
     <section
       class="value-section"
@@ -1224,7 +1141,6 @@
 
     </section>
 
-
     <section class="use-cases">
 
       <h2>Need a smaller image for an upload?</h2>
@@ -1245,15 +1161,12 @@
 
     </section>
 
-
     <section class="faq">
 
       <h2>Frequently Asked Questions</h2>
 
       <details>
-        <summary>
-          Can I compress an image to 100KB?
-        </summary>
+        <summary>Can I compress an image to 100KB?</summary>
 
         <div class="faq-answer">
           Yes. Select your image, choose 100KB as the target size,
@@ -1262,11 +1175,8 @@
         </div>
       </details>
 
-
       <details>
-        <summary>
-          Is Under100KB free?
-        </summary>
+        <summary>Is Under100KB free?</summary>
 
         <div class="faq-answer">
           Yes. Under100KB is free to use and does not require
@@ -1274,11 +1184,8 @@
         </div>
       </details>
 
-
       <details>
-        <summary>
-          Are my images uploaded?
-        </summary>
+        <summary>Are my images uploaded?</summary>
 
         <div class="faq-answer">
           No. Image processing happens locally in your browser.
@@ -1286,11 +1193,8 @@
         </div>
       </details>
 
-
       <details>
-        <summary>
-          Can I compress a JPG to 100KB?
-        </summary>
+        <summary>Can I compress a JPG to 100KB?</summary>
 
         <div class="faq-answer">
           Yes. Select your JPG image, set the target size to
@@ -1299,11 +1203,8 @@
         </div>
       </details>
 
-
       <details>
-        <summary>
-          Can I compress a TIFF image?
-        </summary>
+        <summary>Can I compress a TIFF image?</summary>
 
         <div class="faq-answer">
           Yes. Under100KB supports TIFF input and TIFF output.
@@ -1314,13 +1215,60 @@
 
     </section>
 
-
     <footer>
       Under100KB — Free online image compression
     </footer>
 
   </main>
 
+  <!-- PRIVACY EXPLANATION MODAL -->
+  <div
+    class="privacy-modal"
+    id="privacyModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="privacyTitle"
+  >
+
+    <div class="privacy-dialog">
+
+      <div class="privacy-dialog-header">
+
+        <h2 id="privacyTitle">
+          How your image is processed
+        </h2>
+
+        <button
+          type="button"
+          class="privacy-close"
+          id="privacyClose"
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <p>
+        Under100KB performs image processing directly in your web browser.
+        Your image does not need to be sent to an upload server.
+      </p>
+
+      <ul>
+        <li>Your browser reads the image from your device.</li>
+        <li>The compression happens locally on your device.</li>
+        <li>The compressed file is generated in your browser.</li>
+        <li>You download the result directly to your device.</li>
+      </ul>
+
+      <p>
+        This means the tool can compress images without requiring
+        an account or a traditional file upload.
+      </p>
+
+    </div>
+
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/utif@3.1.0/UTIF.js"></script>
 
@@ -1340,15 +1288,6 @@
     const presetButtons = document.querySelectorAll(".preset-btn");
     const compressBtn = document.getElementById("compressBtn");
 
-    const statusArea = document.getElementById("statusArea");
-    const progressLabel = document.getElementById("progressLabel");
-    const progressPercent = document.getElementById("progressPercent");
-    const progressBar = document.getElementById("progressBar");
-
-    const stepAnalyze = document.getElementById("stepAnalyze");
-    const stepCompress = document.getElementById("stepCompress");
-    const stepDone = document.getElementById("stepDone");
-
     const status = document.getElementById("status");
     const errorBox = document.getElementById("error");
 
@@ -1360,15 +1299,17 @@
     const resultInfo = document.getElementById("resultInfo");
 
     const resultSize = document.getElementById("resultSize");
-    const targetResult = document.getElementById("targetResult");
     const saving = document.getElementById("saving");
     const downloadBtn = document.getElementById("downloadBtn");
+
+    const privacyButton = document.getElementById("privacyButton");
+    const privacyModal = document.getElementById("privacyModal");
+    const privacyClose = document.getElementById("privacyClose");
 
     let selectedFile = null;
     let originalObjectUrl = null;
     let resultObjectUrl = null;
     let selectedImageSource = null;
-
 
     function formatBytes(bytes) {
       if (bytes < 1024) {
@@ -1382,23 +1323,19 @@
       return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
     }
 
-
     function showError(message) {
       errorBox.textContent = message;
       errorBox.style.display = "block";
     }
-
 
     function clearError() {
       errorBox.textContent = "";
       errorBox.style.display = "none";
     }
 
-
     function setStatus(message) {
       status.textContent = message;
     }
-
 
     function clearResultUrl() {
       if (resultObjectUrl) {
@@ -1407,7 +1344,6 @@
       }
     }
 
-
     function clearOriginalUrl() {
       if (originalObjectUrl) {
         URL.revokeObjectURL(originalObjectUrl);
@@ -1415,57 +1351,10 @@
       }
     }
 
-
-    function resetProgress() {
-      statusArea.classList.remove("visible");
-
-      progressLabel.textContent = "Preparing...";
-      progressPercent.textContent = "0%";
-      progressBar.style.width = "0%";
-
-      stepAnalyze.className = "process-step";
-      stepCompress.className = "process-step";
-      stepDone.className = "process-step";
-    }
-
-
-    function setProgress(percent, label, phase) {
-      statusArea.classList.add("visible");
-
-      const safePercent = Math.max(
-        0,
-        Math.min(100, Math.round(percent))
-      );
-
-      progressBar.style.width = `${safePercent}%`;
-      progressPercent.textContent = `${safePercent}%`;
-      progressLabel.textContent = label;
-
-      stepAnalyze.className = "process-step";
-      stepCompress.className = "process-step";
-      stepDone.className = "process-step";
-
-      if (phase === "analyzing") {
-        stepAnalyze.classList.add("active");
-      }
-
-      if (phase === "compressing") {
-        stepAnalyze.classList.add("done");
-        stepCompress.classList.add("active");
-      }
-
-      if (phase === "done") {
-        stepAnalyze.classList.add("done");
-        stepCompress.classList.add("done");
-        stepDone.classList.add("done");
-      }
-    }
-
-
     function updateSelectedFileUI(file) {
       dropZone.classList.add("selected");
 
-      uploadIcon.textContent = "✓";
+      uploadIcon.textContent = "✅";
       dropTitle.textContent = "Image selected";
 
       dropDescription.textContent =
@@ -1476,7 +1365,6 @@
 
       selectedFileElement.style.display = "block";
     }
-
 
     function updatePresetState(value) {
       presetButtons.forEach(button => {
@@ -1489,25 +1377,21 @@
       });
     }
 
-
     presetButtons.forEach(button => {
       button.addEventListener("click", () => {
         const size = Number(button.dataset.size);
 
         maxSizeInput.value = size;
-
         updatePresetState(size);
-
         clearError();
+
         setStatus(`Target size set to ${size}KB.`);
       });
     });
 
-
     maxSizeInput.addEventListener("input", () => {
       updatePresetState(maxSizeInput.value);
     });
-
 
     function isTiff(file) {
       const name = file.name.toLowerCase();
@@ -1518,7 +1402,6 @@
         name.endsWith(".tiff")
       );
     }
-
 
     async function loadStandardImage(file) {
       return new Promise((resolve, reject) => {
@@ -1541,7 +1424,6 @@
         image.src = url;
       });
     }
-
 
     async function loadTiffImage(file) {
       const buffer = await file.arrayBuffer();
@@ -1590,7 +1472,6 @@
       return canvas;
     }
 
-
     async function loadImage(file) {
       if (isTiff(file)) {
         return loadTiffImage(file);
@@ -1598,7 +1479,6 @@
 
       return loadStandardImage(file);
     }
-
 
     async function createPreviewUrlFromTiff(image) {
       const blob = await new Promise((resolve, reject) => {
@@ -1623,7 +1503,6 @@
       return URL.createObjectURL(blob);
     }
 
-
     function createCanvas(image, width, height) {
       const canvas = document.createElement("canvas");
 
@@ -1645,7 +1524,6 @@
 
       return canvas;
     }
-
 
     function canvasToBlob(canvas, type, quality) {
       return new Promise((resolve, reject) => {
@@ -1669,7 +1547,6 @@
       });
     }
 
-
     function canvasToTiff(canvas) {
       const context = canvas.getContext("2d");
 
@@ -1691,7 +1568,6 @@
         { type: "image/tiff" }
       );
     }
-
 
     function calculateDimensions(
       originalWidth,
@@ -1723,7 +1599,6 @@
         )
       };
     }
-
 
     async function encode(
       image,
@@ -1761,14 +1636,12 @@
       };
     }
 
-
     async function compressWithQuality(
       image,
       width,
       height,
       format,
-      targetBytes,
-      onProgress
+      targetBytes
     ) {
       let low = 0.05;
       let high = 0.95;
@@ -1782,10 +1655,6 @@
         high
       );
 
-      if (onProgress) {
-        onProgress(10);
-      }
-
       if (highResult.blob.size <= targetBytes) {
         return highResult;
       }
@@ -1797,10 +1666,6 @@
         format,
         low
       );
-
-      if (onProgress) {
-        onProgress(20);
-      }
 
       if (lowResult.blob.size > targetBytes) {
         return null;
@@ -1825,22 +1690,16 @@
         } else {
           high = middle;
         }
-
-        if (onProgress) {
-          onProgress(25 + ((i + 1) / 9) * 45);
-        }
       }
 
       return best;
     }
 
-
     async function compressPng(
       image,
       width,
       height,
-      targetBytes,
-      onProgress
+      targetBytes
     ) {
       let currentWidth = width;
       let currentHeight = height;
@@ -1866,22 +1725,16 @@
           1,
           Math.floor(currentHeight * 0.85)
         );
-
-        if (onProgress) {
-          onProgress(20 + ((i + 1) / 10) * 65);
-        }
       }
 
       return null;
     }
 
-
     async function compressTiff(
       image,
       width,
       height,
-      targetBytes,
-      onProgress
+      targetBytes
     ) {
       let currentWidth = width;
       let currentHeight = height;
@@ -1908,10 +1761,6 @@
           Math.floor(currentHeight * 0.85)
         );
 
-        if (onProgress) {
-          onProgress(20 + ((i + 1) / 20) * 65);
-        }
-
         if (
           currentWidth <= 1 ||
           currentHeight <= 1
@@ -1923,14 +1772,12 @@
       return null;
     }
 
-
     async function compressImage(
       image,
       targetBytes,
       maxWidth,
       maxHeight,
-      format,
-      onProgress
+      format
     ) {
       const dimensions = calculateDimensions(
         image.naturalWidth || image.width,
@@ -1946,16 +1793,14 @@
           image,
           dimensions.width,
           dimensions.height,
-          targetBytes,
-          onProgress
+          targetBytes
         );
       } else if (format === "image/tiff") {
         result = await compressTiff(
           image,
           dimensions.width,
           dimensions.height,
-          targetBytes,
-          onProgress
+          targetBytes
         );
       } else {
         result = await compressWithQuality(
@@ -1963,8 +1808,7 @@
           dimensions.width,
           dimensions.height,
           format,
-          targetBytes,
-          onProgress
+          targetBytes
         );
       }
 
@@ -1988,16 +1832,14 @@
             image,
             width,
             height,
-            targetBytes,
-            onProgress
+            targetBytes
           );
         } else if (format === "image/tiff") {
           result = await compressTiff(
             image,
             width,
             height,
-            targetBytes,
-            onProgress
+            targetBytes
           );
         } else {
           result = await compressWithQuality(
@@ -2005,8 +1847,7 @@
             width,
             height,
             format,
-            targetBytes,
-            onProgress
+            targetBytes
           );
         }
 
@@ -2021,16 +1862,15 @@
       return null;
     }
 
-
     async function handleFile(file) {
       clearError();
+
       clearResultUrl();
       clearOriginalUrl();
 
       selectedImageSource = null;
 
       preview.style.display = "none";
-      resetProgress();
 
       setStatus("");
 
@@ -2040,33 +1880,23 @@
 
       const validImage =
         file.type.startsWith("image/") ||
-        /\.(jpg|jpeg|png|webp|gif|bmp|tif|tiff)$/i.test(
+        /\.(jpg|jpeg|png|webp|tif|tiff)$/i.test(
           file.name
         );
 
       if (!validImage) {
         showError(
-          "Please choose a JPG, JPEG, PNG, WebP, GIF, BMP or TIFF image."
+          "Please choose a JPG, JPEG, PNG, WebP or TIFF image."
         );
 
         return;
       }
 
       try {
-        setProgress(
-          15,
-          "Analyzing image...",
-          "analyzing"
-        );
-
         setStatus(
           isTiff(file)
             ? "Reading TIFF image..."
             : "Reading image..."
-        );
-
-        await new Promise(resolve =>
-          requestAnimationFrame(resolve)
         );
 
         const image = await loadImage(file);
@@ -2099,25 +1929,14 @@
 
         compressBtn.disabled = false;
 
-        setProgress(
-          100,
-          "Image ready",
-          "done"
-        );
-
-        statusArea.classList.remove("visible");
-
         setStatus(
           "Image ready to compress."
         );
-
       } catch (error) {
         selectedFile = null;
         selectedImageSource = null;
 
         compressBtn.disabled = true;
-
-        resetProgress();
 
         showError(
           error.message ||
@@ -2128,7 +1947,6 @@
       }
     }
 
-
     fileInput.addEventListener(
       "change",
       event => {
@@ -2138,7 +1956,6 @@
         handleFile(file);
       }
     );
-
 
     dropZone.addEventListener(
       "dragover",
@@ -2151,7 +1968,6 @@
       }
     );
 
-
     dropZone.addEventListener(
       "dragleave",
       () => {
@@ -2160,7 +1976,6 @@
         );
       }
     );
-
 
     dropZone.addEventListener(
       "drop",
@@ -2177,7 +1992,6 @@
         handleFile(file);
       }
     );
-
 
     compressBtn.addEventListener(
       "click",
@@ -2241,35 +2055,16 @@
           maxSize * 1024;
 
         compressBtn.disabled = true;
+
         preview.style.display = "none";
 
-        setProgress(
-          15,
-          "Analyzing image...",
-          "analyzing"
-        );
-
         setStatus(
-          "Checking image dimensions and target size..."
+          format === "image/tiff"
+            ? "Creating TIFF image..."
+            : "Compressing image..."
         );
 
         try {
-          await new Promise(resolve =>
-            setTimeout(resolve, 180)
-          );
-
-          setProgress(
-            25,
-            "Compressing image...",
-            "compressing"
-          );
-
-          setStatus(
-            format === "image/tiff"
-              ? "Creating TIFF image..."
-              : "Finding the best compression..."
-          );
-
           const startTime =
             performance.now();
 
@@ -2279,17 +2074,7 @@
               targetBytes,
               Math.floor(maxWidth),
               Math.floor(maxHeight),
-              format,
-              progress => {
-                const adjusted =
-                  25 + (progress * 0.7);
-
-                setProgress(
-                  adjusted,
-                  "Compressing image...",
-                  "compressing"
-                );
-              }
+              format
             );
 
           const duration =
@@ -2326,10 +2111,7 @@
             `${result.width} × ${result.height}px`;
 
           resultSize.textContent =
-            formatBytes(result.blob.size);
-
-          targetResult.textContent =
-            `Target ${maxSize} KB ✓`;
+            `${formatBytes(result.blob.size)} — Target ${maxSize} KB ✓`;
 
           const percentage =
             Math.max(
@@ -2381,17 +2163,11 @@
           downloadBtn.download =
             `compressed-image.${extension}`;
 
-          setProgress(
-            100,
-            "Compression complete",
-            "done"
-          );
-
           preview.style.display =
             "block";
 
           setStatus(
-            "Your image is ready to download."
+            "Compression complete."
           );
 
           if (
@@ -2404,8 +2180,6 @@
           }
 
         } catch (error) {
-          resetProgress();
-
           showError(
             error.message ||
             "Something went wrong while compressing the image."
@@ -2415,6 +2189,51 @@
 
         } finally {
           compressBtn.disabled = false;
+        }
+      }
+    );
+
+    /* Privacy explanation modal */
+
+    function openPrivacyModal() {
+      privacyModal.classList.add("open");
+      privacyClose.focus();
+      document.body.style.overflow = "hidden";
+    }
+
+    function closePrivacyModal() {
+      privacyModal.classList.remove("open");
+      document.body.style.overflow = "";
+      privacyButton.focus();
+    }
+
+    privacyButton.addEventListener(
+      "click",
+      openPrivacyModal
+    );
+
+    privacyClose.addEventListener(
+      "click",
+      closePrivacyModal
+    );
+
+    privacyModal.addEventListener(
+      "click",
+      event => {
+        if (event.target === privacyModal) {
+          closePrivacyModal();
+        }
+      }
+    );
+
+    document.addEventListener(
+      "keydown",
+      event => {
+        if (
+          event.key === "Escape" &&
+          privacyModal.classList.contains("open")
+        ) {
+          closePrivacyModal();
         }
       }
     );
