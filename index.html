@@ -469,7 +469,11 @@
 
     <section class="card">
 
-      <label class="drop-zone" id="dropZone" for="fileInput">
+      <label
+        class="drop-zone"
+        id="dropZone"
+        for="fileInput"
+      >
 
         <input
           type="file"
@@ -477,15 +481,24 @@
           accept=".jpg,.jpeg,.png,.webp,.tif,.tiff,image/jpeg,image/png,image/webp,image/tiff"
         >
 
-        <div class="upload-icon" id="uploadIcon">
+        <div
+          class="upload-icon"
+          id="uploadIcon"
+        >
           🖼️
         </div>
 
-        <div class="drop-title" id="dropTitle">
+        <div
+          class="drop-title"
+          id="dropTitle"
+        >
           Drop your image here
         </div>
 
-        <div class="drop-description" id="dropDescription">
+        <div
+          class="drop-description"
+          id="dropDescription"
+        >
           JPG, JPEG, PNG, WebP or TIFF
         </div>
 
@@ -565,6 +578,10 @@
 
             <option value="image/png">
               PNG
+            </option>
+
+            <option value="image/tiff">
+              TIFF
             </option>
 
           </select>
@@ -722,28 +739,68 @@
   <script src="https://cdn.jsdelivr.net/npm/utif@3.1.0/UTIF.js"></script>
 
   <script>
-    const fileInput = document.getElementById("fileInput");
-    const dropZone = document.getElementById("dropZone");
-    const uploadIcon = document.getElementById("uploadIcon");
-    const dropTitle = document.getElementById("dropTitle");
-    const dropDescription = document.getElementById("dropDescription");
-    const selectedFileElement = document.getElementById("selectedFile");
+    const fileInput =
+      document.getElementById("fileInput");
 
-    const maxSizeInput = document.getElementById("maxSize");
-    const maxWidthInput = document.getElementById("maxWidth");
-    const formatInput = document.getElementById("format");
-    const presetButtons = document.querySelectorAll(".preset-btn");
-    const compressBtn = document.getElementById("compressBtn");
-    const status = document.getElementById("status");
-    const errorBox = document.getElementById("error");
-    const preview = document.getElementById("preview");
-    const originalPreview = document.getElementById("originalPreview");
-    const resultPreview = document.getElementById("resultPreview");
-    const originalInfo = document.getElementById("originalInfo");
-    const resultInfo = document.getElementById("resultInfo");
-    const resultSize = document.getElementById("resultSize");
-    const saving = document.getElementById("saving");
-    const downloadBtn = document.getElementById("downloadBtn");
+    const dropZone =
+      document.getElementById("dropZone");
+
+    const uploadIcon =
+      document.getElementById("uploadIcon");
+
+    const dropTitle =
+      document.getElementById("dropTitle");
+
+    const dropDescription =
+      document.getElementById("dropDescription");
+
+    const selectedFileElement =
+      document.getElementById("selectedFile");
+
+    const maxSizeInput =
+      document.getElementById("maxSize");
+
+    const maxWidthInput =
+      document.getElementById("maxWidth");
+
+    const formatInput =
+      document.getElementById("format");
+
+    const presetButtons =
+      document.querySelectorAll(".preset-btn");
+
+    const compressBtn =
+      document.getElementById("compressBtn");
+
+    const status =
+      document.getElementById("status");
+
+    const errorBox =
+      document.getElementById("error");
+
+    const preview =
+      document.getElementById("preview");
+
+    const originalPreview =
+      document.getElementById("originalPreview");
+
+    const resultPreview =
+      document.getElementById("resultPreview");
+
+    const originalInfo =
+      document.getElementById("originalInfo");
+
+    const resultInfo =
+      document.getElementById("resultInfo");
+
+    const resultSize =
+      document.getElementById("resultSize");
+
+    const saving =
+      document.getElementById("saving");
+
+    const downloadBtn =
+      document.getElementById("downloadBtn");
 
     let selectedFile = null;
     let originalObjectUrl = null;
@@ -803,12 +860,14 @@
       selectedFileElement.textContent =
         `${file.name} · ${formatBytes(file.size)}`;
 
-      selectedFileElement.style.display = "block";
+      selectedFileElement.style.display =
+        "block";
     }
 
     function updatePresetState(value) {
       presetButtons.forEach(button => {
-        const buttonSize = Number(button.dataset.size);
+        const buttonSize =
+          Number(button.dataset.size);
 
         button.classList.toggle(
           "active",
@@ -819,7 +878,8 @@
 
     presetButtons.forEach(button => {
       button.addEventListener("click", () => {
-        const size = Number(button.dataset.size);
+        const size =
+          Number(button.dataset.size);
 
         maxSizeInput.value = size;
 
@@ -827,16 +887,24 @@
 
         clearError();
 
-        setStatus(`Target size set to ${size}KB.`);
+        setStatus(
+          `Target size set to ${size}KB.`
+        );
       });
     });
 
-    maxSizeInput.addEventListener("input", () => {
-      updatePresetState(maxSizeInput.value);
-    });
+    maxSizeInput.addEventListener(
+      "input",
+      () => {
+        updatePresetState(
+          maxSizeInput.value
+        );
+      }
+    );
 
     function isTiff(file) {
-      const name = file.name.toLowerCase();
+      const name =
+        file.name.toLowerCase();
 
       return (
         file.type === "image/tiff" ||
@@ -846,34 +914,46 @@
     }
 
     async function loadStandardImage(file) {
-      return new Promise((resolve, reject) => {
-        const url = URL.createObjectURL(file);
-        const image = new Image();
+      return new Promise(
+        (resolve, reject) => {
+          const url =
+            URL.createObjectURL(file);
 
-        image.onload = () => {
-          URL.revokeObjectURL(url);
+          const image =
+            new Image();
 
-          resolve(image);
-        };
+          image.onload = () => {
+            URL.revokeObjectURL(url);
 
-        image.onerror = () => {
-          URL.revokeObjectURL(url);
+            resolve(image);
+          };
 
-          reject(
-            new Error("Could not read this image.")
-          );
-        };
+          image.onerror = () => {
+            URL.revokeObjectURL(url);
 
-        image.src = url;
-      });
+            reject(
+              new Error(
+                "Could not read this image."
+              )
+            );
+          };
+
+          image.src = url;
+        }
+      );
     }
 
     async function loadTiffImage(file) {
-      const buffer = await file.arrayBuffer();
+      const buffer =
+        await file.arrayBuffer();
 
-      const ifds = UTIF.decode(buffer);
+      const ifds =
+        UTIF.decode(buffer);
 
-      if (!ifds || ifds.length === 0) {
+      if (
+        !ifds ||
+        ifds.length === 0
+      ) {
         throw new Error(
           "Could not read this TIFF image."
         );
@@ -881,25 +961,37 @@
 
       const ifd = ifds[0];
 
-      UTIF.decodeImage(buffer, ifd);
+      UTIF.decodeImage(
+        buffer,
+        ifd
+      );
 
-      const width = ifd.width;
-      const height = ifd.height;
+      const width =
+        ifd.width;
 
-      if (!width || !height) {
+      const height =
+        ifd.height;
+
+      if (
+        !width ||
+        !height
+      ) {
         throw new Error(
           "Could not determine the TIFF image dimensions."
         );
       }
 
-      const rgba = UTIF.toRGBA8(ifd);
+      const rgba =
+        UTIF.toRGBA8(ifd);
 
-      const canvas = document.createElement("canvas");
+      const canvas =
+        document.createElement("canvas");
 
       canvas.width = width;
       canvas.height = height;
 
-      const context = canvas.getContext("2d");
+      const context =
+        canvas.getContext("2d");
 
       if (!context) {
         throw new Error(
@@ -907,10 +999,11 @@
         );
       }
 
-      const imageData = context.createImageData(
-        width,
-        height
-      );
+      const imageData =
+        context.createImageData(
+          width,
+          height
+        );
 
       imageData.data.set(rgba);
 
@@ -919,9 +1012,6 @@
         0,
         0
       );
-
-      canvas.naturalWidth = width;
-      canvas.naturalHeight = height;
 
       return canvas;
     }
@@ -937,39 +1027,49 @@
     async function createPreviewUrlFromTiff(
       image
     ) {
-      const blob = await new Promise(
-        (resolve, reject) => {
-          image.toBlob(
-            result => {
-              if (!result) {
-                reject(
-                  new Error(
-                    "Could not create TIFF preview."
-                  )
-                );
+      const blob =
+        await new Promise(
+          (resolve, reject) => {
+            image.toBlob(
+              result => {
+                if (!result) {
+                  reject(
+                    new Error(
+                      "Could not create TIFF preview."
+                    )
+                  );
 
-                return;
-              }
+                  return;
+                }
 
-              resolve(result);
-            },
-            "image/png"
-          );
-        }
-      );
+                resolve(result);
+              },
+              "image/png"
+            );
+          }
+        );
 
       return URL.createObjectURL(blob);
     }
 
-    function createCanvas(image, width, height) {
-      const canvas = document.createElement("canvas");
+    function createCanvas(
+      image,
+      width,
+      height
+    ) {
+      const canvas =
+        document.createElement("canvas");
 
       canvas.width = width;
       canvas.height = height;
 
-      const context = canvas.getContext("2d", {
-        alpha: true
-      });
+      const context =
+        canvas.getContext(
+          "2d",
+          {
+            alpha: true
+          }
+        );
 
       context.drawImage(
         image,
@@ -982,26 +1082,61 @@
       return canvas;
     }
 
-    function canvasToBlob(canvas, type, quality) {
-      return new Promise((resolve, reject) => {
-        canvas.toBlob(
-          blob => {
-            if (!blob) {
-              reject(
-                new Error(
-                  "Browser could not create the image."
-                )
-              );
+    function canvasToBlob(
+      canvas,
+      type,
+      quality
+    ) {
+      return new Promise(
+        (resolve, reject) => {
+          canvas.toBlob(
+            blob => {
+              if (!blob) {
+                reject(
+                  new Error(
+                    "Browser could not create the image."
+                  )
+                );
 
-              return;
-            }
+                return;
+              }
 
-            resolve(blob);
-          },
-          type,
-          quality
+              resolve(blob);
+            },
+            type,
+            quality
+          );
+        }
+      );
+    }
+
+    function canvasToTiff(
+      canvas
+    ) {
+      const context =
+        canvas.getContext("2d");
+
+      const imageData =
+        context.getImageData(
+          0,
+          0,
+          canvas.width,
+          canvas.height
         );
-      });
+
+      const tiffBuffer =
+        UTIF.encodeImage(
+          imageData.data,
+          canvas.width,
+          canvas.height
+        );
+
+      return new Blob(
+        [tiffBuffer],
+        {
+          type: "image/tiff"
+        }
+      );
     }
 
     function calculateDimensions(
@@ -1009,24 +1144,32 @@
       originalHeight,
       maxWidth
     ) {
-      if (originalWidth <= maxWidth) {
+      if (
+        originalWidth <= maxWidth
+      ) {
         return {
           width: originalWidth,
           height: originalHeight
         };
       }
 
-      const ratio = maxWidth / originalWidth;
+      const ratio =
+        maxWidth /
+        originalWidth;
 
       return {
         width: Math.max(
           1,
-          Math.round(originalWidth * ratio)
+          Math.round(
+            originalWidth * ratio
+          )
         ),
 
         height: Math.max(
           1,
-          Math.round(originalHeight * ratio)
+          Math.round(
+            originalHeight * ratio
+          )
         )
       };
     }
@@ -1038,17 +1181,32 @@
       format,
       quality
     ) {
-      const canvas = createCanvas(
-        image,
-        width,
-        height
-      );
+      const canvas =
+        createCanvas(
+          image,
+          width,
+          height
+        );
 
-      const blob = await canvasToBlob(
-        canvas,
-        format,
-        quality
-      );
+      if (
+        format === "image/tiff"
+      ) {
+        const blob =
+          canvasToTiff(canvas);
+
+        return {
+          blob,
+          width,
+          height
+        };
+      }
+
+      const blob =
+        await canvasToBlob(
+          canvas,
+          format,
+          quality
+        );
 
       return {
         blob,
@@ -1068,44 +1226,61 @@
       let high = 0.95;
       let best = null;
 
-      const highResult = await encode(
-        image,
-        width,
-        height,
-        format,
-        high
-      );
+      const highResult =
+        await encode(
+          image,
+          width,
+          height,
+          format,
+          high
+        );
 
-      if (highResult.blob.size <= targetBytes) {
+      if (
+        highResult.blob.size <=
+        targetBytes
+      ) {
         return highResult;
       }
 
-      const lowResult = await encode(
-        image,
-        width,
-        height,
-        format,
-        low
-      );
+      const lowResult =
+        await encode(
+          image,
+          width,
+          height,
+          format,
+          low
+        );
 
-      if (lowResult.blob.size > targetBytes) {
+      if (
+        lowResult.blob.size >
+        targetBytes
+      ) {
         return null;
       }
 
       best = lowResult;
 
-      for (let i = 0; i < 9; i++) {
-        const middle = (low + high) / 2;
+      for (
+        let i = 0;
+        i < 9;
+        i++
+      ) {
+        const middle =
+          (low + high) / 2;
 
-        const result = await encode(
-          image,
-          width,
-          height,
-          format,
-          middle
-        );
+        const result =
+          await encode(
+            image,
+            width,
+            height,
+            format,
+            middle
+          );
 
-        if (result.blob.size <= targetBytes) {
+        if (
+          result.blob.size <=
+          targetBytes
+        ) {
           best = result;
           low = middle;
         } else {
@@ -1122,30 +1297,106 @@
       height,
       targetBytes
     ) {
-      let currentWidth = width;
-      let currentHeight = height;
+      let currentWidth =
+        width;
 
-      for (let i = 0; i < 10; i++) {
-        const result = await encode(
-          image,
-          currentWidth,
-          currentHeight,
-          "image/png"
-        );
+      let currentHeight =
+        height;
 
-        if (result.blob.size <= targetBytes) {
+      for (
+        let i = 0;
+        i < 10;
+        i++
+      ) {
+        const result =
+          await encode(
+            image,
+            currentWidth,
+            currentHeight,
+            "image/png"
+          );
+
+        if (
+          result.blob.size <=
+          targetBytes
+        ) {
           return result;
         }
 
-        currentWidth = Math.max(
-          1,
-          Math.floor(currentWidth * 0.85)
-        );
+        currentWidth =
+          Math.max(
+            1,
+            Math.floor(
+              currentWidth * 0.85
+            )
+          );
 
-        currentHeight = Math.max(
-          1,
-          Math.floor(currentHeight * 0.85)
-        );
+        currentHeight =
+          Math.max(
+            1,
+            Math.floor(
+              currentHeight * 0.85
+            )
+          );
+      }
+
+      return null;
+    }
+
+    async function compressTiff(
+      image,
+      width,
+      height,
+      targetBytes
+    ) {
+      let currentWidth =
+        width;
+
+      let currentHeight =
+        height;
+
+      for (
+        let i = 0;
+        i < 20;
+        i++
+      ) {
+        const result =
+          await encode(
+            image,
+            currentWidth,
+            currentHeight,
+            "image/tiff"
+          );
+
+        if (
+          result.blob.size <=
+          targetBytes
+        ) {
+          return result;
+        }
+
+        currentWidth =
+          Math.max(
+            1,
+            Math.floor(
+              currentWidth * 0.85
+            )
+          );
+
+        currentHeight =
+          Math.max(
+            1,
+            Math.floor(
+              currentHeight * 0.85
+            )
+          );
+
+        if (
+          currentWidth <= 1 ||
+          currentHeight <= 1
+        ) {
+          break;
+        }
       }
 
       return null;
@@ -1157,71 +1408,116 @@
       maxWidth,
       format
     ) {
-      const dimensions = calculateDimensions(
-        image.naturalWidth,
-        image.naturalHeight,
-        maxWidth
-      );
+      const dimensions =
+        calculateDimensions(
+          image.naturalWidth,
+          image.naturalHeight,
+          maxWidth
+        );
 
       let result;
 
-      if (format === "image/png") {
-        result = await compressPng(
-          image,
-          dimensions.width,
-          dimensions.height,
-          targetBytes
-        );
+      if (
+        format === "image/png"
+      ) {
+        result =
+          await compressPng(
+            image,
+            dimensions.width,
+            dimensions.height,
+            targetBytes
+          );
+      } else if (
+        format === "image/tiff"
+      ) {
+        result =
+          await compressTiff(
+            image,
+            dimensions.width,
+            dimensions.height,
+            targetBytes
+          );
       } else {
-        result = await compressWithQuality(
-          image,
-          dimensions.width,
-          dimensions.height,
-          format,
-          targetBytes
-        );
+        result =
+          await compressWithQuality(
+            image,
+            dimensions.width,
+            dimensions.height,
+            format,
+            targetBytes
+          );
       }
 
       if (result) {
         return result;
       }
 
-      let width = Math.floor(
-        dimensions.width * 0.85
-      );
+      let width =
+        Math.floor(
+          dimensions.width * 0.85
+        );
 
-      let height = Math.floor(
-        dimensions.height * 0.85
-      );
+      let height =
+        Math.floor(
+          dimensions.height * 0.85
+        );
 
-      for (let i = 0; i < 8; i++) {
-        if (width < 1 || height < 1) {
+      for (
+        let i = 0;
+        i < 8;
+        i++
+      ) {
+        if (
+          width < 1 ||
+          height < 1
+        ) {
           break;
         }
 
-        if (format === "image/png") {
-          result = await compressPng(
-            image,
-            width,
-            height,
-            targetBytes
-          );
+        if (
+          format === "image/png"
+        ) {
+          result =
+            await compressPng(
+              image,
+              width,
+              height,
+              targetBytes
+            );
+        } else if (
+          format === "image/tiff"
+        ) {
+          result =
+            await compressTiff(
+              image,
+              width,
+              height,
+              targetBytes
+            );
         } else {
-          result = await compressWithQuality(
-            image,
-            width,
-            height,
-            format,
-            targetBytes
-          );
+          result =
+            await compressWithQuality(
+              image,
+              width,
+              height,
+              format,
+              targetBytes
+            );
         }
 
         if (result) {
           return result;
         }
 
-        width = Math.floor(width * 0.85);
-        height = Math.floor(height * 0.85);
+        width =
+          Math.floor(
+            width * 0.85
+          );
+
+        height =
+          Math.floor(
+            height * 0.85
+          );
       }
 
       return null;
@@ -1229,12 +1525,16 @@
 
     async function handleFile(file) {
       clearError();
+
       clearResultUrl();
+
       clearOriginalUrl();
 
       selectedImageSource = null;
 
-      preview.style.display = "none";
+      preview.style.display =
+        "none";
+
       setStatus("");
 
       if (!file) {
@@ -1266,7 +1566,9 @@
           await loadImage(file);
 
         selectedFile = file;
-        selectedImageSource = image;
+
+        selectedImageSource =
+          image;
 
         if (isTiff(file)) {
           originalObjectUrl =
@@ -1275,7 +1577,9 @@
             );
         } else {
           originalObjectUrl =
-            URL.createObjectURL(file);
+            URL.createObjectURL(
+              file
+            );
         }
 
         originalPreview.src =
@@ -1288,16 +1592,19 @@
 
         updateSelectedFileUI(file);
 
-        compressBtn.disabled = false;
+        compressBtn.disabled =
+          false;
 
         setStatus(
           "Image ready to compress."
         );
       } catch (error) {
         selectedFile = null;
+
         selectedImageSource = null;
 
-        compressBtn.disabled = true;
+        compressBtn.disabled =
+          true;
 
         showError(
           error.message ||
@@ -1311,7 +1618,8 @@
     fileInput.addEventListener(
       "change",
       event => {
-        const file = event.target.files[0];
+        const file =
+          event.target.files[0];
 
         handleFile(file);
       }
@@ -1356,18 +1664,26 @@
     compressBtn.addEventListener(
       "click",
       async () => {
-        if (!selectedFile || !selectedImageSource) {
+        if (
+          !selectedFile ||
+          !selectedImageSource
+        ) {
           return;
         }
 
         clearError();
+
         clearResultUrl();
 
         const maxSize =
-          Number(maxSizeInput.value);
+          Number(
+            maxSizeInput.value
+          );
 
         const maxWidth =
-          Number(maxWidthInput.value);
+          Number(
+            maxWidthInput.value
+          );
 
         const format =
           formatInput.value;
@@ -1397,12 +1713,16 @@
         const targetBytes =
           maxSize * 1024;
 
-        compressBtn.disabled = true;
+        compressBtn.disabled =
+          true;
 
-        preview.style.display = "none";
+        preview.style.display =
+          "none";
 
         setStatus(
-          "Compressing image..."
+          format === "image/tiff"
+            ? "Creating TIFF image..."
+            : "Compressing image..."
         );
 
         try {
@@ -1419,7 +1739,8 @@
 
           const duration =
             Math.round(
-              performance.now() - startTime
+              performance.now() -
+              startTime
             );
 
           if (!result) {
@@ -1428,7 +1749,10 @@
             );
           }
 
-          if (result.blob.size > targetBytes) {
+          if (
+            result.blob.size >
+            targetBytes
+          ) {
             throw new Error(
               "The image could not be compressed below the requested size."
             );
@@ -1448,7 +1772,9 @@
             `${result.height}px`;
 
           resultSize.textContent =
-            `${formatBytes(result.blob.size)}`;
+            formatBytes(
+              result.blob.size
+            );
 
           const percentage =
             Math.max(
@@ -1474,14 +1800,28 @@
               `Processed in ${duration}ms`;
           }
 
-          let extension = "jpg";
+          let extension =
+            "jpg";
 
-          if (format === "image/webp") {
-            extension = "webp";
+          if (
+            format === "image/webp"
+          ) {
+            extension =
+              "webp";
           }
 
-          if (format === "image/png") {
-            extension = "png";
+          if (
+            format === "image/png"
+          ) {
+            extension =
+              "png";
+          }
+
+          if (
+            format === "image/tiff"
+          ) {
+            extension =
+              "tiff";
           }
 
           downloadBtn.href =
@@ -1490,7 +1830,8 @@
           downloadBtn.download =
             `compressed-image.${extension}`;
 
-          preview.style.display = "block";
+          preview.style.display =
+            "block";
 
           setStatus(
             "Compression complete."
@@ -1503,7 +1844,8 @@
 
           setStatus("");
         } finally {
-          compressBtn.disabled = false;
+          compressBtn.disabled =
+            false;
         }
       }
     );
