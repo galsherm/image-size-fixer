@@ -13,7 +13,7 @@
 
   <meta
     name="description"
-    content="Compress JPG, PNG and WebP images to under 100KB or any file size you need. Free, fast and private. Your images stay on your device."
+    content="Compress JPG, JPEG, PNG, WebP and TIFF images to under 100KB or any file size you need. Free, fast and private. Your images stay on your device."
   >
 
   <meta
@@ -33,7 +33,7 @@
 
   <meta
     property="og:description"
-    content="Compress images to a specific file size directly in your browser. Free, fast and private."
+    content="Compress JPG, JPEG, PNG, WebP and TIFF images to a specific file size directly in your browser. Free, fast and private."
   >
 
   <meta
@@ -58,7 +58,7 @@
 
   <meta
     name="twitter:description"
-    content="Compress images to a specific file size directly in your browser. Free, fast and private."
+    content="Compress JPG, JPEG, PNG, WebP and TIFF images to a specific file size directly in your browser."
   >
 
   <style>
@@ -462,7 +462,7 @@
       <h1>Under100KB</h1>
 
       <p class="subtitle">
-        Compress JPG, PNG or WebP images to under 100KB
+        Compress JPG, JPEG, PNG, WebP or TIFF images to under 100KB
         or any file size you need. Free, fast and private.
       </p>
     </header>
@@ -474,7 +474,7 @@
         <input
           type="file"
           id="fileInput"
-          accept="image/jpeg,image/png,image/webp,image/gif"
+          accept=".jpg,.jpeg,.png,.webp,.tif,.tiff,image/jpeg,image/png,image/webp,image/tiff"
         >
 
         <div class="upload-icon" id="uploadIcon">
@@ -486,7 +486,7 @@
         </div>
 
         <div class="drop-description" id="dropDescription">
-          or click to choose an image
+          JPG, JPEG, PNG, WebP or TIFF
         </div>
 
         <div
@@ -719,6 +719,8 @@
 
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/utif@3.1.0/UTIF.js"></script>
+
   <script>
     const fileInput = document.getElementById("fileInput");
     const dropZone = document.getElementById("dropZone");
@@ -746,6 +748,7 @@
     let selectedFile = null;
     let originalObjectUrl = null;
     let resultObjectUrl = null;
+    let selectedImageSource = null;
 
     function formatBytes(bytes) {
       if (bytes < 1024) {
@@ -832,13 +835,24 @@
       updatePresetState(maxSizeInput.value);
     });
 
-    function loadImage(file) {
+    function isTiff(file) {
+      const name = file.name.toLowerCase();
+
+      return (
+        file.type === "image/tiff" ||
+        name.endsWith(".tif") ||
+        name.endsWith(".tiff")
+      );
+    }
+
+    async function loadStandardImage(file) {
       return new Promise((resolve, reject) => {
         const url = URL.createObjectURL(file);
         const image = new Image();
 
         image.onload = () => {
           URL.revokeObjectURL(url);
+
           resolve(image);
         };
 
@@ -852,6 +866,99 @@
 
         image.src = url;
       });
+    }
+
+    async function loadTiffImage(file) {
+      const buffer = await file.arrayBuffer();
+
+      const ifds = UTIF.decode(buffer);
+
+      if (!ifds || ifds.length === 0) {
+        throw new Error(
+          "Could not read this TIFF image."
+        );
+      }
+
+      const ifd = ifds[0];
+
+      UTIF.decodeImage(buffer, ifd);
+
+      const width = ifd.width;
+      const height = ifd.height;
+
+      if (!width || !height) {
+        throw new Error(
+          "Could not determine the TIFF image dimensions."
+        );
+      }
+
+      const rgba = UTIF.toRGBA8(ifd);
+
+      const canvas = document.createElement("canvas");
+
+      canvas.width = width;
+      canvas.height = height;
+
+      const context = canvas.getContext("2d");
+
+      if (!context) {
+        throw new Error(
+          "Your browser could not create a canvas."
+        );
+      }
+
+      const imageData = context.createImageData(
+        width,
+        height
+      );
+
+      imageData.data.set(rgba);
+
+      context.putImageData(
+        imageData,
+        0,
+        0
+      );
+
+      canvas.naturalWidth = width;
+      canvas.naturalHeight = height;
+
+      return canvas;
+    }
+
+    async function loadImage(file) {
+      if (isTiff(file)) {
+        return loadTiffImage(file);
+      }
+
+      return loadStandardImage(file);
+    }
+
+    async function createPreviewUrlFromTiff(
+      image
+    ) {
+      const blob = await new Promise(
+        (resolve, reject) => {
+          image.toBlob(
+            result => {
+              if (!result) {
+                reject(
+                  new Error(
+                    "Could not create TIFF preview."
+                  )
+                );
+
+                return;
+              }
+
+              resolve(result);
+            },
+            "image/png"
+          );
+        }
+      );
+
+      return URL.createObjectURL(blob);
     }
 
     function createCanvas(image, width, height) {
@@ -1125,6 +1232,8 @@
       clearResultUrl();
       clearOriginalUrl();
 
+      selectedImageSource = null;
+
       preview.style.display = "none";
       setStatus("");
 
@@ -1132,21 +1241,42 @@
         return;
       }
 
-      if (!file.type.startsWith("image/")) {
+      const validImage =
+        file.type.startsWith("image/") ||
+        /\.(jpg|jpeg|png|webp|tif|tiff)$/i.test(
+          file.name
+        );
+
+      if (!validImage) {
         showError(
-          "Please choose a valid image file."
+          "Please choose a JPG, JPEG, PNG, WebP or TIFF image."
         );
 
         return;
       }
 
       try {
-        const image = await loadImage(file);
+        setStatus(
+          isTiff(file)
+            ? "Reading TIFF image..."
+            : "Reading image..."
+        );
+
+        const image =
+          await loadImage(file);
 
         selectedFile = file;
+        selectedImageSource = image;
 
-        originalObjectUrl =
-          URL.createObjectURL(file);
+        if (isTiff(file)) {
+          originalObjectUrl =
+            await createPreviewUrlFromTiff(
+              image
+            );
+        } else {
+          originalObjectUrl =
+            URL.createObjectURL(file);
+        }
 
         originalPreview.src =
           originalObjectUrl;
@@ -1165,11 +1295,16 @@
         );
       } catch (error) {
         selectedFile = null;
+        selectedImageSource = null;
+
         compressBtn.disabled = true;
 
         showError(
+          error.message ||
           "Could not read this image. Please try another file."
         );
+
+        setStatus("");
       }
     }
 
@@ -1221,7 +1356,7 @@
     compressBtn.addEventListener(
       "click",
       async () => {
-        if (!selectedFile) {
+        if (!selectedFile || !selectedImageSource) {
           return;
         }
 
@@ -1271,15 +1406,12 @@
         );
 
         try {
-          const image =
-            await loadImage(selectedFile);
-
           const startTime =
             performance.now();
 
           const result =
             await compressImage(
-              image,
+              selectedImageSource,
               targetBytes,
               Math.floor(maxWidth),
               format
