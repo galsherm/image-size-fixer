@@ -8,7 +8,7 @@
 
   <meta
     name="description"
-    content="Compress JPG, PNG, WebP and TIFF images to 100KB, 50KB, 20KB or your own target size. Free, fast and private — your images never leave your device."
+    content="Compress JPG, PNG, WebP and TIFF images to 100KB, 50KB, 20KB or your own target size. Free, fast and private — your images are processed locally in your browser."
   >
 
   <meta
@@ -30,10 +30,7 @@
     content="Free online image compressor. Reduce JPG, PNG, WebP and TIFF images to your target file size directly in your browser."
   >
   <meta property="og:type" content="website">
-  <meta
-    property="og:url"
-    content="https://galsherm.github.io/under100kb/"
-  >
+  <meta property="og:url" content="https://galsherm.github.io/under100kb/">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Compress Image to 100KB Online">
@@ -42,7 +39,6 @@
     content="Compress images to 100KB or any target size. Free, fast and private."
   >
 
-  <!-- WebApplication structured data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -71,7 +67,6 @@
   }
   </script>
 
-  <!-- FAQ structured data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -130,29 +125,17 @@
       --primary: #2563eb;
       --primary-dark: #1d4ed8;
       --primary-soft: #eff6ff;
-
       --background: #f6f8fc;
-      --surface: #ffffff;
-      --surface-soft: #f8fafc;
-
+      --card: #ffffff;
       --text: #172033;
-      --text-soft: #475467;
       --muted: #667085;
-
-      --border: #e4e7ec;
-      --border-strong: #d0d5dd;
-
+      --border: #e2e6ee;
+      --border-strong: #d5dae3;
       --success: #15803d;
       --success-dark: #166534;
       --success-bg: #f0fdf4;
       --success-border: #bbf7d0;
-
       --error: #dc2626;
-      --error-bg: #fef2f2;
-
-      --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.04);
-      --shadow-md: 0 12px 35px rgba(16, 24, 40, 0.07);
-      --shadow-lg: 0 24px 70px rgba(16, 24, 40, 0.10);
     }
 
     html {
@@ -162,10 +145,9 @@
     body {
       margin: 0;
       min-height: 100vh;
-      padding: 0 16px 48px;
+      padding: 34px 16px 48px;
       font-family:
         Inter,
-        ui-sans-serif,
         system-ui,
         -apple-system,
         BlinkMacSystemFont,
@@ -173,12 +155,11 @@
         sans-serif;
       background:
         radial-gradient(
-          circle at 50% -10%,
-          #eaf1ff 0,
-          rgba(234, 241, 255, 0.55) 25%,
-          transparent 55%
-        ),
-        var(--background);
+          circle at top,
+          #ffffff 0,
+          #f6f8fc 45%,
+          #f3f5f9 100%
+        );
       color: var(--text);
     }
 
@@ -188,220 +169,112 @@
       font: inherit;
     }
 
-    button,
-    select,
-    input {
-      -webkit-tap-highlight-color: transparent;
-    }
-
     .container {
       width: 100%;
-      max-width: 900px;
+      max-width: 780px;
       margin: 0 auto;
     }
 
-    /* =========================
-       TOP BAR
-    ========================= */
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 70px;
-      padding: 0 2px;
-    }
-
-    .brand-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-
-    .brand-mark {
-      display: grid;
-      place-items: center;
-      width: 31px;
-      height: 31px;
-      border-radius: 9px;
-      background: var(--primary);
-      color: white;
-      font-size: 14px;
-      box-shadow: 0 5px 14px rgba(37, 99, 235, 0.25);
-    }
-
-    .brand-name {
-      font-size: 0.96rem;
-    }
-
-    .topbar-note {
-      color: var(--muted);
-      font-size: 0.78rem;
-      font-weight: 600;
-    }
-
-    /* =========================
-       HERO
-    ========================= */
-
-    .hero {
+    header {
       text-align: center;
-      padding: 42px 0 28px;
+      margin-bottom: 22px;
     }
 
-    .eyebrow {
+    .brand {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      margin-bottom: 13px;
-      padding: 6px 10px;
-      border: 1px solid #dbeafe;
-      border-radius: 999px;
-      background: rgba(239, 246, 255, 0.8);
+      justify-content: center;
+      margin-bottom: 12px;
       color: var(--primary);
-      font-size: 0.72rem;
+      font-size: 0.78rem;
       font-weight: 800;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
-    .eyebrow-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #22c55e;
-      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.12);
-    }
-
     h1 {
-      margin: 0;
-      color: #111827;
-      font-size: clamp(2.25rem, 6vw, 4rem);
-      line-height: 1.02;
-      letter-spacing: -0.055em;
+      margin: 0 0 10px;
+      font-size: clamp(2.15rem, 6vw, 3.15rem);
+      line-height: 1.04;
+      letter-spacing: -0.045em;
     }
 
-    .hero-subtitle {
-      max-width: 650px;
-      margin: 16px auto 0;
-      color: var(--text-soft);
-      font-size: clamp(0.96rem, 2vw, 1.08rem);
-      line-height: 1.65;
+    .subtitle {
+      max-width: 610px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.6;
     }
 
-    .hero-trust {
+    .trust-row {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
-      gap: 8px 18px;
+      flex-wrap: wrap;
+      gap: 8px;
       margin-top: 17px;
-      color: var(--muted);
-      font-size: 0.78rem;
-      font-weight: 600;
     }
 
-    .hero-trust span {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    /* =========================
-       MAIN TOOL
-    ========================= */
-
-    .tool-card {
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      border-radius: 24px;
-      background: var(--surface);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .tool-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 18px 22px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.9);
-    }
-
-    .tool-header-title {
-      font-size: 0.9rem;
-      font-weight: 800;
-    }
-
-    .tool-header-subtitle {
-      margin-top: 2px;
-      color: var(--muted);
-      font-size: 0.75rem;
-    }
-
-    .private-pill {
+    .trust-item {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      flex-shrink: 0;
-      padding: 6px 9px;
-      border: 1px solid var(--success-border);
+      padding: 7px 10px;
+      border: 1px solid var(--border);
       border-radius: 999px;
-      background: var(--success-bg);
-      color: var(--success-dark);
-      font-size: 0.72rem;
-      font-weight: 750;
+      background: rgba(255, 255, 255, 0.85);
+      color: #475467;
+      font-size: 0.76rem;
+      font-weight: 650;
     }
 
-    .tool-body {
-      padding: 22px;
+    .trust-item strong {
+      color: var(--text);
     }
 
-    /* =========================
-       UPLOAD
-    ========================= */
+    .tool-card {
+      background: var(--card);
+      border: 1px solid rgba(226, 230, 238, 0.9);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow:
+        0 20px 50px rgba(15, 23, 42, 0.08),
+        0 2px 8px rgba(15, 23, 42, 0.03);
+    }
+
+    .section-label {
+      margin-bottom: 9px;
+      color: #344054;
+      font-size: 0.84rem;
+      font-weight: 800;
+    }
 
     .drop-zone {
-      position: relative;
       display: block;
-      min-height: 245px;
+      border: 2px dashed #d5dbe5;
+      border-radius: 16px;
       padding: 38px 20px;
-      border: 1.5px dashed #cbd5e1;
-      border-radius: 18px;
-      background:
-        linear-gradient(
-          180deg,
-          #fbfdff 0%,
-          #f8fafc 100%
-        );
       text-align: center;
       cursor: pointer;
+      background: #fbfcfe;
       transition:
         border-color 0.18s ease,
         background 0.18s ease,
-        transform 0.18s ease,
-        box-shadow 0.18s ease;
+        transform 0.18s ease;
     }
 
     .drop-zone:hover,
     .drop-zone.drag-over {
       border-color: var(--primary);
-      background: #f8fbff;
-      box-shadow:
-        inset 0 0 0 1px rgba(37, 99, 235, 0.05),
-        0 8px 22px rgba(37, 99, 235, 0.06);
+      background: var(--primary-soft);
     }
 
-    .drop-zone.drag-over {
-      transform: scale(1.005);
+    .drop-zone:hover {
+      transform: translateY(-1px);
     }
 
     .drop-zone.selected {
-      border-color: #86efac;
+      border-color: var(--success);
       background: var(--success-bg);
     }
 
@@ -409,103 +282,96 @@
       display: none;
     }
 
-    .upload-icon-wrap {
-      display: grid;
-      place-items: center;
-      width: 58px;
-      height: 58px;
-      margin: 0 auto 13px;
-      border: 1px solid #dbeafe;
-      border-radius: 16px;
-      background: white;
-      box-shadow: var(--shadow-sm);
+    .upload-icon {
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      border-radius: 14px;
+      background: #eef4ff;
+      font-size: 25px;
     }
 
-    .upload-icon {
-      font-size: 25px;
-      line-height: 1;
+    .drop-zone.selected .upload-icon {
+      background: #dcfce7;
     }
 
     .drop-title {
-      color: #111827;
       font-size: 1.08rem;
       font-weight: 800;
-      letter-spacing: -0.015em;
     }
 
     .drop-description {
       margin-top: 6px;
       color: var(--muted);
-      font-size: 0.83rem;
-    }
-
-    .drop-action {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 34px;
-      margin-top: 15px;
-      padding: 0 12px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: white;
-      color: var(--text);
-      font-size: 0.76rem;
-      font-weight: 750;
-      box-shadow: var(--shadow-sm);
+      font-size: 0.84rem;
     }
 
     .selected-file {
-      margin: 10px auto 0;
-      max-width: 90%;
-      color: var(--success-dark);
-      font-size: 0.78rem;
+      margin: 9px auto 0;
+      max-width: 100%;
+      color: var(--success);
+      font-size: 0.82rem;
       font-weight: 700;
       overflow-wrap: anywhere;
     }
 
-    /* =========================
-       SETTINGS
-    ========================= */
-
-    .settings {
-      margin-top: 22px;
+    .upload-note {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin-top: 13px;
+      color: var(--success-dark);
+      font-size: 0.76rem;
+      font-weight: 650;
     }
 
-    .section-heading {
+    .settings {
+      margin-top: 25px;
+    }
+
+    .settings-heading {
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 11px;
+      gap: 10px;
+      margin-bottom: 12px;
     }
 
-    .section-title {
-      font-size: 0.88rem;
+    .settings-title {
+      font-size: 0.95rem;
       font-weight: 800;
     }
 
-    .section-hint {
+    .settings-subtitle {
       color: var(--muted);
-      font-size: 0.72rem;
+      font-size: 0.75rem;
     }
 
     .settings-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 14px;
     }
 
     .field {
-      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
     }
 
     .field label {
-      display: block;
-      margin-bottom: 6px;
-      color: #344054;
-      font-size: 0.77rem;
+      font-size: 0.82rem;
       font-weight: 750;
+    }
+
+    .field-hint {
+      color: var(--muted);
+      font-size: 0.72rem;
+      line-height: 1.35;
     }
 
     .input-row {
@@ -517,89 +383,65 @@
     input[type="number"],
     select {
       width: 100%;
-      min-height: 46px;
+      min-height: 44px;
       padding: 9px 12px;
       border: 1px solid var(--border-strong);
       border-radius: 10px;
-      outline: none;
       background: white;
       color: var(--text);
-      transition:
-        border-color 0.15s ease,
-        box-shadow 0.15s ease;
-    }
-
-    input[type="number"]:hover,
-    select:hover {
-      border-color: #98a2b3;
+      outline: none;
     }
 
     input[type="number"]:focus,
     select:focus {
       border-color: var(--primary);
-      box-shadow:
-        0 0 0 3px rgba(37, 99, 235, 0.11);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.11);
     }
 
     .unit {
       color: var(--muted);
-      font-size: 0.76rem;
-      font-weight: 600;
+      font-size: 0.8rem;
       white-space: nowrap;
     }
 
-    /* =========================
-       TARGET SIZE
-    ========================= */
-
-    .target-section {
-      margin-top: 20px;
-      padding: 15px;
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      background: var(--surface-soft);
-    }
-
-    .target-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .target-label {
-      color: #344054;
-      font-size: 0.76rem;
-      font-weight: 750;
-    }
-
-    .target-description {
+    .format-note {
+      margin-top: 7px;
       color: var(--muted);
-      font-size: 0.7rem;
+      font-size: 0.72rem;
+    }
+
+    .presets {
+      margin-top: 20px;
+    }
+
+    .presets-label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 700;
     }
 
     .preset-buttons {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      display: flex;
+      flex-wrap: wrap;
       gap: 7px;
     }
 
     .preset-btn {
-      min-height: 38px;
-      padding: 0 8px;
+      min-height: 35px;
+      padding: 0 12px;
       border: 1px solid var(--border-strong);
       border-radius: 8px;
       background: white;
       color: var(--text);
-      font-size: 0.78rem;
-      font-weight: 750;
+      font-size: 0.8rem;
+      font-weight: 700;
       cursor: pointer;
       transition:
         border-color 0.15s ease,
         background 0.15s ease,
-        color 0.15s ease,
-        transform 0.1s ease;
+        color 0.15s ease;
     }
 
     .preset-btn:hover {
@@ -607,102 +449,91 @@
       color: var(--primary);
     }
 
-    .preset-btn:active {
-      transform: translateY(1px);
-    }
-
     .preset-btn.active {
       border-color: var(--primary);
       background: var(--primary-soft);
       color: var(--primary);
-      box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.08);
     }
 
-    /* =========================
-       ACTION
-    ========================= */
-
     .compress-btn {
-      position: relative;
       width: 100%;
-      min-height: 52px;
-      margin-top: 18px;
+      min-height: 51px;
+      margin-top: 24px;
       border: 0;
       border-radius: 11px;
-      background: linear-gradient(
-        135deg,
-        #2563eb,
-        #1d4ed8
-      );
+      background: var(--primary);
       color: white;
-      font-size: 0.92rem;
       font-weight: 800;
+      font-size: 0.98rem;
       cursor: pointer;
-      box-shadow:
-        0 8px 18px rgba(37, 99, 235, 0.20);
+      box-shadow: 0 5px 14px rgba(37, 99, 235, 0.18);
       transition:
-        transform 0.12s ease,
-        box-shadow 0.15s ease,
-        opacity 0.15s ease;
+        background 0.15s ease,
+        transform 0.1s ease,
+        box-shadow 0.15s ease;
     }
 
     .compress-btn:hover:not(:disabled) {
-      transform: translateY(-1px);
-      box-shadow:
-        0 11px 23px rgba(37, 99, 235, 0.25);
+      background: var(--primary-dark);
+      box-shadow: 0 7px 18px rgba(37, 99, 235, 0.23);
     }
 
     .compress-btn:active:not(:disabled) {
-      transform: translateY(0);
+      transform: translateY(1px);
     }
 
     .compress-btn:disabled {
-      opacity: 0.48;
+      opacity: 0.5;
       cursor: not-allowed;
       box-shadow: none;
     }
 
     .status {
-      min-height: 20px;
-      margin-top: 9px;
+      min-height: 23px;
+      margin-top: 11px;
       text-align: center;
       color: var(--muted);
-      font-size: 0.76rem;
+      font-size: 0.82rem;
     }
 
     .error {
-      display: none;
-      margin-top: 10px;
-      padding: 11px 12px;
-      border: 1px solid #fecaca;
+      margin-top: 11px;
+      padding: 11px;
       border-radius: 9px;
-      background: var(--error-bg);
+      background: #fef2f2;
       color: var(--error);
-      font-size: 0.78rem;
-      line-height: 1.45;
+      font-size: 0.84rem;
+      display: none;
     }
 
-    /* =========================
-       RESULTS
-    ========================= */
+    .privacy-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 0.73rem;
+      text-align: center;
+    }
 
     .preview {
       display: none;
-      margin-top: 22px;
-      padding-top: 22px;
+      margin-top: 25px;
+      padding-top: 24px;
       border-top: 1px solid var(--border);
     }
 
-    .result-heading {
-      margin-bottom: 11px;
-      font-size: 0.88rem;
+    .preview-heading {
+      margin-bottom: 13px;
+      font-size: 0.95rem;
       font-weight: 800;
     }
 
     .preview-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 13px;
     }
 
     .image-box {
@@ -716,7 +547,7 @@
     .image-box img {
       display: block;
       width: 100%;
-      height: 210px;
+      height: 220px;
       object-fit: contain;
       background:
         linear-gradient(45deg, #f0f0f0 25%, transparent 25%),
@@ -732,233 +563,159 @@
     }
 
     .image-title {
-      padding: 9px 11px 2px;
+      padding: 10px 11px 2px;
+      font-weight: 750;
+      font-size: 0.84rem;
+    }
+
+    .image-info {
+      padding: 4px 11px 11px;
+      color: var(--muted);
+      font-size: 0.76rem;
+    }
+
+    .result {
+      margin-top: 14px;
+      padding: 18px;
+      border-radius: 12px;
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
+      text-align: center;
+    }
+
+    .result-success {
+      margin-bottom: 5px;
+      color: var(--success);
       font-size: 0.78rem;
       font-weight: 800;
     }
 
-    .image-info {
-      padding: 3px 11px 10px;
-      color: var(--muted);
-      font-size: 0.7rem;
-    }
-
-    .result {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-top: 12px;
-      padding: 15px;
-      border: 1px solid var(--success-border);
-      border-radius: 12px;
-      background: var(--success-bg);
-    }
-
-    .result-copy {
-      min-width: 0;
-    }
-
-    .result-label {
-      color: var(--success-dark);
-      font-size: 0.7rem;
-      font-weight: 750;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
     .result-size {
-      margin-top: 2px;
       color: var(--success);
       font-size: 1.35rem;
       font-weight: 850;
-      letter-spacing: -0.025em;
     }
 
     .saving {
-      margin-top: 2px;
+      margin-top: 4px;
       color: var(--success-dark);
-      font-size: 0.74rem;
+      font-size: 0.81rem;
     }
 
     .download-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-      min-height: 42px;
-      padding: 0 15px;
+      min-height: 43px;
+      margin-top: 14px;
+      padding: 0 20px;
       border-radius: 9px;
       background: var(--success);
       color: white;
       text-decoration: none;
-      font-size: 0.78rem;
-      font-weight: 800;
-      box-shadow: 0 5px 12px rgba(21, 128, 61, 0.16);
-      transition:
-        background 0.15s ease,
-        transform 0.1s ease;
+      font-weight: 750;
+      transition: background 0.15s ease;
     }
 
     .download-btn:hover {
       background: var(--success-dark);
-      transform: translateY(-1px);
     }
 
-    /* =========================
-       PRIVACY
-    ========================= */
+    .value-section {
+      margin-top: 18px;
+    }
 
-    .privacy-footer {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 15px;
-      color: var(--muted);
-      font-size: 0.7rem;
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+    }
+
+    .value-card {
+      padding: 13px 11px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: rgba(255, 255, 255, 0.75);
       text-align: center;
     }
 
-    /* =========================
-       BELOW TOOL
-    ========================= */
-
-    .benefits {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 13px;
+    .value-icon {
+      font-size: 19px;
+      margin-bottom: 4px;
     }
 
-    .benefit {
-      padding: 14px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.78);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .benefit-icon {
-      display: grid;
-      place-items: center;
-      width: 30px;
-      height: 30px;
-      margin-bottom: 9px;
-      border-radius: 8px;
-      background: var(--primary-soft);
-      font-size: 15px;
-    }
-
-    .benefit-title {
+    .value-title {
       font-size: 0.78rem;
       font-weight: 800;
     }
 
-    .benefit-text {
+    .value-text {
       margin-top: 3px;
       color: var(--muted);
       font-size: 0.7rem;
-      line-height: 1.4;
+      line-height: 1.35;
     }
 
-    /* =========================
-       USE CASES
-    ========================= */
-
     .use-cases {
-      margin-top: 28px;
-      padding: 0 3px;
-      text-align: center;
+      margin-top: 18px;
+      padding: 17px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.65);
     }
 
     .use-cases h2 {
-      margin: 0;
-      color: #1d2939;
+      margin: 0 0 6px;
       font-size: 1rem;
-      letter-spacing: -0.01em;
     }
 
     .use-cases p {
-      max-width: 650px;
-      margin: 7px auto 0;
+      margin: 0;
       color: var(--muted);
-      font-size: 0.78rem;
-      line-height: 1.55;
+      font-size: 0.81rem;
+      line-height: 1.5;
     }
 
     .keyword-list {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
       gap: 6px;
-      margin-top: 11px;
+      margin-top: 10px;
     }
 
     .keyword {
       padding: 5px 8px;
-      border: 1px solid #e0e7ff;
-      border-radius: 999px;
-      background: #f5f7ff;
-      color: #4754a8;
-      font-size: 0.66rem;
-      font-weight: 650;
+      border-radius: 7px;
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 0.7rem;
+      font-weight: 700;
     }
-
-    /* =========================
-       FAQ
-    ========================= */
 
     .faq {
-      max-width: 720px;
-      margin: 34px auto 0;
-    }
-
-    .faq-header {
-      margin-bottom: 9px;
-      text-align: center;
+      margin-top: 22px;
     }
 
     .faq h2 {
-      margin: 0;
+      margin: 0 0 9px;
       font-size: 1.05rem;
-      letter-spacing: -0.015em;
-    }
-
-    .faq-subtitle {
-      margin-top: 5px;
-      color: var(--muted);
-      font-size: 0.74rem;
-    }
-
-    .faq-list {
-      overflow: hidden;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: white;
     }
 
     details {
-      border-bottom: 1px solid var(--border);
+      border-top: 1px solid var(--border);
     }
 
     details:last-child {
-      border-bottom: 0;
+      border-bottom: 1px solid var(--border);
     }
 
     summary {
       position: relative;
-      padding: 14px 42px 14px 14px;
+      padding: 14px 30px 14px 0;
       cursor: pointer;
       list-style: none;
-      color: #344054;
-      font-size: 0.79rem;
-      font-weight: 750;
-      transition: color 0.15s ease;
-    }
-
-    summary:hover {
-      color: var(--primary);
+      font-size: 0.86rem;
+      font-weight: 700;
     }
 
     summary::-webkit-details-marker {
@@ -968,10 +725,10 @@
     summary::after {
       content: "+";
       position: absolute;
-      right: 14px;
+      right: 2px;
       top: 11px;
       color: var(--primary);
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 500;
     }
 
@@ -980,122 +737,86 @@
     }
 
     .faq-answer {
-      padding: 0 42px 14px 14px;
+      padding: 0 25px 14px 0;
       color: var(--muted);
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       line-height: 1.55;
     }
 
-    /* =========================
-       FOOTER
-    ========================= */
-
     footer {
-      margin-top: 30px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(208, 213, 221, 0.7);
-      color: var(--muted);
-      font-size: 0.7rem;
+      margin-top: 20px;
       text-align: center;
+      color: var(--muted);
+      font-size: 0.73rem;
     }
 
-    /* =========================
-       RESPONSIVE
-    ========================= */
-
-    @media (max-width: 700px) {
+    @media (max-width: 600px) {
       body {
-        padding: 0 11px 35px;
+        padding: 22px 11px 34px;
       }
 
-      .topbar {
-        min-height: 60px;
-      }
-
-      .topbar-note {
-        display: none;
-      }
-
-      .hero {
-        padding: 30px 0 22px;
+      header {
+        margin-bottom: 18px;
       }
 
       h1 {
-        font-size: clamp(2rem, 10vw, 3rem);
+        font-size: 2.2rem;
       }
 
-      .hero-subtitle {
-        font-size: 0.9rem;
+      .subtitle {
+        font-size: 0.91rem;
+      }
+
+      .trust-row {
+        gap: 6px;
+      }
+
+      .trust-item {
+        font-size: 0.7rem;
+        padding: 6px 8px;
       }
 
       .tool-card {
-        border-radius: 18px;
-      }
-
-      .tool-header {
         padding: 15px;
-      }
-
-      .tool-body {
-        padding: 15px;
+        border-radius: 17px;
       }
 
       .drop-zone {
-        min-height: 220px;
-        padding: 32px 15px;
-      }
-
-      .private-pill {
-        font-size: 0.66rem;
+        padding: 31px 15px;
       }
 
       .settings-grid {
         grid-template-columns: 1fr;
-        gap: 12px;
       }
 
-      .preset-buttons {
-        grid-template-columns: repeat(2, 1fr);
+      .settings-heading {
+        display: block;
+      }
+
+      .settings-subtitle {
+        display: block;
+        margin-top: 3px;
       }
 
       .preview-grid {
         grid-template-columns: 1fr;
       }
 
-      .image-box img {
-        height: 220px;
-      }
-
-      .result {
-        align-items: stretch;
-        flex-direction: column;
-      }
-
-      .download-btn {
-        width: 100%;
-      }
-
-      .benefits {
+      .value-grid {
         grid-template-columns: 1fr;
       }
-    }
 
-    @media (max-width: 420px) {
-      .tool-header-subtitle {
-        display: none;
+      .image-box img {
+        height: 210px;
       }
 
-      .private-pill {
-        padding: 5px 7px;
+      .preset-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      .hero-trust {
-        gap: 7px 12px;
-        font-size: 0.7rem;
-      }
-
-      .target-section {
-        padding: 12px;
+      .preset-btn {
+        width: 100%;
       }
     }
   </style>
@@ -1105,442 +826,357 @@
 
   <main class="container">
 
-    <!-- TOP BAR -->
-    <nav class="topbar" aria-label="Main navigation">
-      <a class="brand-link" href="./">
-        <span class="brand-mark">↓</span>
-        <span class="brand-name">Under100KB</span>
-      </a>
+    <header>
+      <div class="brand">Under100KB</div>
 
-      <div class="topbar-note">
-        Free image compression
-      </div>
-    </nav>
+      <h1>Compress Images to 100KB</h1>
 
-
-    <!-- HERO -->
-    <header class="hero">
-
-      <div class="eyebrow">
-        <span class="eyebrow-dot"></span>
-        Free & private
-      </div>
-
-      <h1>Compress images to 100KB</h1>
-
-      <p class="hero-subtitle">
-        Reduce JPG, PNG, WebP and TIFF images to a target file size —
-        directly in your browser, without uploading your files.
+      <p class="subtitle">
+        Reduce JPG, PNG, WebP and TIFF images to your target file size —
+        free, fast and directly in your browser.
       </p>
 
-      <div class="hero-trust">
-        <span>⚡ Fast</span>
-        <span>🔒 Private</span>
-        <span>🆓 No account required</span>
+      <div class="trust-row" aria-label="Under100KB benefits">
+        <div class="trust-item">🔒 <strong>Private</strong> by design</div>
+        <div class="trust-item">⚡ <strong>Fast</strong> browser processing</div>
+        <div class="trust-item">🆓 <strong>Free</strong> to use</div>
       </div>
-
     </header>
 
 
-    <!-- MAIN TOOL -->
-    <section
-      class="tool-card"
-      aria-label="Image compression tool"
-    >
+    <section class="tool-card" aria-label="Image compression tool">
 
-      <div class="tool-header">
+      <div class="section-label">
+        1. Upload your image
+      </div>
 
-        <div>
-          <div class="tool-header-title">
-            Image compressor
+      <label
+        class="drop-zone"
+        id="dropZone"
+        for="fileInput"
+      >
+
+        <input
+          type="file"
+          id="fileInput"
+          accept=".jpg,.jpeg,.png,.webp,.tif,.tiff,image/jpeg,image/png,image/webp,image/tiff"
+        >
+
+        <div
+          class="upload-icon"
+          id="uploadIcon"
+        >
+          🖼️
+        </div>
+
+        <div
+          class="drop-title"
+          id="dropTitle"
+        >
+          Drop your image here
+        </div>
+
+        <div
+          class="drop-description"
+          id="dropDescription"
+        >
+          JPG, JPEG, PNG, WebP or TIFF
+        </div>
+
+        <div
+          class="selected-file"
+          id="selectedFile"
+          style="display:none;"
+        ></div>
+
+      </label>
+
+      <div class="upload-note">
+        🔒 Your image is processed locally in your browser — no upload required.
+      </div>
+
+
+      <div class="settings">
+
+        <div class="settings-heading">
+          <div class="settings-title">
+            2. Choose compression settings
           </div>
 
-          <div class="tool-header-subtitle">
-            Choose your target size and compress
+          <div class="settings-subtitle">
+            Set the maximum file size you need
           </div>
         </div>
 
-        <div class="private-pill">
-          🔒 Processed locally
+        <div class="settings-grid">
+
+          <div class="field">
+            <label for="maxSize">
+              Target file size
+            </label>
+
+            <div class="input-row">
+              <input
+                type="number"
+                id="maxSize"
+                value="100"
+                min="1"
+                step="1"
+              >
+
+              <span class="unit">KB</span>
+            </div>
+
+            <div class="field-hint">
+              The result will be at or below this target when possible.
+            </div>
+          </div>
+
+
+          <div class="field">
+            <label for="format">
+              Output format
+            </label>
+
+            <select id="format">
+              <option value="image/jpeg">JPG</option>
+              <option value="image/webp">WebP</option>
+              <option value="image/png">PNG</option>
+              <option value="image/tiff">TIFF</option>
+            </select>
+
+            <div class="format-note">
+              You can convert the uploaded image to another format.
+            </div>
+          </div>
+
+
+          <div class="field">
+            <label for="maxWidth">
+              Maximum width
+            </label>
+
+            <div class="input-row">
+              <input
+                type="number"
+                id="maxWidth"
+                value="1200"
+                min="1"
+                step="1"
+              >
+
+              <span class="unit">px</span>
+            </div>
+          </div>
+
+
+          <div class="field">
+            <label for="maxHeight">
+              Maximum height
+            </label>
+
+            <div class="input-row">
+              <input
+                type="number"
+                id="maxHeight"
+                value="1200"
+                min="1"
+                step="1"
+              >
+
+              <span class="unit">px</span>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="presets">
+
+          <span class="presets-label">
+            Quick target sizes
+          </span>
+
+          <div class="preset-buttons">
+
+            <button
+              type="button"
+              class="preset-btn"
+              data-size="20"
+            >
+              20KB
+            </button>
+
+            <button
+              type="button"
+              class="preset-btn"
+              data-size="50"
+            >
+              50KB
+            </button>
+
+            <button
+              type="button"
+              class="preset-btn active"
+              data-size="100"
+            >
+              100KB
+            </button>
+
+            <button
+              type="button"
+              class="preset-btn"
+              data-size="200"
+            >
+              200KB
+            </button>
+
+          </div>
+
         </div>
 
       </div>
 
 
-      <div class="tool-body">
+      <button
+        class="compress-btn"
+        id="compressBtn"
+        disabled
+      >
+        Compress Image
+      </button>
 
-        <!-- UPLOAD -->
-        <label
-          class="drop-zone"
-          id="dropZone"
-          for="fileInput"
-        >
 
-          <input
-            type="file"
-            id="fileInput"
-            accept=".jpg,.jpeg,.png,.webp,.tif,.tiff,image/jpeg,image/png,image/webp,image/tiff"
-          >
+      <div
+        class="status"
+        id="status"
+        aria-live="polite"
+      ></div>
 
-          <div class="upload-icon-wrap">
-            <div
-              class="upload-icon"
-              id="uploadIcon"
+
+      <div
+        class="error"
+        id="error"
+        role="alert"
+      ></div>
+
+
+      <div
+        class="preview"
+        id="preview"
+      >
+
+        <div class="preview-heading">
+          Compression result
+        </div>
+
+        <div class="preview-grid">
+
+          <div class="image-box">
+
+            <img
+              id="originalPreview"
+              alt="Original image preview"
             >
-              🖼️
+
+            <div class="image-title">
+              Original
             </div>
+
+            <div
+              class="image-info"
+              id="originalInfo"
+            ></div>
+
+          </div>
+
+
+          <div class="image-box">
+
+            <img
+              id="resultPreview"
+              alt="Compressed image preview"
+            >
+
+            <div class="image-title">
+              Compressed
+            </div>
+
+            <div
+              class="image-info"
+              id="resultInfo"
+            ></div>
+
+          </div>
+
+        </div>
+
+
+        <div class="result">
+
+          <div class="result-success">
+            ✓ Compression complete
           </div>
 
           <div
-            class="drop-title"
-            id="dropTitle"
-          >
-            Drop your image here
-          </div>
-
-          <div
-            class="drop-description"
-            id="dropDescription"
-          >
-            JPG, JPEG, PNG, WebP or TIFF
-          </div>
-
-          <div class="drop-action">
-            Choose image
-          </div>
-
-          <div
-            class="selected-file"
-            id="selectedFile"
-            style="display:none;"
+            class="result-size"
+            id="resultSize"
           ></div>
 
-        </label>
+          <div
+            class="saving"
+            id="saving"
+          ></div>
 
-
-        <!-- SETTINGS -->
-        <div class="settings">
-
-          <div class="section-heading">
-            <div class="section-title">
-              Compression settings
-            </div>
-
-            <div class="section-hint">
-              Customize the output
-            </div>
-          </div>
-
-
-          <div class="settings-grid">
-
-            <div class="field">
-
-              <label for="maxSize">
-                Target file size
-              </label>
-
-              <div class="input-row">
-
-                <input
-                  type="number"
-                  id="maxSize"
-                  value="100"
-                  min="1"
-                  step="1"
-                >
-
-                <span class="unit">KB</span>
-
-              </div>
-
-            </div>
-
-
-            <div class="field">
-
-              <label for="format">
-                Output format
-              </label>
-
-              <select id="format">
-                <option value="image/jpeg">JPG</option>
-                <option value="image/webp">WebP</option>
-                <option value="image/png">PNG</option>
-                <option value="image/tiff">TIFF</option>
-              </select>
-
-            </div>
-
-
-            <div class="field">
-
-              <label for="maxWidth">
-                Maximum width
-              </label>
-
-              <div class="input-row">
-
-                <input
-                  type="number"
-                  id="maxWidth"
-                  value="1200"
-                  min="1"
-                  step="1"
-                >
-
-                <span class="unit">px</span>
-
-              </div>
-
-            </div>
-
-
-            <div class="field">
-
-              <label for="maxHeight">
-                Maximum height
-              </label>
-
-              <div class="input-row">
-
-                <input
-                  type="number"
-                  id="maxHeight"
-                  value="1200"
-                  min="1"
-                  step="1"
-                >
-
-                <span class="unit">px</span>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <!-- TARGET PRESETS -->
-          <div class="target-section">
-
-            <div class="target-header">
-
-              <div class="target-label">
-                Quick target size
-              </div>
-
-              <div class="target-description">
-                Select a preset
-              </div>
-
-            </div>
-
-            <div class="preset-buttons">
-
-              <button
-                type="button"
-                class="preset-btn"
-                data-size="20"
-              >
-                20KB
-              </button>
-
-              <button
-                type="button"
-                class="preset-btn"
-                data-size="50"
-              >
-                50KB
-              </button>
-
-              <button
-                type="button"
-                class="preset-btn active"
-                data-size="100"
-              >
-                100KB
-              </button>
-
-              <button
-                type="button"
-                class="preset-btn"
-                data-size="200"
-              >
-                200KB
-              </button>
-
-            </div>
-
-          </div>
+          <a
+            class="download-btn"
+            id="downloadBtn"
+            download="compressed-image"
+          >
+            Download image
+          </a>
 
         </div>
 
-
-        <!-- ACTION -->
-        <button
-          class="compress-btn"
-          id="compressBtn"
-          disabled
-        >
-          Compress Image
-        </button>
+      </div>
 
 
-        <div
-          class="status"
-          id="status"
-          aria-live="polite"
-        ></div>
-
-
-        <div
-          class="error"
-          id="error"
-          role="alert"
-        ></div>
-
-
-        <!-- RESULTS -->
-        <div
-          class="preview"
-          id="preview"
-        >
-
-          <div class="result-heading">
-            Compression result
-          </div>
-
-          <div class="preview-grid">
-
-            <div class="image-box">
-
-              <img
-                id="originalPreview"
-                alt="Original image preview"
-              >
-
-              <div class="image-title">
-                Original
-              </div>
-
-              <div
-                class="image-info"
-                id="originalInfo"
-              ></div>
-
-            </div>
-
-
-            <div class="image-box">
-
-              <img
-                id="resultPreview"
-                alt="Compressed image preview"
-              >
-
-              <div class="image-title">
-                Compressed
-              </div>
-
-              <div
-                class="image-info"
-                id="resultInfo"
-              ></div>
-
-            </div>
-
-          </div>
-
-
-          <div class="result">
-
-            <div class="result-copy">
-
-              <div class="result-label">
-                Ready to download
-              </div>
-
-              <div
-                class="result-size"
-                id="resultSize"
-              ></div>
-
-              <div
-                class="saving"
-                id="saving"
-              ></div>
-
-            </div>
-
-            <a
-              class="download-btn"
-              id="downloadBtn"
-              download="compressed-image"
-            >
-              Download image
-            </a>
-
-          </div>
-
-        </div>
-
-
-        <div class="privacy-footer">
-          🔒 Your image is processed locally in your browser — no upload required.
-        </div>
-
+      <div class="privacy-footer">
+        🔒 Images are processed locally in your browser. No account or upload is required.
       </div>
 
     </section>
 
 
-    <!-- BENEFITS -->
     <section
-      class="benefits"
+      class="value-section"
       aria-label="Benefits"
     >
 
-      <div class="benefit">
+      <div class="value-grid">
 
-        <div class="benefit-icon">⚡</div>
-
-        <div class="benefit-title">
-          Fast
+        <div class="value-card">
+          <div class="value-icon">🔒</div>
+          <div class="value-title">Private</div>
+          <div class="value-text">
+            Image processing happens directly in your browser.
+          </div>
         </div>
 
-        <div class="benefit-text">
-          Compression happens directly in your browser.
+        <div class="value-card">
+          <div class="value-icon">⚡</div>
+          <div class="value-title">Fast</div>
+          <div class="value-text">
+            No waiting for an image to upload to a server.
+          </div>
         </div>
 
-      </div>
-
-
-      <div class="benefit">
-
-        <div class="benefit-icon">🔒</div>
-
-        <div class="benefit-title">
-          Private
-        </div>
-
-        <div class="benefit-text">
-          Your images don't need to leave your device.
-        </div>
-
-      </div>
-
-
-      <div class="benefit">
-
-        <div class="benefit-icon">🆓</div>
-
-        <div class="benefit-title">
-          Free
-        </div>
-
-        <div class="benefit-text">
-          No account, subscription or upload required.
+        <div class="value-card">
+          <div class="value-icon">🆓</div>
+          <div class="value-title">Free</div>
+          <div class="value-text">
+            No account and no subscription required.
+          </div>
         </div>
 
       </div>
@@ -1548,17 +1184,14 @@
     </section>
 
 
-    <!-- USE CASES -->
     <section class="use-cases">
 
-      <h2>
-        Built for real-world upload limits
-      </h2>
+      <h2>Need a smaller image for an upload?</h2>
 
       <p>
-        Compress images when a website, application, academic submission
-        or online form requires a smaller file. Choose 20KB, 50KB,
-        100KB, 200KB or enter your own target size.
+        Under100KB is useful when a website, application, online form,
+        government service or academic submission has a file-size limit.
+        Compress an image to 20KB, 50KB, 100KB, 200KB or choose your own target size.
       </p>
 
       <div class="keyword-list">
@@ -1572,97 +1205,69 @@
     </section>
 
 
-    <!-- FAQ -->
     <section class="faq">
 
-      <div class="faq-header">
+      <h2>Frequently Asked Questions</h2>
 
-        <h2>
-          Frequently Asked Questions
-        </h2>
+      <details>
+        <summary>
+          Can I compress an image to 100KB?
+        </summary>
 
-        <div class="faq-subtitle">
-          Quick answers about Under100KB
+        <div class="faq-answer">
+          Yes. Select your image, choose 100KB as the target size,
+          and click Compress Image. The tool attempts to create
+          an image at or below your selected target size.
         </div>
-
-      </div>
-
-
-      <div class="faq-list">
-
-        <details>
-
-          <summary>
-            Can I compress an image to 100KB?
-          </summary>
-
-          <div class="faq-answer">
-            Yes. Select your image, choose 100KB as the target size,
-            and click Compress Image. The tool attempts to create
-            an image at or below your selected target size.
-          </div>
-
-        </details>
+      </details>
 
 
-        <details>
+      <details>
+        <summary>
+          Is Under100KB free?
+        </summary>
 
-          <summary>
-            Is Under100KB free?
-          </summary>
-
-          <div class="faq-answer">
-            Yes. Under100KB is free to use and does not require
-            an account.
-          </div>
-
-        </details>
+        <div class="faq-answer">
+          Yes. Under100KB is free to use and does not require an account.
+        </div>
+      </details>
 
 
-        <details>
+      <details>
+        <summary>
+          Are my images uploaded?
+        </summary>
 
-          <summary>
-            Are my images uploaded?
-          </summary>
-
-          <div class="faq-answer">
-            No. Image processing happens locally in your browser.
-            Your image does not need to be uploaded to a server.
-          </div>
-
-        </details>
+        <div class="faq-answer">
+          No. Image processing happens locally in your browser.
+          Your image does not need to be uploaded to a server.
+        </div>
+      </details>
 
 
-        <details>
+      <details>
+        <summary>
+          Can I compress a JPG to 100KB?
+        </summary>
 
-          <summary>
-            Can I compress a JPG to 100KB?
-          </summary>
-
-          <div class="faq-answer">
-            Yes. Select your JPG image, set the target size to
-            100KB, choose JPG as the output format and start
-            compression.
-          </div>
-
-        </details>
+        <div class="faq-answer">
+          Yes. Select your JPG image, set the target size to 100KB,
+          choose JPG as the output format and start compression.
+        </div>
+      </details>
 
 
-        <details>
+      <details>
+        <summary>
+          Can I compress a TIFF image?
+        </summary>
 
-          <summary>
-            Can I compress a TIFF image?
-          </summary>
-
-          <div class="faq-answer">
-            Yes. Under100KB supports TIFF input and TIFF output.
-            You can also convert a TIFF image to JPG or WebP when
-            you need a smaller file.
-          </div>
-
-        </details>
-
-      </div>
+        <div class="faq-answer">
+          Yes. Under100KB supports TIFF input and TIFF output.
+          You can also convert a TIFF image to JPG or WebP when
+          you need a smaller file.
+        </div>
+      </details>
 
     </section>
 
@@ -1674,9 +1279,7 @@
   </main>
 
 
-  <!-- TIFF SUPPORT -->
   <script src="https://cdn.jsdelivr.net/npm/utif@3.1.0/UTIF.js"></script>
-
 
   <script>
     const fileInput = document.getElementById("fileInput");
