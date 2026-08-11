@@ -13,7 +13,7 @@
 
   <meta
     name="description"
-    content="Compress JPG, JPEG, PNG, WebP and TIFF images to under 100KB or any file size you need. Free, fast and private. Your images stay on your device."
+    content="Compress JPG, JPEG, PNG, WebP and TIFF images to your target file size. Free, fast and private."
   >
 
   <meta
@@ -33,7 +33,7 @@
 
   <meta
     property="og:description"
-    content="Compress JPG, JPEG, PNG, WebP and TIFF images to a specific file size directly in your browser. Free, fast and private."
+    content="Compress images to your target file size directly in your browser. Free, fast and private."
   >
 
   <meta
@@ -58,7 +58,7 @@
 
   <meta
     name="twitter:description"
-    content="Compress JPG, JPEG, PNG, WebP and TIFF images to a specific file size directly in your browser."
+    content="Compress images to your target file size directly in your browser. Free, fast and private."
   >
 
   <style>
@@ -75,13 +75,14 @@
       --muted: #6b7280;
       --border: #dfe3ea;
       --success: #15803d;
+      --success-bg: #f0fdf4;
       --error: #dc2626;
     }
 
     body {
       margin: 0;
       min-height: 100vh;
-      padding: 40px 16px;
+      padding: 36px 16px;
       font-family:
         Inter,
         system-ui,
@@ -95,27 +96,46 @@
 
     .container {
       width: 100%;
-      max-width: 760px;
+      max-width: 720px;
       margin: 0 auto;
     }
 
     header {
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 22px;
     }
 
     h1 {
-      margin: 0 0 10px;
-      font-size: clamp(2rem, 5vw, 3rem);
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 5vw, 2.7rem);
       line-height: 1.1;
+      letter-spacing: -0.03em;
     }
 
     .subtitle {
-      margin: 0 auto;
-      max-width: 600px;
+      margin: 0;
       color: var(--muted);
-      font-size: 1.05rem;
-      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    .privacy-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 20px auto 0;
+      padding: 11px 14px;
+      max-width: 560px;
+      border: 1px solid #bbf7d0;
+      border-radius: 10px;
+      background: var(--success-bg);
+      color: #166534;
+      font-size: 0.88rem;
+      line-height: 1.4;
+    }
+
+    .privacy-banner strong {
+      font-weight: 700;
     }
 
     .card {
@@ -129,7 +149,7 @@
       display: block;
       border: 2px dashed var(--border);
       border-radius: 14px;
-      padding: 42px 20px;
+      padding: 36px 20px;
       text-align: center;
       cursor: pointer;
       transition:
@@ -145,7 +165,7 @@
 
     .drop-zone.selected {
       border-color: var(--success);
-      background: #f0fdf4;
+      background: var(--success-bg);
     }
 
     .drop-zone input {
@@ -153,34 +173,44 @@
     }
 
     .upload-icon {
-      font-size: 42px;
-      margin-bottom: 10px;
+      font-size: 38px;
+      margin-bottom: 8px;
     }
 
     .drop-title {
-      font-size: 1.15rem;
+      font-size: 1.08rem;
       font-weight: 700;
     }
 
     .drop-description {
       margin-top: 6px;
       color: var(--muted);
-      font-size: 0.92rem;
+      font-size: 0.88rem;
     }
 
     .selected-file {
-      margin-top: 10px;
+      margin: 10px auto 0;
+      max-width: 100%;
       color: var(--success);
-      font-size: 0.9rem;
+      font-size: 0.86rem;
       font-weight: 600;
       overflow-wrap: anywhere;
     }
 
     .settings {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
       margin-top: 22px;
+    }
+
+    .settings-title {
+      margin-bottom: 12px;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .settings-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
     }
 
     .field {
@@ -189,8 +219,12 @@
       gap: 7px;
     }
 
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
     .field label {
-      font-size: 0.9rem;
+      font-size: 0.86rem;
       font-weight: 700;
     }
 
@@ -214,14 +248,21 @@
 
     input[type="number"]:focus,
     select:focus {
-      outline: 2px solid rgba(37, 99, 235, 0.2);
+      outline: 2px solid rgba(37, 99, 235, 0.18);
       border-color: var(--primary);
     }
 
     .unit {
       color: var(--muted);
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       white-space: nowrap;
+    }
+
+    .field-help {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.76rem;
+      line-height: 1.4;
     }
 
     .presets {
@@ -231,26 +272,26 @@
     .presets-label {
       display: block;
       margin-bottom: 8px;
-      font-size: 0.85rem;
-      font-weight: 700;
       color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 600;
     }
 
     .preset-buttons {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 7px;
     }
 
     .preset-btn {
-      min-height: 38px;
-      padding: 0 14px;
+      min-height: 36px;
+      padding: 0 13px;
       border: 1px solid var(--border);
       border-radius: 8px;
       background: white;
       color: var(--text);
       font: inherit;
-      font-size: 0.88rem;
+      font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
       transition:
@@ -302,10 +343,10 @@
 
     .status {
       min-height: 24px;
-      margin-top: 14px;
+      margin-top: 12px;
       text-align: center;
-      font-size: 0.9rem;
       color: var(--muted);
+      font-size: 0.86rem;
     }
 
     .error {
@@ -314,19 +355,19 @@
       border-radius: 8px;
       background: #fef2f2;
       color: var(--error);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       display: none;
     }
 
     .preview {
       display: none;
-      margin-top: 28px;
+      margin-top: 26px;
     }
 
     .preview-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+      gap: 14px;
     }
 
     .image-box {
@@ -340,7 +381,7 @@
     .image-box img {
       display: block;
       width: 100%;
-      height: 260px;
+      height: 240px;
       object-fit: contain;
       background:
         linear-gradient(45deg, #f0f0f0 25%, transparent 25%),
@@ -358,26 +399,26 @@
     .image-title {
       padding: 10px 12px 2px;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
     }
 
     .image-info {
       padding: 4px 12px 12px;
       color: var(--muted);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
     }
 
     .result {
-      margin-top: 18px;
-      padding: 20px;
+      margin-top: 16px;
+      padding: 18px;
       border-radius: 12px;
-      background: #f0fdf4;
+      background: var(--success-bg);
       border: 1px solid #bbf7d0;
       text-align: center;
     }
 
     .result-size {
-      font-size: 1.35rem;
+      font-size: 1.3rem;
       font-weight: 800;
       color: var(--success);
     }
@@ -385,7 +426,7 @@
     .saving {
       margin-top: 5px;
       color: #166534;
-      font-size: 0.9rem;
+      font-size: 0.86rem;
     }
 
     .download-btn {
@@ -393,7 +434,7 @@
       align-items: center;
       justify-content: center;
       min-height: 44px;
-      margin-top: 15px;
+      margin-top: 14px;
       padding: 0 20px;
       border-radius: 9px;
       background: var(--success);
@@ -406,22 +447,21 @@
       background: #166534;
     }
 
-    .privacy {
-      margin-top: 20px;
+    .privacy-footer {
+      margin-top: 18px;
       text-align: center;
       color: var(--muted);
-      font-size: 0.85rem;
-      line-height: 1.5;
+      font-size: 0.78rem;
     }
 
     footer {
-      margin-top: 24px;
+      margin-top: 22px;
       text-align: center;
       color: var(--muted);
-      font-size: 0.82rem;
+      font-size: 0.78rem;
     }
 
-    @media (max-width: 650px) {
+    @media (max-width: 600px) {
       body {
         padding: 24px 12px;
       }
@@ -430,8 +470,12 @@
         padding: 16px;
       }
 
-      .settings {
+      .settings-grid {
         grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
       }
 
       .preview-grid {
@@ -459,12 +503,20 @@
   <main class="container">
 
     <header>
+
       <h1>Under100KB</h1>
 
       <p class="subtitle">
-        Compress JPG, JPEG, PNG, WebP or TIFF images to under 100KB
-        or any file size you need. Free, fast and private.
+        Compress images to your target file size.
       </p>
+
+      <div class="privacy-banner">
+        🔒
+        <strong>
+          100% private — your images never leave your device.
+        </strong>
+      </div>
+
     </header>
 
     <section class="card">
@@ -512,123 +564,155 @@
 
       <div class="settings">
 
-        <div class="field">
+        <div class="settings-title">
+          Compression settings
+        </div>
 
-          <label for="maxSize">
-            Maximum file size
-          </label>
+        <div class="settings-grid">
 
-          <div class="input-row">
+          <div class="field">
 
-            <input
-              type="number"
-              id="maxSize"
-              value="100"
-              min="1"
-              step="1"
-            >
+            <label for="maxSize">
+              Target file size
+            </label>
 
-            <span class="unit">
-              KB
-            </span>
+            <div class="input-row">
+
+              <input
+                type="number"
+                id="maxSize"
+                value="100"
+                min="1"
+                step="1"
+              >
+
+              <span class="unit">
+                KB
+              </span>
+
+            </div>
+
+          </div>
+
+          <div class="field">
+
+            <label for="format">
+              Output format
+            </label>
+
+            <select id="format">
+
+              <option value="image/jpeg">
+                JPG
+              </option>
+
+              <option value="image/webp">
+                WebP
+              </option>
+
+              <option value="image/png">
+                PNG
+              </option>
+
+              <option value="image/tiff">
+                TIFF
+              </option>
+
+            </select>
+
+          </div>
+
+          <div class="field">
+
+            <label for="maxWidth">
+              Maximum width
+            </label>
+
+            <div class="input-row">
+
+              <input
+                type="number"
+                id="maxWidth"
+                value="1200"
+                min="1"
+                step="1"
+              >
+
+              <span class="unit">
+                px
+              </span>
+
+            </div>
+
+          </div>
+
+          <div class="field">
+
+            <label for="maxHeight">
+              Maximum height
+            </label>
+
+            <div class="input-row">
+
+              <input
+                type="number"
+                id="maxHeight"
+                value="1200"
+                min="1"
+                step="1"
+              >
+
+              <span class="unit">
+                px
+              </span>
+
+            </div>
 
           </div>
 
         </div>
 
-        <div class="field">
+        <div class="presets">
 
-          <label for="maxWidth">
-            Maximum width
-          </label>
+          <span class="presets-label">
+            Quick target sizes
+          </span>
 
-          <div class="input-row">
+          <div class="preset-buttons">
 
-            <input
-              type="number"
-              id="maxWidth"
-              value="1200"
-              min="1"
-              step="1"
+            <button
+              type="button"
+              class="preset-btn"
+              data-size="20"
             >
+              20KB
+            </button>
 
-            <span class="unit">
-              px
-            </span>
+            <button
+              type="button"
+              class="preset-btn"
+              data-size="50"
+            >
+              50KB
+            </button>
+
+            <button
+              type="button"
+              class="preset-btn active"
+              data-size="100"
+            >
+              100KB
+            </button>
+
+            <button
+              type="button"
+              class="preset-btn"
+              data-size="200"
+            >
+              200KB
+            </button>
 
           </div>
-
-        </div>
-
-        <div class="field">
-
-          <label for="format">
-            Format
-          </label>
-
-          <select id="format">
-
-            <option value="image/jpeg">
-              JPG
-            </option>
-
-            <option value="image/webp">
-              WebP
-            </option>
-
-            <option value="image/png">
-              PNG
-            </option>
-
-            <option value="image/tiff">
-              TIFF
-            </option>
-
-          </select>
-
-        </div>
-
-      </div>
-
-      <div class="presets">
-
-        <span class="presets-label">
-          Common file size limits
-        </span>
-
-        <div class="preset-buttons">
-
-          <button
-            type="button"
-            class="preset-btn"
-            data-size="20"
-          >
-            20KB
-          </button>
-
-          <button
-            type="button"
-            class="preset-btn"
-            data-size="50"
-          >
-            50KB
-          </button>
-
-          <button
-            type="button"
-            class="preset-btn active"
-            data-size="100"
-          >
-            100KB
-          </button>
-
-          <button
-            type="button"
-            class="preset-btn"
-            data-size="200"
-          >
-            200KB
-          </button>
 
         </div>
 
@@ -723,9 +807,9 @@
 
       </div>
 
-      <div class="privacy">
-        🔒 <strong>Your image stays on your device.</strong>
-        It is never uploaded to a server.
+      <div class="privacy-footer">
+        🔒 Images are processed locally in your browser.
+        Nothing is uploaded to a server.
       </div>
 
     </section>
@@ -762,6 +846,9 @@
 
     const maxWidthInput =
       document.getElementById("maxWidth");
+
+    const maxHeightInput =
+      document.getElementById("maxHeight");
 
     const formatInput =
       document.getElementById("format");
@@ -924,7 +1011,6 @@
 
           image.onload = () => {
             URL.revokeObjectURL(url);
-
             resolve(image);
           };
 
@@ -1024,9 +1110,7 @@
       return loadStandardImage(file);
     }
 
-    async function createPreviewUrlFromTiff(
-      image
-    ) {
+    async function createPreviewUrlFromTiff(image) {
       const blob =
         await new Promise(
           (resolve, reject) => {
@@ -1110,9 +1194,7 @@
       );
     }
 
-    function canvasToTiff(
-      canvas
-    ) {
+    function canvasToTiff(canvas) {
       const context =
         canvas.getContext("2d");
 
@@ -1142,20 +1224,21 @@
     function calculateDimensions(
       originalWidth,
       originalHeight,
-      maxWidth
+      maxWidth,
+      maxHeight
     ) {
-      if (
-        originalWidth <= maxWidth
-      ) {
-        return {
-          width: originalWidth,
-          height: originalHeight
-        };
-      }
+      const widthRatio =
+        maxWidth / originalWidth;
+
+      const heightRatio =
+        maxHeight / originalHeight;
 
       const ratio =
-        maxWidth /
-        originalWidth;
+        Math.min(
+          1,
+          widthRatio,
+          heightRatio
+        );
 
       return {
         width: Math.max(
@@ -1406,13 +1489,15 @@
       image,
       targetBytes,
       maxWidth,
+      maxHeight,
       format
     ) {
       const dimensions =
         calculateDimensions(
-          image.naturalWidth,
-          image.naturalHeight,
-          maxWidth
+          image.naturalWidth || image.width,
+          image.naturalHeight || image.height,
+          maxWidth,
+          maxHeight
         );
 
       let result;
@@ -1585,10 +1670,18 @@
         originalPreview.src =
           originalObjectUrl;
 
+        const imageWidth =
+          image.naturalWidth ||
+          image.width;
+
+        const imageHeight =
+          image.naturalHeight ||
+          image.height;
+
         originalInfo.textContent =
           `${formatBytes(file.size)} · ` +
-          `${image.naturalWidth} × ` +
-          `${image.naturalHeight}px`;
+          `${imageWidth} × ` +
+          `${imageHeight}px`;
 
         updateSelectedFileUI(file);
 
@@ -1685,6 +1778,11 @@
             maxWidthInput.value
           );
 
+        const maxHeight =
+          Number(
+            maxHeightInput.value
+          );
+
         const format =
           formatInput.value;
 
@@ -1693,7 +1791,7 @@
           maxSize <= 0
         ) {
           showError(
-            "Maximum file size must be greater than 0."
+            "Target file size must be greater than 0."
           );
 
           return;
@@ -1705,6 +1803,17 @@
         ) {
           showError(
             "Maximum width must be greater than 0."
+          );
+
+          return;
+        }
+
+        if (
+          !Number.isFinite(maxHeight) ||
+          maxHeight <= 0
+        ) {
+          showError(
+            "Maximum height must be greater than 0."
           );
 
           return;
@@ -1734,6 +1843,7 @@
               selectedImageSource,
               targetBytes,
               Math.floor(maxWidth),
+              Math.floor(maxHeight),
               format
             );
 
@@ -1806,22 +1916,19 @@
           if (
             format === "image/webp"
           ) {
-            extension =
-              "webp";
+            extension = "webp";
           }
 
           if (
             format === "image/png"
           ) {
-            extension =
-              "png";
+            extension = "png";
           }
 
           if (
             format === "image/tiff"
           ) {
-            extension =
-              "tiff";
+            extension = "tiff";
           }
 
           downloadBtn.href =
