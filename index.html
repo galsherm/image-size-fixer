@@ -1,57 +1,80 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="google-site-verification"
-    content="1vsWdsiggv-ksgu6OfwL5HpR5pZamLemomVxFSLK5po"
-  >
+<meta
+name="google-site-verification"
+content="1vsWdsiggv-ksgu6OfwL5HpR5pZamLemomVxFSLK5po"
 
-  <title>Compress Image to 100KB Online — Free & Private | Under100KB</title>
+>
 
-  <meta
-    name="description"
-    content="Compress JPG, JPEG, PNG, WebP and TIFF images to 100KB or any target size. Free online image compressor that works directly in your browser. No uploads."
-  >
+  <title>Under100KB — Compress Images to 100KB Online</title>
 
-  <meta
-    name="robots"
-    content="index, follow, max-image-preview:large"
-  >
+<meta
+name="description"
+content="Compress images to 100KB, 50KB, 20KB or any target size online. Free image compressor for students, applications, government forms and websites. Private and processed in your browser."
+
+>
+
+<meta
+name="robots"
+content="index, follow, max-image-preview:large"
+
+>
 
   <link
     rel="canonical"
     href="https://galsherm.github.io/under100kb/"
   >
 
-  <meta name="theme-color" content="#2563eb">
+<meta
+property="og:title"
+content="Under100KB — Compress Images to 100KB Online"
 
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Under100KB">
-  <meta
-    property="og:title"
-    content="Compress Image to 100KB Online — Free & Private"
-  >
-  <meta
-    property="og:description"
-    content="Compress images to 100KB or any target size directly in your browser. Free, fast and private — your images never leave your device."
-  >
-  <meta
-    property="og:url"
-    content="https://galsherm.github.io/under100kb/"
-  >
+>
 
-  <meta name="twitter:card" content="summary">
-  <meta
-    name="twitter:title"
-    content="Compress Image to 100KB Online — Free & Private"
-  >
-  <meta
-    name="twitter:description"
-    content="Compress JPG, PNG, WebP and TIFF images to your target size directly in your browser."
-  >
+<meta
+property="og:description"
+content="Need an image under 100KB? Compress JPG, PNG, WebP and TIFF images to your target size. Free, private and browser-based."
+
+>
+
+<meta
+property="og:type"
+content="website"
+
+>
+
+<meta
+property="og:url"
+content="https://galsherm.github.io/under100kb/"
+
+>
+
+<meta
+name="twitter:card"
+content="summary"
+
+>
+
+<meta
+name="twitter:title"
+content="Under100KB — Compress Images to 100KB Online"
+
+>
+
+<meta
+name="twitter:description"
+content="Compress images to 100KB or any target size. Free, private and processed directly in your browser."
+
+>
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <!-- WebSite + WebApplication structured data -->
 
   <script type="application/ld+json">
   {
@@ -62,22 +85,33 @@
         "@id": "https://galsherm.github.io/under100kb/#website",
         "url": "https://galsherm.github.io/under100kb/",
         "name": "Under100KB",
-        "description": "Free online image compression tool for reducing images to a target file size."
+        "description": "Free online image compressor for reducing images to a target file size."
       },
       {
         "@type": "WebApplication",
         "@id": "https://galsherm.github.io/under100kb/#app",
         "name": "Under100KB Image Compressor",
         "url": "https://galsherm.github.io/under100kb/",
-        "description": "Compress JPG, JPEG, PNG, WebP and TIFF images to a target file size directly in your browser.",
-        "applicationCategory": "UtilitiesApplication",
+        "description": "Compress JPG, PNG, WebP and TIFF images to a target file size directly in your browser.",
+        "applicationCategory": "MultimediaApplication",
         "operatingSystem": "Any",
-        "browserRequirements": "Requires a modern web browser with JavaScript enabled.",
+        "browserRequirements": "Requires JavaScript",
         "offers": {
           "@type": "Offer",
           "price": "0",
           "priceCurrency": "USD"
-        }
+        },
+        "featureList": [
+          "Compress images to 100KB",
+          "Compress images to 50KB",
+          "Compress images to 20KB",
+          "JPG compression",
+          "PNG compression",
+          "WebP compression",
+          "TIFF compression",
+          "Browser-based image processing",
+          "No image upload required"
+        ]
       }
     ]
   }
@@ -91,15 +125,16 @@
     :root {
       --primary: #2563eb;
       --primary-dark: #1d4ed8;
+      --primary-soft: #eff6ff;
       --background: #f5f7fb;
       --card: #ffffff;
       --text: #172033;
-      --muted: #6b7280;
+      --muted: #667085;
       --border: #dfe3ea;
       --success: #15803d;
       --success-bg: #f0fdf4;
       --error: #dc2626;
-      --section: #ffffff;
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
     }
 
     html {
@@ -109,7 +144,7 @@
     body {
       margin: 0;
       min-height: 100vh;
-      padding: 36px 16px 50px;
+      padding: 0;
       font-family:
         Inter,
         system-ui,
@@ -117,34 +152,67 @@
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
-      background: var(--background);
+      background:
+        radial-gradient(
+          circle at top,
+          #eef4ff 0,
+          #f5f7fb 38%,
+          #f5f7fb 100%
+        );
       color: var(--text);
-      line-height: 1.5;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
     }
 
     .container {
       width: 100%;
-      max-width: 760px;
+      max-width: 920px;
       margin: 0 auto;
+      padding: 28px 18px 60px;
     }
 
     header {
       text-align: center;
-      margin-bottom: 22px;
+      padding: 26px 0 22px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: white;
+      border: 1px solid #e6eaf0;
+      color: var(--primary);
+      font-size: 0.82rem;
+      font-weight: 800;
+      box-shadow: 0 5px 20px rgba(15, 23, 42, 0.04);
     }
 
     h1 {
-      margin: 0 0 10px;
-      font-size: clamp(2rem, 5vw, 2.8rem);
-      line-height: 1.1;
-      letter-spacing: -0.035em;
+      margin: 0 auto 12px;
+      max-width: 760px;
+      font-size: clamp(2.2rem, 7vw, 4.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.055em;
+    }
+
+    .headline-highlight {
+      color: var(--primary);
     }
 
     .subtitle {
-      max-width: 620px;
+      max-width: 650px;
       margin: 0 auto;
       color: var(--muted);
-      font-size: 1.02rem;
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
+      line-height: 1.6;
     }
 
     .privacy-banner {
@@ -152,44 +220,55 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      margin: 20px auto 0;
-      padding: 11px 14px;
-      max-width: 600px;
+      width: fit-content;
+      max-width: 100%;
+      margin: 18px auto 0;
+      padding: 9px 14px;
       border: 1px solid #bbf7d0;
-      border-radius: 10px;
+      border-radius: 999px;
       background: var(--success-bg);
       color: #166534;
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       line-height: 1.4;
     }
 
-    .privacy-banner strong {
-      font-weight: 700;
+    .tool-card {
+      position: relative;
+      background: var(--card);
+      border: 1px solid rgba(223, 227, 234, 0.8);
+      border-radius: 22px;
+      padding: 26px;
+      box-shadow: var(--shadow);
     }
 
-    .card {
-      background: var(--card);
-      border-radius: 18px;
-      padding: 24px;
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
+    .tool-label {
+      margin-bottom: 14px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
     .drop-zone {
       display: block;
-      border: 2px dashed var(--border);
-      border-radius: 14px;
-      padding: 36px 20px;
+      border: 2px dashed #cfd6e2;
+      border-radius: 16px;
+      padding: 42px 20px;
       text-align: center;
       cursor: pointer;
       transition:
         border-color 0.15s ease,
-        background 0.15s ease;
+        background 0.15s ease,
+        transform 0.15s ease;
     }
 
     .drop-zone:hover,
     .drop-zone.drag-over {
       border-color: var(--primary);
-      background: #eff6ff;
+      background: var(--primary-soft);
+      transform: translateY(-1px);
     }
 
     .drop-zone.selected {
@@ -202,38 +281,38 @@
     }
 
     .upload-icon {
-      font-size: 38px;
-      margin-bottom: 8px;
+      font-size: 42px;
+      margin-bottom: 10px;
     }
 
     .drop-title {
-      font-size: 1.08rem;
-      font-weight: 700;
+      font-size: 1.12rem;
+      font-weight: 800;
     }
 
     .drop-description {
-      margin-top: 6px;
+      margin-top: 7px;
       color: var(--muted);
       font-size: 0.88rem;
     }
 
     .selected-file {
-      margin: 10px auto 0;
+      margin: 11px auto 0;
       max-width: 100%;
       color: var(--success);
       font-size: 0.86rem;
-      font-weight: 600;
+      font-weight: 700;
       overflow-wrap: anywhere;
     }
 
     .settings {
-      margin-top: 22px;
+      margin-top: 24px;
     }
 
     .settings-title {
-      margin-bottom: 12px;
-      font-size: 0.92rem;
-      font-weight: 700;
+      margin-bottom: 13px;
+      font-size: 0.94rem;
+      font-weight: 800;
     }
 
     .settings-grid {
@@ -248,12 +327,8 @@
       gap: 7px;
     }
 
-    .field.full {
-      grid-column: 1 / -1;
-    }
-
     .field label {
-      font-size: 0.86rem;
+      font-size: 0.84rem;
       font-weight: 700;
     }
 
@@ -266,19 +341,19 @@
     input[type="number"],
     select {
       width: 100%;
-      min-height: 44px;
+      min-height: 46px;
       padding: 10px 12px;
       border: 1px solid var(--border);
-      border-radius: 9px;
+      border-radius: 10px;
       background: white;
       color: var(--text);
-      font: inherit;
+      outline: none;
     }
 
     input[type="number"]:focus,
     select:focus {
-      outline: 2px solid rgba(37, 99, 235, 0.18);
       border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
     }
 
     .unit {
@@ -293,28 +368,27 @@
 
     .presets-label {
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 9px;
       color: var(--muted);
-      font-size: 0.8rem;
-      font-weight: 600;
+      font-size: 0.79rem;
+      font-weight: 700;
     }
 
     .preset-buttons {
       display: flex;
       flex-wrap: wrap;
-      gap: 7px;
+      gap: 8px;
     }
 
     .preset-btn {
-      min-height: 36px;
-      padding: 0 13px;
+      min-height: 38px;
+      padding: 0 14px;
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 9px;
       background: white;
       color: var(--text);
-      font: inherit;
       font-size: 0.82rem;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       transition:
         border-color 0.15s ease,
@@ -322,36 +396,34 @@
         color 0.15s ease;
     }
 
-    .preset-btn:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-    }
-
+    .preset-btn:hover,
     .preset-btn.active {
       border-color: var(--primary);
-      background: #eff6ff;
+      background: var(--primary-soft);
       color: var(--primary);
     }
 
     .compress-btn {
       width: 100%;
-      min-height: 50px;
-      margin-top: 22px;
+      min-height: 54px;
+      margin-top: 23px;
       border: 0;
-      border-radius: 10px;
+      border-radius: 11px;
       background: var(--primary);
       color: white;
-      font: inherit;
-      font-weight: 700;
       font-size: 1rem;
+      font-weight: 800;
       cursor: pointer;
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
       transition:
         background 0.15s ease,
-        transform 0.1s ease;
+        transform 0.1s ease,
+        box-shadow 0.15s ease;
     }
 
     .compress-btn:hover:not(:disabled) {
       background: var(--primary-dark);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.25);
     }
 
     .compress-btn:active:not(:disabled) {
@@ -361,6 +433,18 @@
     .compress-btn:disabled {
       opacity: 0.5;
       cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .trust-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px 22px;
+      margin-top: 15px;
+      color: var(--muted);
+      font-size: 0.77rem;
+      font-weight: 600;
     }
 
     .status {
@@ -383,7 +467,7 @@
 
     .preview {
       display: none;
-      margin-top: 26px;
+      margin-top: 28px;
     }
 
     .preview-grid {
@@ -455,141 +539,172 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 44px;
+      min-height: 46px;
       margin-top: 14px;
-      padding: 0 20px;
+      padding: 0 22px;
       border-radius: 9px;
       background: var(--success);
       color: white;
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .download-btn:hover {
       background: #166534;
     }
 
-    .privacy-footer {
-      margin-top: 18px;
-      text-align: center;
+    .content-section {
+      margin-top: 42px;
+    }
+
+    .section-heading {
+      margin: 0 0 11px;
+      font-size: clamp(1.45rem, 4vw, 2rem);
+      letter-spacing: -0.025em;
+    }
+
+    .section-text {
+      margin: 0;
       color: var(--muted);
-      font-size: 0.78rem;
-    }
-
-    .seo-content {
-      margin-top: 28px;
-      padding: 28px 24px;
-      background: var(--section);
-      border-radius: 18px;
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
-    }
-
-    .seo-content h2 {
-      margin: 0 0 12px;
-      font-size: 1.45rem;
-      line-height: 1.25;
-      letter-spacing: -0.02em;
-    }
-
-    .seo-content h3 {
-      margin: 26px 0 8px;
-      font-size: 1.05rem;
-    }
-
-    .seo-content p {
-      margin: 0 0 12px;
-      color: #4b5563;
-      font-size: 0.94rem;
-    }
-
-    .seo-content ul {
-      margin: 10px 0 0;
-      padding-left: 22px;
-      color: #4b5563;
-    }
-
-    .seo-content li {
-      margin: 7px 0;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 18px;
-    }
-
-    .feature {
-      padding: 15px;
-      border: 1px solid var(--border);
-      border-radius: 11px;
-      background: #fafafa;
-    }
-
-    .feature strong {
-      display: block;
-      margin-bottom: 4px;
-      font-size: 0.9rem;
-    }
-
-    .feature span {
-      color: var(--muted);
-      font-size: 0.82rem;
-    }
-
-    .faq {
-      margin-top: 24px;
-    }
-
-    .faq-item {
-      padding: 15px 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .faq-item:last-child {
-      border-bottom: 1px solid var(--border);
-    }
-
-    .faq-item h3 {
-      margin: 0 0 6px;
+      line-height: 1.7;
       font-size: 0.96rem;
     }
 
-    .faq-item p {
-      margin: 0;
+    .use-cases {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 18px;
     }
 
-    footer {
-      margin-top: 22px;
+    .use-case {
+      padding: 19px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: white;
+    }
+
+    .use-case-icon {
+      font-size: 25px;
+    }
+
+    .use-case h3 {
+      margin: 10px 0 7px;
+      font-size: 0.98rem;
+    }
+
+    .use-case p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .step {
+      padding: 18px;
+      border-radius: 14px;
+      background: white;
+      border: 1px solid var(--border);
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .step h3 {
+      margin: 11px 0 6px;
+      font-size: 0.95rem;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+
+    .faq {
+      margin-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .faq details {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq summary {
+      padding: 17px 0;
+      cursor: pointer;
+      font-weight: 750;
+      list-style-position: outside;
+    }
+
+    .faq p {
+      margin: -5px 0 17px;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.9rem;
+    }
+
+    .privacy-footer {
+      margin-top: 20px;
       text-align: center;
       color: var(--muted);
       font-size: 0.78rem;
     }
 
-    @media (max-width: 600px) {
-      body {
-        padding: 24px 12px 40px;
+    footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    footer strong {
+      color: var(--text);
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        padding: 16px 12px 45px;
       }
 
-      .card,
-      .seo-content {
-        padding: 16px;
+      header {
+        padding-top: 20px;
       }
 
-      .settings-grid {
+      h1 {
+        font-size: clamp(2rem, 11vw, 3rem);
+      }
+
+      .tool-card {
+        padding: 17px;
+        border-radius: 17px;
+      }
+
+      .settings-grid,
+      .preview-grid,
+      .use-cases,
+      .steps {
         grid-template-columns: 1fr;
-      }
-
-      .field.full {
-        grid-column: auto;
-      }
-
-      .preview-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .image-box img {
-        height: 220px;
       }
 
       .preset-buttons {
@@ -601,465 +716,534 @@
         width: 100%;
       }
 
-      .feature-grid {
-        grid-template-columns: 1fr;
+      .drop-zone {
+        padding: 34px 16px;
+      }
+
+      .image-box img {
+        height: 220px;
+      }
+
+      .trust-row {
+        gap: 8px 15px;
       }
     }
   </style>
+
 </head>
 
 <body>
+
   <main class="container">
 
-    <header>
-      <h1>Compress Image to 100KB Online</h1>
+```
+<header>
+  <div class="logo">
+    🖼️ Under100KB
+  </div>
 
-      <p class="subtitle">
-        Free image compressor for JPG, PNG, WebP and TIFF.
-        Reduce image size to 100KB or any target size directly in your browser.
-      </p>
+  <h1>
+    Need an image
+    <span class="headline-highlight">under 100KB?</span>
+  </h1>
 
-      <div class="privacy-banner">
-        🔒
-        <strong>
-          100% private — your images never leave your device.
-        </strong>
-      </div>
-    </header>
+  <p class="subtitle">
+    Compress JPG, PNG, WebP and TIFF images to a specific file size —
+    directly in your browser.
+  </p>
 
-    <section class="card" aria-labelledby="compressor-title">
+  <div class="privacy-banner">
+    🔒
+    <strong>
+      Your images stay on your device. Nothing is uploaded.
+    </strong>
+  </div>
+</header>
 
-      <h2 id="compressor-title" style="position:absolute;left:-9999px;">
-        Online Image Compressor
-      </h2>
+<section
+  class="tool-card"
+  aria-label="Image compression tool"
+>
 
-      <label
-        class="drop-zone"
-        id="dropZone"
-        for="fileInput"
-      >
-        <input
-          type="file"
-          id="fileInput"
-          accept=".jpg,.jpeg,.png,.webp,.tif,.tiff,image/jpeg,image/png,image/webp,image/tiff"
-        >
+  <div class="tool-label">
+    Free image compressor
+  </div>
 
-        <div
-          class="upload-icon"
-          id="uploadIcon"
-          aria-hidden="true"
-        >
-          🖼️
-        </div>
+  <label
+    class="drop-zone"
+    id="dropZone"
+    for="fileInput"
+  >
 
-        <div
-          class="drop-title"
-          id="dropTitle"
-        >
-          Drop your image here
-        </div>
+    <input
+      type="file"
+      id="fileInput"
+      accept=".jpg,.jpeg,.png,.webp,.tif,.tiff,image/jpeg,image/png,image/webp,image/tiff"
+    >
 
-        <div
-          class="drop-description"
-          id="dropDescription"
-        >
-          JPG, JPEG, PNG, WebP or TIFF
-        </div>
+    <div
+      class="upload-icon"
+      id="uploadIcon"
+    >
+      🖼️
+    </div>
 
-        <div
-          class="selected-file"
-          id="selectedFile"
-          style="display: none;"
-        ></div>
-      </label>
+    <div
+      class="drop-title"
+      id="dropTitle"
+    >
+      Drop your image here
+    </div>
 
-      <div class="settings">
+    <div
+      class="drop-description"
+      id="dropDescription"
+    >
+      or click to browse · JPG, PNG, WebP or TIFF
+    </div>
 
-        <div class="settings-title">
-          Compression settings
-        </div>
+    <div
+      class="selected-file"
+      id="selectedFile"
+      style="display: none;"
+    ></div>
 
-        <div class="settings-grid">
+  </label>
 
-          <div class="field">
-            <label for="maxSize">
-              Target file size
-            </label>
+  <div class="settings">
 
-            <div class="input-row">
-              <input
-                type="number"
-                id="maxSize"
-                value="100"
-                min="1"
-                step="1"
-              >
+    <div class="settings-title">
+      Choose your target
+    </div>
 
-              <span class="unit">
-                KB
-              </span>
-            </div>
-          </div>
+    <div class="settings-grid">
 
-          <div class="field">
-            <label for="format">
-              Output format
-            </label>
+      <div class="field">
+        <label for="maxSize">
+          Target file size
+        </label>
 
-            <select id="format">
-              <option value="image/jpeg">
-                JPG
-              </option>
-
-              <option value="image/webp">
-                WebP
-              </option>
-
-              <option value="image/png">
-                PNG
-              </option>
-
-              <option value="image/tiff">
-                TIFF
-              </option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="maxWidth">
-              Maximum width
-            </label>
-
-            <div class="input-row">
-              <input
-                type="number"
-                id="maxWidth"
-                value="1200"
-                min="1"
-                step="1"
-              >
-
-              <span class="unit">
-                px
-              </span>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="maxHeight">
-              Maximum height
-            </label>
-
-            <div class="input-row">
-              <input
-                type="number"
-                id="maxHeight"
-                value="1200"
-                min="1"
-                step="1"
-              >
-
-              <span class="unit">
-                px
-              </span>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="presets">
-
-          <span class="presets-label">
-            Quick target sizes
-          </span>
-
-          <div class="preset-buttons">
-
-            <button
-              type="button"
-              class="preset-btn"
-              data-size="20"
-            >
-              20KB
-            </button>
-
-            <button
-              type="button"
-              class="preset-btn"
-              data-size="50"
-            >
-              50KB
-            </button>
-
-            <button
-              type="button"
-              class="preset-btn active"
-              data-size="100"
-            >
-              100KB
-            </button>
-
-            <button
-              type="button"
-              class="preset-btn"
-              data-size="200"
-            >
-              200KB
-            </button>
-
-          </div>
-        </div>
-      </div>
-
-      <button
-        class="compress-btn"
-        id="compressBtn"
-        disabled
-      >
-        Compress Image to Target Size
-      </button>
-
-      <div
-        class="status"
-        id="status"
-        aria-live="polite"
-      ></div>
-
-      <div
-        class="error"
-        id="error"
-        role="alert"
-      ></div>
-
-      <div
-        class="preview"
-        id="preview"
-      >
-
-        <div class="preview-grid">
-
-          <div class="image-box">
-            <img
-              id="originalPreview"
-              alt="Original image preview"
-            >
-
-            <div class="image-title">
-              Original image
-            </div>
-
-            <div
-              class="image-info"
-              id="originalInfo"
-            ></div>
-          </div>
-
-          <div class="image-box">
-            <img
-              id="resultPreview"
-              alt="Compressed image preview"
-            >
-
-            <div class="image-title">
-              Compressed image
-            </div>
-
-            <div
-              class="image-info"
-              id="resultInfo"
-            ></div>
-          </div>
-
-        </div>
-
-        <div class="result">
-
-          <div
-            class="result-size"
-            id="resultSize"
-          ></div>
-
-          <div
-            class="saving"
-            id="saving"
-          ></div>
-
-          <a
-            class="download-btn"
-            id="downloadBtn"
-            download="compressed-image"
+        <div class="input-row">
+          <input
+            type="number"
+            id="maxSize"
+            value="100"
+            min="1"
+            step="1"
           >
-            Download compressed image
-          </a>
 
+          <span class="unit">
+            KB
+          </span>
         </div>
       </div>
 
-      <div class="privacy-footer">
-        🔒 Images are processed locally in your browser.
-        Nothing is uploaded to a server.
-      </div>
-    </section>
+      <div class="field">
+        <label for="format">
+          Output format
+        </label>
 
-    <section class="seo-content" aria-labelledby="about-title">
+        <select id="format">
+          <option value="image/jpeg">
+            JPG
+          </option>
 
-      <h2 id="about-title">
-        Free Online Image Compressor
-      </h2>
+          <option value="image/webp">
+            WebP
+          </option>
 
-      <p>
-        Under100KB is a free online image compressor that helps you
-        reduce JPG, JPEG, PNG, WebP and TIFF images to a specific file size.
-        If you need to compress an image to 100KB, 50KB, 20KB or another
-        target size, choose your target and download the compressed image.
-      </p>
+          <option value="image/png">
+            PNG
+          </option>
 
-      <p>
-        Unlike many online image compressors, your image is processed
-        directly in your browser. Your files do not need to be uploaded
-        to a server, making the tool useful when privacy matters.
-      </p>
-
-      <div class="feature-grid">
-
-        <div class="feature">
-          <strong>🎯 Target a specific size</strong>
-          <span>
-            Compress images to 20KB, 50KB, 100KB, 200KB or your own target.
-          </span>
-        </div>
-
-        <div class="feature">
-          <strong>🔒 Private by design</strong>
-          <span>
-            Image processing happens locally in your browser.
-          </span>
-        </div>
-
-        <div class="feature">
-          <strong>⚡ No upload required</strong>
-          <span>
-            Select an image and compress it without sending it to a server.
-          </span>
-        </div>
-
-        <div class="feature">
-          <strong>🖼️ Multiple formats</strong>
-          <span>
-            Work with JPG, JPEG, PNG, WebP and TIFF images.
-          </span>
-        </div>
-
+          <option value="image/tiff">
+            TIFF
+          </option>
+        </select>
       </div>
 
-      <h2 style="margin-top:32px;">
-        How to Compress an Image to 100KB
-      </h2>
+      <div class="field">
+        <label for="maxWidth">
+          Maximum width
+        </label>
 
-      <p>
-        Need to reduce an image below 100KB for a website, form, application
-        or upload limit? Under100KB makes the process simple.
-      </p>
+        <div class="input-row">
+          <input
+            type="number"
+            id="maxWidth"
+            value="1200"
+            min="1"
+            step="1"
+          >
 
-      <ol>
-        <li>Select or drag an image into the compressor.</li>
-        <li>Set the target file size to <strong>100KB</strong>.</li>
-        <li>Choose the output format you need.</li>
-        <li>Click <strong>Compress Image to Target Size</strong>.</li>
-        <li>Preview the result and download the compressed image.</li>
-      </ol>
-
-      <h2 style="margin-top:32px;">
-        Compress JPG, PNG and WebP Images
-      </h2>
-
-      <p>
-        You can use the same tool to compress JPG images to 100KB,
-        reduce PNG file size, or convert and compress an image as WebP.
-        The target file size can be changed whenever you need a smaller
-        or larger output.
-      </p>
-
-      <div class="faq">
-
-        <h2>
-          Frequently Asked Questions
-        </h2>
-
-        <div class="faq-item">
-          <h3>
-            Can I compress an image to exactly 100KB?
-          </h3>
-
-          <p>
-            The tool attempts to produce an image at or below your selected
-            target size. Because image formats and browser encoding work
-            differently, the final file may be smaller than the target.
-          </p>
+          <span class="unit">
+            px
+          </span>
         </div>
+      </div>
 
-        <div class="faq-item">
-          <h3>
-            Is this image compressor free?
-          </h3>
+      <div class="field">
+        <label for="maxHeight">
+          Maximum height
+        </label>
 
-          <p>
-            Yes. Under100KB is free to use and does not require an account
-            to compress an image.
-          </p>
+        <div class="input-row">
+          <input
+            type="number"
+            id="maxHeight"
+            value="1200"
+            min="1"
+            step="1"
+          >
+
+          <span class="unit">
+            px
+          </span>
         </div>
+      </div>
 
-        <div class="faq-item">
-          <h3>
-            Are my images uploaded?
-          </h3>
+    </div>
 
-          <p>
-            No. Image processing is performed locally in your browser.
-            The tool does not need to upload your image to a server.
-          </p>
-        </div>
+    <div class="presets">
 
-        <div class="faq-item">
-          <h3>
-            Can I compress a JPG to 100KB?
-          </h3>
+      <span class="presets-label">
+        Common target sizes
+      </span>
 
-          <p>
-            Yes. Select your JPG image, set the target size to 100KB,
-            choose JPG as the output format and start compression.
-          </p>
-        </div>
+      <div class="preset-buttons">
 
-        <div class="faq-item">
-          <h3>
-            Can I compress PNG images?
-          </h3>
+        <button
+          type="button"
+          class="preset-btn"
+          data-size="20"
+        >
+          20KB
+        </button>
 
-          <p>
-            Yes. PNG is supported as an input and output format.
-            PNG compression can behave differently from JPG because PNG
-            uses lossless compression, so reducing the dimensions may
-            sometimes be necessary to reach a small target size.
-          </p>
-        </div>
+        <button
+          type="button"
+          class="preset-btn"
+          data-size="50"
+        >
+          50KB
+        </button>
 
-        <div class="faq-item">
-          <h3>
-            What image formats are supported?
-          </h3>
+        <button
+          type="button"
+          class="preset-btn active"
+          data-size="100"
+        >
+          100KB
+        </button>
 
-          <p>
-            The tool supports JPG, JPEG, PNG, WebP and TIFF images.
-          </p>
-        </div>
+        <button
+          type="button"
+          class="preset-btn"
+          data-size="200"
+        >
+          200KB
+        </button>
 
       </div>
-    </section>
 
-    <footer>
-      Under100KB — Free online image compression
-    </footer>
+    </div>
+
+  </div>
+
+  <button
+    class="compress-btn"
+    id="compressBtn"
+    disabled
+  >
+    Compress Image
+  </button>
+
+  <div class="trust-row">
+    <span>✓ Free</span>
+    <span>✓ No signup</span>
+    <span>✓ No upload</span>
+    <span>✓ Works in your browser</span>
+  </div>
+
+  <div
+    class="status"
+    id="status"
+    aria-live="polite"
+  ></div>
+
+  <div
+    class="error"
+    id="error"
+    role="alert"
+  ></div>
+
+  <div
+    class="preview"
+    id="preview"
+  >
+
+    <div class="preview-grid">
+
+      <div class="image-box">
+
+        <img
+          id="originalPreview"
+          alt="Original image preview"
+        >
+
+        <div class="image-title">
+          Original
+        </div>
+
+        <div
+          class="image-info"
+          id="originalInfo"
+        ></div>
+
+      </div>
+
+      <div class="image-box">
+
+        <img
+          id="resultPreview"
+          alt="Compressed image preview"
+        >
+
+        <div class="image-title">
+          Compressed
+        </div>
+
+        <div
+          class="image-info"
+          id="resultInfo"
+        ></div>
+
+      </div>
+
+    </div>
+
+    <div class="result">
+
+      <div
+        class="result-size"
+        id="resultSize"
+      ></div>
+
+      <div
+        class="saving"
+        id="saving"
+      ></div>
+
+      <a
+        class="download-btn"
+        id="downloadBtn"
+        download="compressed-image"
+      >
+        Download image
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="privacy-footer">
+    🔒 Images are processed locally in your browser.
+    Nothing is uploaded to a server.
+  </div>
+
+</section>
+
+<section class="content-section">
+
+  <h2 class="section-heading">
+    Why use Under100KB?
+  </h2>
+
+  <p class="section-text">
+    Sometimes an image is simply too large to upload. A school or
+    university assignment may have a file-size limit, an online
+    application may only accept small images, or a website may reject
+    an image because it exceeds its upload limit. Under100KB lets you
+    reduce the image to a target size such as 20KB, 50KB, 100KB or
+    200KB without installing software.
+  </p>
+
+  <div class="use-cases">
+
+    <article class="use-case">
+      <div class="use-case-icon">🎓</div>
+
+      <h3>
+        Students & assignments
+      </h3>
+
+      <p>
+        Reduce scanned documents, photos and figures when an assignment
+        or submission system has a strict file-size limit.
+      </p>
+    </article>
+
+    <article class="use-case">
+      <div class="use-case-icon">🏛️</div>
+
+      <h3>
+        Online forms & applications
+      </h3>
+
+      <p>
+        When a government, public-service or application website says
+        your image is too large, choose the required target size and
+        compress it here.
+      </p>
+    </article>
+
+    <article class="use-case">
+      <div class="use-case-icon">🌐</div>
+
+      <h3>
+        Websites & uploads
+      </h3>
+
+      <p>
+        Make images smaller before uploading them to a website,
+        content-management system or other online service.
+      </p>
+    </article>
+
+  </div>
+
+</section>
+
+<section class="content-section">
+
+  <h2 class="section-heading">
+    How to compress an image to 100KB
+  </h2>
+
+  <div class="steps">
+
+    <article class="step">
+      <span class="step-number">1</span>
+
+      <h3>
+        Choose your image
+      </h3>
+
+      <p>
+        Upload or drag a JPG, PNG, WebP or TIFF image into the
+        compressor.
+      </p>
+    </article>
+
+    <article class="step">
+      <span class="step-number">2</span>
+
+      <h3>
+        Set the file size
+      </h3>
+
+      <p>
+        Enter the maximum size you need, such as 100KB, or choose one
+        of the common presets.
+      </p>
+    </article>
+
+    <article class="step">
+      <span class="step-number">3</span>
+
+      <h3>
+        Download the result
+      </h3>
+
+      <p>
+        The image is processed in your browser and you can download the
+        compressed file immediately.
+      </p>
+    </article>
+
+  </div>
+
+</section>
+
+<section class="content-section">
+
+  <h2 class="section-heading">
+    Frequently asked questions
+  </h2>
+
+  <div class="faq">
+
+    <details>
+      <summary>
+        How do I compress an image to 100KB?
+      </summary>
+
+      <p>
+        Choose your image, enter 100 in the target file size field,
+        select your preferred output format and click Compress Image.
+        Under100KB will try to create an image that is no larger than
+        the requested size.
+      </p>
+    </details>
+
+    <details>
+      <summary>
+        Can I compress an image to 50KB or 20KB?
+      </summary>
+
+      <p>
+        Yes. You can enter any positive target size in KB. The preset
+        buttons also provide quick targets for 20KB, 50KB, 100KB and
+        200KB.
+      </p>
+    </details>
+
+    <details>
+      <summary>
+        Are my images uploaded to a server?
+      </summary>
+
+      <p>
+        No. Image processing happens locally in your browser. The image
+        itself does not need to be uploaded to a server for compression.
+      </p>
+    </details>
+
+    <details>
+      <summary>
+        Can I compress TIFF images?
+      </summary>
+
+      <p>
+        Yes. Under100KB can read TIFF images in the browser and create a
+        smaller TIFF or convert the image to another supported output
+        format.
+      </p>
+    </details>
+
+    <details>
+      <summary>
+        Why is my compressed image sometimes smaller than expected?
+      </summary>
+
+      <p>
+        Image formats have different compression characteristics.
+        Photos, screenshots, scans and graphics can produce very
+        different file sizes even at the same dimensions. The tool
+        therefore adjusts quality and, when necessary, image dimensions
+        to reach the requested target.
+      </p>
+    </details>
+
+  </div>
+
+</section>
+
+<footer>
+  <strong>Under100KB</strong> — Free online image compression.
+  Built for simple, private and fast image resizing.
+</footer>
+```
 
   </main>
 
@@ -2186,6 +2370,12 @@
           setStatus(
             "Compression complete."
           );
+
+          preview.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest"
+          });
+
         } catch (error) {
           showError(
             error.message ||
